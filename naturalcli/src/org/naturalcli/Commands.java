@@ -20,7 +20,6 @@
 
 package org.naturalcli;
 
-
 /**
  * Encapsulates the commands to know and to execute
  * @author Ferran Busquets

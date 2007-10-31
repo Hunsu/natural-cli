@@ -1,5 +1,5 @@
 /*
- * CommandExecutor.java
+ * ICommandExecutor.java
  *
  * Copyright (C) 2007 Ferran Busquets
  *
@@ -20,12 +20,16 @@
 
 package org.naturalcli;
 
-
 /**
- *
+ * A command executor is the responsible of 
+ * run a command 
  * @author Ferran Busquets
  */
-public interface CommandExecutor {
+public interface ICommandExecutor {
     
-    public void execute(String[] params)  throws Exception;
+	/*
+	 * Execute the command
+	 * @param params Parameters for the command
+	 */
+    public void execute(String[] params) throws Exception;
 }

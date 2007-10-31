@@ -39,11 +39,11 @@ public class Command {
     private String[] parameterName;
     private boolean[] isParameter;
     private int paramCount;
-    private CommandExecutor executor;
+    private ICommandExecutor executor;
     
     
     /** Creates a new instance of Command */
-    public Command(String syn, String desc, CommandExecutor ce) throws CommandException {
+    public Command(String syn, String desc, ICommandExecutor ce) throws CommandException {
         this.description = desc;
         this.tokenize(syn);
         this.executor = ce;
