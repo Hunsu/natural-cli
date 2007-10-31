@@ -22,7 +22,7 @@ package org.naturalcli;
 
 import java.util.regex.Pattern;
 
-/**
+/*
  * Represents a command on a command line
  *
  * @author Ferran Busquets
@@ -42,18 +42,22 @@ public class Command {
     private ICommandExecutor executor;
     
     
-    /** Creates a new instance of Command */
+    /*
+     * Creates a new instance of Command 
+     * 
+     */
     public Command(String syn, String desc, ICommandExecutor ce) throws CommandException {
         this.description = desc;
         this.tokenize(syn);
         this.executor = ce;
     }
    
-    /**
+    /*
      * Checks is the token begins with CHAR_BEGIN_PARAM and ends
      * with CHAR_END_PARAM
      *
      * @return true if its a parameter
+     * 
      */
     private boolean isParameterToken(String t) throws CommandException
     {
@@ -191,7 +195,8 @@ public class Command {
     {
         return this.description;
     }
-    
+
+  /*  
     private String validateParameter(String value, String type) throws CommandException
     {
         try {
@@ -217,9 +222,9 @@ public class Command {
         } catch (Exception ex) {
             throw new CommandException("Internal error", ex);
         }
-    }
+    } */
     
-    public void run(String ss[], int first) throws Exception
+    public void execute(String ss[], int first, ParameterTypes pts) throws Exception
     {
         // Obtain parameters
         String[] params = new String[this.paramCount];
@@ -230,9 +235,10 @@ public class Command {
             {
                 if (this.isParameter[i])
                 {
-                    String m = this.validateParameter(ss[this.fixed.length+i+first], this.pattern[i]);
+//                    String m = this.validateParameter(ss[this.fixed.length+i+first], this.pattern[i]);
+                    String m = pts.validate(ss[this.fixed.length+i+first], this.pattern[i]);
                     if (m != null)
-                        throw new CommandException("Parameter error: "+m);
+                        throw new CommandException("Parameter error"+": "+m);
                     params[p++] = ss[first+this.fixed.length+i];
                 }
             }

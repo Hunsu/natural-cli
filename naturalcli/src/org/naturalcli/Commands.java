@@ -31,6 +31,7 @@ public class Commands {
     
     /* 
      * Creates a new instance of Commands
+     * 
      * @param c List of commands  
      */
     public Commands(Command[] c) throws CommandException 
@@ -40,6 +41,7 @@ public class Commands {
 
     /* 
      * Outputs the help for all the visible commands
+     * 
      * @param html If true, outputs in html format
      */
     private void help(boolean html)
@@ -67,6 +69,7 @@ public class Commands {
     
     /*
      * Search a command based on the string array
+     * 
      * @param args arguments for the command
      * @return the command that matches the arguments or null if no one matches
      */
@@ -80,10 +83,11 @@ public class Commands {
     
     /*
      * Runs a command based on the arguments
+     * 
      * @param args arguments to run
      * @param first index on <code>args</code> of the first string for the arguments
      */
-    public void run(String[] args, int first) throws Exception
+    public void execute(String[] args, int first) throws Exception
     {
     	// Check if the command is some of the predefined
         if (args[first].equals("help")) {
