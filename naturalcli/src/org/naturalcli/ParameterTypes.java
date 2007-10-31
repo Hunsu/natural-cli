@@ -25,16 +25,24 @@ import java.util.regex.Pattern;
 public class ParameterTypes {
 
 	private IParameterType[] parameterTypes;
+	
+	/* 
+     * Creates a new instance of ParameterTypes
+     * with default parameter types
+     */
+    public ParameterTypes() 
+    {   
+    }	
 
 	/* 
-     * Creates a new instance of Commands
-     * @param c List of commands  
+     * Creates a new instance of ParameterTypes
+     * @param c List of user parameter types  
      */
     public ParameterTypes(IParameterType[] pt) 
     {   
         this.parameterTypes = pt;
     }	
-
+    
     /*
      * Search a parameter type
      * @param name parameter type name 
@@ -66,16 +74,16 @@ public class ParameterTypes {
                     return "Bad number";
             } else if (type.equals("email")) {
                 if (!Pattern.matches("(\\w+)@(\\w+\\.)(\\w+)(\\.\\w+)*)", value))
-                    return "Invalid email: "+value;
+                    return "Invalid email"+": "+value;
             } else if (type.equals("parameter")) {
                 if (!Pattern.matches("[\\.\\w]+", value))
-                    return "Invalid parameter name: "+value;
-            } else if (type.equals("string"))            
+                    return "Invalid parameter name"+": "+value;
+            } else if (type.equals("string")) {            
                 return null;
-            else {
+            } else if (this.parameterTypes != null) {
             	IParameterType pt = this.searchParameterType(type);
             	if (pt == null)
-                    return "Unknown parameter type: "+type;
+                    return "Unknown parameter type"+": "+type;
             	if (!pt.validateParameter(value))
             		return pt.validationMessage(value);
             }

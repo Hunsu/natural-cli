@@ -28,7 +28,19 @@ public class Commands {
     
 
     private Command[] commands;
+    private ParameterTypes pts;
     
+    /* 
+     * Creates a new instance of Commands
+     * 
+     * @param c List of commands  
+     */
+    public Commands(Command[] c, ParameterTypes pts) throws CommandException 
+    {   
+        this.commands = c;
+        this.pts = pts;
+    }
+
     /* 
      * Creates a new instance of Commands
      * 
@@ -37,8 +49,9 @@ public class Commands {
     public Commands(Command[] c) throws CommandException 
     {   
         this.commands = c;
+        this.pts = new ParameterTypes();
     }
-
+    
     /* 
      * Outputs the help for all the visible commands
      * 
@@ -107,7 +120,7 @@ public class Commands {
                 x += " "+s;
             throw new CommandException("Unknown command: "+x);
         }
-        c.run(args,1);
+        c.execute(args,1, this.pts);
     }
     
 }
