@@ -20,6 +20,11 @@
 
 package org.naturalcli.demo;
 
+import java.util.Set;
+
+import org.naturalcli.*;
+import org.naturalcli.parameters.ParameterValidator;
+
 
 /**
  *
@@ -29,8 +34,15 @@ public class Main {
     
               
     public static synchronized void main(String args[])
-    { 
- 
+    {
+		try {
+			ParameterValidator pv = new ParameterValidator();
+    		Set<Command> cs = Command.createDefaultCommandSet();
+			new NaturalCLI(cs, pv).execute("help");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
     

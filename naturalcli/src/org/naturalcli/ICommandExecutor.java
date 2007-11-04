@@ -21,15 +21,16 @@
 package org.naturalcli;
 
 /**
- * A command executor is the responsible of 
- * run a command 
+ * A command executor runs a command for the parameters.
+ * 
  * @author Ferran Busquets
  */
 public interface ICommandExecutor {
     
-	/*
-	 * Execute the command
-	 * @param params Parameters for the command
+	/**
+	 * Execute the command.
+	 * 
+	 * @param params the parameters for the command.
 	 */
-    public void execute(String[] params) throws Exception;
+    public void execute(Object[] params) throws Exception;
 }

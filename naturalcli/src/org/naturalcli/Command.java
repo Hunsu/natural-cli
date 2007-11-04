@@ -20,10 +20,13 @@
 
 package org.naturalcli;
 
-import java.util.regex.Pattern;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.naturalcli.parameters.ParameterValidator;
 
 /*
- * Represents a command on a command line
+ * Represents a command definition
  *
  * @author Ferran Busquets
  */
@@ -33,7 +36,7 @@ public class Command {
     private final char CHAR_END_PARAM = '>';
     private final char CHAR_NAME_TYPE = ':';
 
-    private String description;
+    private String help;
     private String[] fixed;
     private String[] pattern;
     private String[] parameterName;
@@ -41,22 +44,27 @@ public class Command {
     private int paramCount;
     private ICommandExecutor executor;
     
-    
-    /*
-     * Creates a new instance of Command 
+
+    /**
+     * Constructs a new command
      * 
+     * @param syntax the syntax or the command
+     * @param help the help help of the command
+     * @param ce command executor
+     * @throws CommandException
      */
-    public Command(String syn, String desc, ICommandExecutor ce) throws CommandException {
-        this.description = desc;
-        this.tokenize(syn);
+    public Command(String syntax, String help, ICommandExecutor ce) throws CommandException {
+        this.help = help;
+        this.tokenize(syntax);
         this.executor = ce;
     }
    
-    /*
+    /**
      * Checks is the token begins with CHAR_BEGIN_PARAM and ends
      * with CHAR_END_PARAM
      *
-     * @return true if its a parameter
+     * @return <code>true</code> if its a parameter;
+     *         <code>false</code> otherwise.
      * 
      */
     private boolean isParameterToken(String t) throws CommandException
@@ -170,12 +178,33 @@ public class Command {
         return this.parse(ss, 1);
     }
 
+    /**
+     * Determine if this is a hidden command
+     * 
+     * @return <code>true</> if it's a hidden command, <code>false</code> if not.
+     */
+    public boolean isHidden()
+    {
+        return this.getHelp().charAt(0) == '.';
+    }
+    
+    
+    /**
+     * Get the number of strings for the command.
+     * 
+     * @return The number of strings for the command.
+     */    
     public int length()
     {
         return this.fixed.length 
              + (this.pattern != null ? this.pattern.length : 0);
     }
     
+    /**
+     * Returns a string with the syntax for the commend.
+     * 
+     * @return A string with the syntax for the command.
+     */    
     public String getSyntax()
     {
         String syn = "";
@@ -191,40 +220,25 @@ public class Command {
         return syn;
     }
 
-    public String getDescription()
+    /**
+     * Returns the help for the commend.
+     * 
+     * @return The help for the command.
+     */
+    public String getHelp()
     {
-        return this.description;
+        return this.help;
     }
 
-  /*  
-    private String validateParameter(String value, String type) throws CommandException
-    {
-        try {
-            if (type.equals("identifier"))
-            {
-                if (!Pattern.matches("\\w+", value))
-                    return "Bad identifier";
-            } else if (type.equals("number"))
-            {
-                if (!Pattern.matches("\\d+", value))
-                    return "Bad number";
-            } else if (type.equals("email")) {
-                if (!Pattern.matches("(\\w+)@(\\w+\\.)(\\w+)(\\.\\w+)*)", value))
-                    return "Invalid email: "+value;
-            } else if (type.equals("parameter")) {
-                if (!Pattern.matches("[\\.\\w]+", value))
-                    return "Invalid parameter name: "+value;
-            } else if (type.equals("string"))            
-                return null;
-            else
-              return "Unknown parameter type: "+type;
-            return null;
-        } catch (Exception ex) {
-            throw new CommandException("Internal error", ex);
-        }
-    } */
-    
-    public void execute(String ss[], int first, ParameterTypes pts) throws Exception
+    /**
+     * Execute this command for that parameters.
+     * 
+     * @param args the arguments with the command.
+     * @param first the index for the first string with the command.
+     * @param pts parameter types to parse the command.
+     * @throws Exception
+     */
+    public void execute(String args[], int first, ParameterValidator pts) throws Exception
     {
         // Obtain parameters
         String[] params = new String[this.paramCount];
@@ -236,13 +250,78 @@ public class Command {
                 if (this.isParameter[i])
                 {
 //                    String m = this.validateParameter(ss[this.fixed.length+i+first], this.pattern[i]);
-                    String m = pts.validate(ss[this.fixed.length+i+first], this.pattern[i]);
+                    String m = pts.validate(args[this.fixed.length+i+first], this.pattern[i]);
                     if (m != null)
                         throw new CommandException("Parameter error"+": "+m);
-                    params[p++] = ss[first+this.fixed.length+i];
+                    params[p++] = args[first+this.fixed.length+i];
                 }
             }
         }
         this.executor.execute(params);
     }
+    
+    public static Set<Command> createDefaultCommandSet() throws CommandException
+    {
+    	Set<Command> s = new HashSet<Command>();
+    	s.add(Command.createHelpCommand());
+    	s.add(Command.createHTMLHelpCommand());
+    	return s;
+    }
+    
+    public static Command createHelpCommand() throws CommandException
+    {
+    	return new Command("help", "Shows the commands help on plain text.", 
+         new ICommandExecutor() {
+            public void execute(Object[] params) throws Exception 
+            {   
+            	if (params.length == 0)
+            		throw new RuntimeException("No parameters given.");
+            	Command.help((Set<Command>) params[0], false);
+            }
+         }
+    	);
+    }    
+    
+    public static Command createHTMLHelpCommand() throws CommandException
+    {
+    	return new Command("htmlhelp", "Shows the commands help on html format.", 
+         new ICommandExecutor() {
+            public void execute(Object[] params) throws Exception 
+            {   
+            	if (params.length == 0)
+            		throw new RuntimeException("No parameters given.");
+            	Command.help((Set<Command>) params[0], true);
+            }
+         }
+    	);
+    }    
+        
+    /** 
+     * Outputs the help for all the visible commands
+     * 
+     * @param html If true, outputs in html format
+     */
+    static private void help(Set<Command> commands, boolean html)
+    {
+        for (Command c : commands)
+        {
+            if (c.isHidden())
+                continue;
+            if (!html)
+            {
+                System.out.println(c.getSyntax());
+                System.out.println("\t"+c.getHelp());
+                System.out.println();
+            }
+            else
+            {
+                String syn = c.getSyntax().replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+                System.out.println("<b>"+syn+"</b><br>");
+                System.out.println("<p>&nbsp;&nbsp;&nbsp;"+c.getHelp()+"<br>");
+                System.out.println("<p>");
+            }
+                
+        }
+    }
+    
 }

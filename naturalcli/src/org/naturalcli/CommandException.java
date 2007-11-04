@@ -20,7 +20,8 @@
 package org.naturalcli;
 
 /**
- *
+ * Thrown when something unexpected happens for a Command
+ * 
  * @author Ferran Busquets
  */
 @SuppressWarnings("serial")
@@ -29,7 +30,8 @@ public class CommandException extends java.lang.Exception {
     
     /**
      * Creates a new instance of CommandException
-     * @param m Exception message
+     * 
+     * @param m the exception message
      */
     public CommandException(String m) {
         super(m);
@@ -37,8 +39,9 @@ public class CommandException extends java.lang.Exception {
 
     /**
      * Creates a new instance of CommandException
-     * @param m Exception message
-     * @param c Cause of this exception
+     * 
+     * @param m the exception message
+     * @param c the cause of this exception
      */
     public CommandException(String m, Throwable c) {
         super(m);
