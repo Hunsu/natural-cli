@@ -1,5 +1,5 @@
 /* 
- * StringParamType.java
+ * Email.java
  *
  * Copyright (C) 2007 Ferran Busquets
  *
@@ -17,24 +17,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.naturalcli.parameterstmp;
+package org.naturalcli.parameters;
+
+import java.util.regex.Pattern;
 
 
 
 /**
- * The class implements a Parameter type for an string
- * 
  * @author Ferran Busquets
  *
  */
-public class StringParamType implements IParameterType {
+public class EmailParamType implements IParameterType {
 
 	/* (non-Javadoc)
 	 * @see org.naturalcli.paramtypes.IParameterType#getParameterTypeName()
 	 */
 	@Override
 	public String getParameterTypeName() {
-		return "string";
+		return "email";
 	}
 
 	/* (non-Javadoc)
@@ -42,8 +42,7 @@ public class StringParamType implements IParameterType {
 	 */
 	@Override
 	public boolean validateParameter(String value) {
-		// Any string is ok, then all it's ok
-		return true;
+		return Pattern.matches("(\\w+)@(\\w+\\.)(\\w+)(\\.\\w+)*)", value);
 	}
 
 	/* (non-Javadoc)
@@ -51,7 +50,7 @@ public class StringParamType implements IParameterType {
 	 */
 	@Override
 	public String validationMessage(String value) {
-		return null;
+		return this.validateParameter(value) ? null : "Bad email";
 	}
 
 }

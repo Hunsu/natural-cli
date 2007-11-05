@@ -23,8 +23,8 @@ package org.naturalcli;
 import java.util.Set;
 
 import org.naturalcli.commands.Command;
-import org.naturalcli.parameterstmp.ParameterValidator;
-import org.naturalcli.parameterstmp.UnkownParameterType;
+import org.naturalcli.parameters.ParameterValidator;
+import org.naturalcli.parameters.UnkownParameterType;
 
 /**
  * A set of commands understood by the CLI

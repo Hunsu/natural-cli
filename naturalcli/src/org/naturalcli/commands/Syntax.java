@@ -22,8 +22,8 @@ package org.naturalcli.commands;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.naturalcli.parameterstmp.ParameterValidator;
-import org.naturalcli.parameterstmp.UnkownParameterType;
+import org.naturalcli.parameters.ParameterValidator;
+import org.naturalcli.parameters.UnkownParameterType;
 
 /**
  * @author Ferran Busquets

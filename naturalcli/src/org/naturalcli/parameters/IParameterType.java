@@ -18,7 +18,7 @@
  *
  */
 
-package org.naturalcli.parameterstmp;
+package org.naturalcli.parameters;
 
 /**
  * A parameter type for all the commands.

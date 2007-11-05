@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.naturalcli.parameterstmp;
+package org.naturalcli.parameters;
 
 import java.util.Set;
 import java.util.HashSet;;

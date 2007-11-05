@@ -18,7 +18,7 @@
  *
  */
 
-package org.naturalcli.parameterstmp;
+package org.naturalcli.parameters;
 
 import java.util.Collection;
 
