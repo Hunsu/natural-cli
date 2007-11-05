@@ -42,8 +42,6 @@ public class HTMLHelpCommandExecutor implements ICommandExecutor {
 	 */
 	@Override
 	public void execute(Object[] params) throws Exception {
-		if (params.length == 0)
-			throw new RuntimeException("No parameters given.");
 		for (Command c : commands) 
 		{
 			if (c.isHidden())

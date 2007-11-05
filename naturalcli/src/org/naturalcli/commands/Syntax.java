@@ -58,7 +58,7 @@ public class Syntax {
 		int i = first;
 		for (Token tg : grammar)
 		{
-			String tm = tokens[++i];
+			String tm = tokens[i++];
 			if (!tg.matches(tm, pv) && !tg.isOptional())
 				return false;
 		}

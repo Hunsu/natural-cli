@@ -32,12 +32,14 @@ import org.naturalcli.parameters.ParameterValidator;
  *
  * @author Ferran Busquets
  */
-public class Main {
+public class NaturalCLIDemo {
     
               
     public static synchronized void main(String args[])
     {
+		System.out.println("Demo started.");
 		try {
+			args = new String[] { "help" };
 			ParameterValidator pv = new ParameterValidator();
     		Set<Command> cs = new HashSet<Command>();
     		cs.add(new HelpCommand(cs));
@@ -45,9 +47,9 @@ public class Main {
     		cs.add(new SleepCommand());    		
 			new NaturalCLI(cs, pv).execute(args, 0);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("Demo finished.");
     }
     
     

@@ -74,7 +74,9 @@ public class NaturalCLI {
      */
     public boolean execute(String[] args, int first) throws Exception
     {
-        // Look for the command that matches
+    	if (args.length == 0)
+    		return false;
+    	// Look for the command that matches
         Command command = null;
         for (Command c : commands)
             if (c.parse(args, first, pv))

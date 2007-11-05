@@ -36,8 +36,6 @@ public class HelpCommand extends Command {
 		super("help", "Shows the commands help on plain text.",
 				new HelpCommandExecutor(commands)
 		);
-	}
-	
-	
+	}	
 
 }
