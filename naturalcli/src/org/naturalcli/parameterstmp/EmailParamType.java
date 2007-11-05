@@ -1,5 +1,5 @@
 /* 
- * IParameterType.java
+ * Email.java
  *
  * Copyright (C) 2007 Ferran Busquets
  *
@@ -17,27 +17,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-
-package org.naturalcli.parameters;
+package org.naturalcli.parameterstmp;
 
 import java.util.regex.Pattern;
 
 
 
 /**
- * The class implements a Parameter type for an identifier
- * 
  * @author Ferran Busquets
  *
  */
-public class IdentifierParamType implements IParameterType {
+public class EmailParamType implements IParameterType {
 
 	/* (non-Javadoc)
 	 * @see org.naturalcli.paramtypes.IParameterType#getParameterTypeName()
 	 */
 	@Override
 	public String getParameterTypeName() {
-		return "identifier";
+		return "email";
 	}
 
 	/* (non-Javadoc)
@@ -45,16 +42,15 @@ public class IdentifierParamType implements IParameterType {
 	 */
 	@Override
 	public boolean validateParameter(String value) {
-        return Pattern.matches("\\w+", value);
+		return Pattern.matches("(\\w+)@(\\w+\\.)(\\w+)(\\.\\w+)*)", value);
 	}
 
 	/* (non-Javadoc)
 	 * @see org.naturalcli.paramtypes.IParameterType#validationMessage(java.lang.String)
 	 */
 	@Override
-	public String validationMessage(String value) {		
-		return this.validateParameter(value) ? null : "Bad identifier";
+	public String validationMessage(String value) {
+		return this.validateParameter(value) ? null : "Bad email";
 	}
 
-	
 }

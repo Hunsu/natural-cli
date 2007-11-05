@@ -1,5 +1,5 @@
 /* 
- * Number.java
+ * IParameterType.java
  *
  * Copyright (C) 2007 Ferran Busquets
  *
@@ -17,26 +17,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.naturalcli.parameters;
+
+package org.naturalcli.parameterstmp;
 
 import java.util.regex.Pattern;
 
 
 
 /**
- * The class implements a Parameter type for a number
+ * The class implements a Parameter type for an identifier
  * 
  * @author Ferran Busquets
  *
  */
-public class NumberParamType implements IParameterType {
+public class IdentifierParamType implements IParameterType {
 
 	/* (non-Javadoc)
 	 * @see org.naturalcli.paramtypes.IParameterType#getParameterTypeName()
 	 */
 	@Override
 	public String getParameterTypeName() {
-		return "number";
+		return "identifier";
 	}
 
 	/* (non-Javadoc)
@@ -44,16 +45,16 @@ public class NumberParamType implements IParameterType {
 	 */
 	@Override
 	public boolean validateParameter(String value) {
-		// TODO Auto-generated method stub
-		return Pattern.matches("\\d+", value);
+        return Pattern.matches("\\w+", value);
 	}
 
 	/* (non-Javadoc)
 	 * @see org.naturalcli.paramtypes.IParameterType#validationMessage(java.lang.String)
 	 */
 	@Override
-	public String validationMessage(String value) {
-		return this.validateParameter(value) ? null : "Bad number";
+	public String validationMessage(String value) {		
+		return this.validateParameter(value) ? null : "Bad identifier";
 	}
 
+	
 }

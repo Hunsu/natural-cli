@@ -19,7 +19,7 @@
  */
 package org.naturalcli.commands;
 
-import org.naturalcli.ICommandExecutor;
+import org.naturalcli.commands.ICommandExecutor;
 
 
 /**

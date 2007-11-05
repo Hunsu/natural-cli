@@ -25,7 +25,7 @@ import java.util.Set;
 
 import org.naturalcli.*;
 import org.naturalcli.commands.*;
-import org.naturalcli.parameters.ParameterValidator;
+import org.naturalcli.parameterstmp.ParameterValidator;
 
 
 /**

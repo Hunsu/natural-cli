@@ -19,8 +19,8 @@
  */
 package org.naturalcli.commands;
 
-import org.naturalcli.parameters.ParameterValidator;
-import org.naturalcli.parameters.UnkownParameterType;
+import org.naturalcli.parameterstmp.ParameterValidator;
+import org.naturalcli.parameterstmp.UnkownParameterType;
 
 
 /**

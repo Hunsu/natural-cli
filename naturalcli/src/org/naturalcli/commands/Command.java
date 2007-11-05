@@ -20,9 +20,8 @@
 
 package org.naturalcli.commands;
 
-import org.naturalcli.ICommandExecutor;
-import org.naturalcli.parameters.ParameterValidator;
-import org.naturalcli.parameters.UnkownParameterType;
+import org.naturalcli.parameterstmp.ParameterValidator;
+import org.naturalcli.parameterstmp.UnkownParameterType;
 
 /*
  * Represents a command definition
@@ -85,7 +84,7 @@ public class Command {
 	 * @param pv
 	 * @return
 	 * @throws UnkownParameterType
-	 * @see org.naturalcli.commands.Syntax#parse(java.lang.String[], int, org.naturalcli.parameters.ParameterValidator)
+	 * @see org.naturalcli.commands.Syntax#parse(java.lang.String[], int, org.naturalcli.parameterstmp.ParameterValidator)
 	 */
 	public boolean parse(String[] tokens, int first, ParameterValidator pv)
 			throws UnkownParameterType {
