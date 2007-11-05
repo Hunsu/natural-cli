@@ -19,7 +19,7 @@
  */
 package org.naturalcli.commands;
 
-import java.util.Set;
+import org.naturalcli.NaturalCLI;
 
 /**
  * @author Ferran Busquets

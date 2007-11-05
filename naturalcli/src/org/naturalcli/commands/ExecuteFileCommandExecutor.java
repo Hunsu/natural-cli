@@ -32,6 +32,8 @@ import org.naturalcli.commands.ICommandExecutor;
  */
 public class ExecuteFileCommandExecutor implements ICommandExecutor {
 
+	static final String COMMENT = "#";
+	
 	private NaturalCLI naturalCLI;
 	
 	public ExecuteFileCommandExecutor(NaturalCLI naturalCLI)
@@ -48,7 +50,11 @@ public class ExecuteFileCommandExecutor implements ICommandExecutor {
         BufferedReader in = new BufferedReader(new FileReader(file_name));
         String command;
         while ((command = in.readLine()) != null)
+        {
+        	if (command.startsWith(COMMENT))
+        		continue;
     		this.naturalCLI.execute(command, 0);
+        }
         in.close();
 	}
 

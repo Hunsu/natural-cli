@@ -33,24 +33,23 @@ import org.naturalcli.parameters.ParameterValidator;
  * @author Ferran Busquets
  */
 public class NaturalCLIDemo {
-    
               
     public static synchronized void main(String args[])
     {
 		System.out.println("Demo started.");
 		try {
-			args = new String[] { "help" };
+			args = new String[] { "execute file " };
 			ParameterValidator pv = new ParameterValidator();
     		Set<Command> cs = new HashSet<Command>();
+    		NaturalCLI nc = new NaturalCLI(cs, pv);
     		cs.add(new HelpCommand(cs));
     		cs.add(new HTMLHelpCommand(cs));
-    		cs.add(new SleepCommand());    		
-			new NaturalCLI(cs, pv).execute(args, 0);
+    		cs.add(new SleepCommand());  
+    		cs.add(new ExecuteFile(nc));  
+			nc.execute(args, 0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		System.out.println("Demo finished.");
     }
-    
-    
 }
