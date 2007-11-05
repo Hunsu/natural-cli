@@ -22,7 +22,9 @@ package org.naturalcli;
 
 import java.util.Set;
 
+import org.naturalcli.commands.Command;
 import org.naturalcli.parameters.ParameterValidator;
+import org.naturalcli.parameters.UnkownParameterType;
 
 /**
  * A set of commands understood by the CLI
@@ -46,36 +48,11 @@ public class NaturalCLI {
      * 
      * @param c List of commands  
      */
-    public NaturalCLI(Set<Command> commands) throws CommandException 
+    public NaturalCLI(Set<Command> commands) 
     {
     	this(commands, new ParameterValidator());
     }
-    
-    
-    /**
-     * Search a command based on the string array.
-     * 
-     * @param  args the arguments for the command.
-     * @return the command that matches the arguments or null if no one matches.
-     */
-    private Command searchCommand(String[] args)
-    {           
-        for (Command c : this.commands)
-            if (c.parse(args))
-                return c;
-        return null;
-    }
-
-    /**
-     * Runs a command based on the arguments.
-     * 
-     * @param args  the string arguments to run.
-     */
-    public void execute(String args) throws Exception
-    {
-    	this.execute(args.split(" "));
-    }
-    
+        
     /**
      * Runs a command based on the arguments.
      * 
@@ -92,32 +69,38 @@ public class NaturalCLI {
      * 
      * @param args  the arguments to be parsed
      * @param first the index on <code>args</code> of the first string for the arguments.
+     * @return
+     * @throws UnkownParameterType 
      */
-    public void execute(String[] args, int first) throws Exception
+    public boolean execute(String[] args, int first) throws Exception
     {
         // Look for the command that matches
-        Command c = this.searchCommand(args);
+        Command command = null;
+        for (Command c : commands)
+            if (c.parse(args, first, pv))
+            {
+                command = c;
+                break;
+            }
         // I no one matches, 
-        if (c == null)
-        {
-            String x = "";
-            for (String s : args)
-                x += " "+s;
-            throw new CommandException("Unknown command: "+x);
-        }
-        c.execute(args,1, this.pv);
+        if (command == null)
+        	return false;
+		// Obtain parameters		
+		int[] indexes = command.getParametersIndexs();
+		String[] params = new String[indexes.length];
+		int p = 0;
+		for (int i : indexes)
+			params[p++] = args[first+i];
+		// Execute the parameters
+        command.getExecutor().execute(params);
+        return true;
+    }
+  
+    public boolean execute(String[] args) throws Exception
+    {
+    	return execute(args, 0);
     }
     
-    /**
-     * Runs a command based on the arguments.
-     * 
-     * @param args  the arguments to be parsed
-     */
-    public void execute(String[] args) throws Exception
-    {
-    	this.execute(args, 0);
-    }
-     
 
     
 }

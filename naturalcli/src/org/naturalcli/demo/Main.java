@@ -20,9 +20,11 @@
 
 package org.naturalcli.demo;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.naturalcli.*;
+import org.naturalcli.commands.*;
 import org.naturalcli.parameters.ParameterValidator;
 
 
@@ -37,8 +39,11 @@ public class Main {
     {
 		try {
 			ParameterValidator pv = new ParameterValidator();
-    		Set<Command> cs = Command.createDefaultCommandSet();
-			new NaturalCLI(cs, pv).execute("help");
+    		Set<Command> cs = new HashSet<Command>();
+    		cs.add(new HelpCommand(cs));
+    		cs.add(new HTMLHelpCommand(cs));
+    		cs.add(new SleepCommand());    		
+			new NaturalCLI(cs, pv).execute(args, 0);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
