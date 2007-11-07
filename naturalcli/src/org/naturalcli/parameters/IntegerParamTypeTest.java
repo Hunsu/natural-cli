@@ -1,5 +1,5 @@
 /* 
- * Email.java
+ * IntegerParamTypeTest.java
  *
  * Copyright (C) 2007 Ferran Busquets
  *
@@ -19,35 +19,28 @@
  */
 package org.naturalcli.parameters;
 
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Ferran Busquets
  *
  */
-public class EmailParamType implements IParameterType {
+public class IntegerParamTypeTest {
 
-	/* (non-Javadoc)
-	 * @see org.naturalcli.paramtypes.IParameterType#getParameterTypeName()
+	/**
+	 * Test method for {@link org.naturalcli.parameters.IntegerParamType#validateParameter(java.lang.String)}.
 	 */
-	@Override
-	public String getParameterTypeName() {
-		return "email";
-	}
-
-	/* (non-Javadoc)
-	 * @see org.naturalcli.paramtypes.IParameterType#validateParameter(java.lang.String)
-	 */
-	@Override
-	public boolean validateParameter(String value) {
-		return value.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
-	}
-
-	/* (non-Javadoc)
-	 * @see org.naturalcli.paramtypes.IParameterType#validationMessage(java.lang.String)
-	 */
-	@Override
-	public String validationMessage(String value) {
-		return this.validateParameter(value) ? null : "Bad email";
+	@Test
+	public final void testValidateParameter() {
+		IntegerParamType t = new IntegerParamType();
+		// Right 
+		Assert.assertTrue(t.validateParameter("123"));
+		Assert.assertTrue(t.validateParameter("0"));
+		// Bad 
+		Assert.assertFalse(t.validateParameter("-1"));
+		Assert.assertFalse(t.validateParameter("1.2"));
+		Assert.assertFalse(t.validateParameter(".2"));
 	}
 
 }

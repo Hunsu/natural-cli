@@ -1,5 +1,5 @@
 /* 
- * Email.java
+ * DefaultParameterTypesTest.java
  *
  * Copyright (C) 2007 Ferran Busquets
  *
@@ -20,34 +20,25 @@
 package org.naturalcli.parameters;
 
 
+import java.util.Set;
+
+import junit.framework.TestCase;
+
+import org.junit.*;
+
 /**
  * @author Ferran Busquets
  *
  */
-public class EmailParamType implements IParameterType {
+public class DefaultParameterTypesTest extends TestCase {
 
-	/* (non-Javadoc)
-	 * @see org.naturalcli.paramtypes.IParameterType#getParameterTypeName()
+	/**
+	 * Test method for {@link org.naturalcli.parameters.DefaultParameterTypes#createSet()}.
 	 */
-	@Override
-	public String getParameterTypeName() {
-		return "email";
+	@Test
+	public void testCreateSet()
+	{
+		Set<IParameterType> s = DefaultParameterTypes.createSet();
+		Assert.assertTrue("Bad size for default set", s.size() >0);
 	}
-
-	/* (non-Javadoc)
-	 * @see org.naturalcli.paramtypes.IParameterType#validateParameter(java.lang.String)
-	 */
-	@Override
-	public boolean validateParameter(String value) {
-		return value.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
-	}
-
-	/* (non-Javadoc)
-	 * @see org.naturalcli.paramtypes.IParameterType#validationMessage(java.lang.String)
-	 */
-	@Override
-	public String validationMessage(String value) {
-		return this.validateParameter(value) ? null : "Bad email";
-	}
-
 }

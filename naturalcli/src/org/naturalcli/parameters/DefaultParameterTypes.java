@@ -34,7 +34,7 @@ public class DefaultParameterTypes {
 		Set<IParameterType> s = new HashSet<IParameterType>();
 		s.add(new EmailParamType());
 		s.add(new IdentifierParamType());
-		s.add(new NumberParamType());
+		s.add(new IntegerParamType());
 		s.add(new StringParamType());
 		return s;
 	}

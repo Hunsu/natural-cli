@@ -20,10 +20,6 @@
 
 package org.naturalcli.parameters;
 
-import java.util.regex.Pattern;
-
-
-
 /**
  * The class implements a Parameter type for an identifier
  * 
@@ -45,7 +41,7 @@ public class IdentifierParamType implements IParameterType {
 	 */
 	@Override
 	public boolean validateParameter(String value) {
-        return Pattern.matches("\\w+", value);
+        return value.matches("[a-zA-Z](\\w)*");
 	}
 
 	/* (non-Javadoc)

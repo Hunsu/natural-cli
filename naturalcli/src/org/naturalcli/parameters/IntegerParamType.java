@@ -19,9 +19,6 @@
  */
 package org.naturalcli.parameters;
 
-import java.util.regex.Pattern;
-
-
 
 /**
  * The class implements a Parameter type for a number
@@ -29,14 +26,14 @@ import java.util.regex.Pattern;
  * @author Ferran Busquets
  *
  */
-public class NumberParamType implements IParameterType {
+public class IntegerParamType implements IParameterType {
 
 	/* (non-Javadoc)
 	 * @see org.naturalcli.paramtypes.IParameterType#getParameterTypeName()
 	 */
 	@Override
 	public String getParameterTypeName() {
-		return "number";
+		return "integer";
 	}
 
 	/* (non-Javadoc)
@@ -44,8 +41,7 @@ public class NumberParamType implements IParameterType {
 	 */
 	@Override
 	public boolean validateParameter(String value) {
-		// TODO Auto-generated method stub
-		return Pattern.matches("\\d+", value);
+		return value.matches("\\d+");
 	}
 
 	/* (non-Javadoc)
@@ -53,7 +49,7 @@ public class NumberParamType implements IParameterType {
 	 */
 	@Override
 	public String validationMessage(String value) {
-		return this.validateParameter(value) ? null : "Bad number";
+		return this.validateParameter(value) ? null : "Bad integer";
 	}
 
 }
