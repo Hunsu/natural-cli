@@ -17,29 +17,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.naturalcli.commands;
+package org.naturalcli;
 
-import org.naturalcli.parameters.ParameterValidator;
-import org.naturalcli.parameters.UnkownParameterType;
 
 
 /**
+ * <p>
  * The <code>Token</code> class implements a token for the 
  * command grammar.
+ * </p>
  * 
  * @author Ferran Busquets
- *
  */
 public class Token {
 	
+	/** Beginning char for a parameter */
     private final char CHAR_BEGIN_PARAM = '<';
+    
+    /** Ending char for a parameter */
     private final char CHAR_END_PARAM = '>';
 
+    /** Beginning char for an optional token*/
     private final char CHAR_BEGIN_OPT = '[';
+
+    /** Ending char for an optional token */
     private final char CHAR_END_OPT= ']';
     
+    /** Char separator for a parameter name and type */
     private final char CHAR_NAME_TYPE = ':';
     
+    /** Texts giving sense to the token */
     private String text;
 	
     /**
@@ -143,9 +150,9 @@ public class Token {
      * @param text the text to match
      * @param pv the parameter validator
      * @return <code>true</code> if matches, <code>false</code> if not
-     * @throws UnkownParameterType
+     * @throws UnknownParameterType
      */
-    public boolean matches(String text, ParameterValidator pv) throws UnkownParameterType
+    public boolean matches(String text, ParameterValidator pv) throws UnknownParameterType
     {
     	if (this.isIdentifier())
     		return this.getWord().equals(text);

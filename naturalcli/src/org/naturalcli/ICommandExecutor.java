@@ -1,5 +1,5 @@
-/* 
- * SyntaxTest.java
+/*
+ * ICommandExecutor.java
  *
  * Copyright (C) 2007 Ferran Busquets
  *
@@ -17,40 +17,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.naturalcli.commands;
 
-import static org.junit.Assert.*;
-
-import org.junit.Before;
-import org.junit.Test;
+package org.naturalcli;
 
 /**
+ * A command executor runs a command for the parameters.
+ * 
  * @author Ferran Busquets
- *
  */
-public class SyntaxTest {
-
+public interface ICommandExecutor {
+    
 	/**
-	 * @throws java.lang.Exception
+	 * Execute the command.
+	 * 
+	 * @param params the parameters for the command.
 	 */
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	/**
-	 * Test method for {@link org.naturalcli.commands.Syntax#parse(java.lang.String[], int, org.naturalcli.parameters.ParameterValidator)}.
-	 */
-	@Test
-	public final void testParse() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link org.naturalcli.commands.Syntax#getParameterIndexs()}.
-	 */
-	@Test
-	public final void testGetParameterIndexs() {
-		fail("Not yet implemented");
-	}
-
+    public void execute(Object[] params) throws Exception;
 }

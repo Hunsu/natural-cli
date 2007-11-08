@@ -18,9 +18,11 @@
  *
  */
 
-package org.naturalcli.parameters;
+package org.naturalcli;
 
 import java.util.Collection;
+
+import org.naturalcli.parameters.DefaultParameterTypes;
 
 
 
@@ -33,11 +35,11 @@ import java.util.Collection;
  */
 public class ParameterValidator {
 
+	/** Parameter types for the validation */
 	private Collection<IParameterType> parameterTypes;
 	
 	/** 
      * Creates a new instance of <code>ParameterValidator</code> with default parameter types
-     * 
      */
     public ParameterValidator() 
     {   
@@ -61,9 +63,9 @@ public class ParameterValidator {
      * @param value the parameter value
      * @param type the parameter type name
      * @return <code>null</code> if validated, otherwise a error message
-     * @throws UnkownParameterType raised if the parameter is not found
+     * @throws UnknownParameterType raised if the parameter is not found
      */
-    public String validate(String value, String type) throws UnkownParameterType
+    public String validate(String value, String type) throws UnknownParameterType
     {
     	IParameterType pt = null;
     	// Look for the parameter type
@@ -77,7 +79,7 @@ public class ParameterValidator {
     	}
     	// If not found throw exception
     	if (pt == null)
-            throw new UnkownParameterType(type);
+            throw new UnknownParameterType(type);
     	// Validate the parameter
     	return pt.validationMessage(value);
     }

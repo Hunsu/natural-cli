@@ -20,6 +20,8 @@
 
 package org.naturalcli.parameters;
 
+import org.naturalcli.IParameterType;
+
 /**
  * The class implements a Parameter type for an identifier
  * 

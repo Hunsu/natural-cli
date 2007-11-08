@@ -17,13 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.naturalcli.commands;
+package org.naturalcli;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Vector;
 
-import org.naturalcli.parameters.ParameterValidator;
-import org.naturalcli.parameters.UnkownParameterType;
 
 /**
  * @author Ferran Busquets
@@ -33,27 +32,41 @@ public class Syntax {
 
 	private String definition;
 	private List<Token> grammar;
-	private int parameters;
+	private int parametersMin;
+	private int parametersMax;
 	
 	public Syntax(String definition)
 	{
 		this.setDefinition(definition);
 	}
-	
+
+	/**
+	 * @param definition the definition to set
+	 */
+	private void setDefinition(String definition) {
+		this.definition = definition;
+		this.generateGrammar();
+	}
+		
 	private void generateGrammar()
 	{
 		grammar = new LinkedList<Token>();
-		parameters = 0;
+		parametersMin = 0;
+		parametersMax = 0;
    		for (String s : definition.split(" "))
    		{
    			Token t = new Token(s);
    			grammar.add(t);
    			if (t.isParameter())
-   				parameters++;
+   			{
+   				parametersMax++;
+   				if (t.isOptional())
+   					parametersMin++;
+   			}
    		}
 	}
 
-	public boolean parse(String[] tokens, int first, ParameterValidator pv) throws UnkownParameterType
+	public boolean parse(String[] tokens, int first, ParameterValidator pv) throws UnknownParameterType
 	{
 		int i = first;
 		for (Token tg : grammar)
@@ -62,22 +75,25 @@ public class Syntax {
 			if (!tg.matches(tm, pv) && !tg.isOptional())
 				return false;
 		}
-		return true;
+		return i == tokens.length;
 	}
 
-	public int[] getParameterIndexs() 
+
+ 	public Integer[] getParameterIndexes(String[] tokens, int first, ParameterValidator pv) throws UnknownParameterType
 	{
-		int[] result = new int[parameters];
-		int result_index = 0;
-		int parameter_index = 0;
-		for (Token t : grammar)
+ 		Vector<Integer> l = new Vector<Integer>();
+		int i = first;
+		for (Token tg : grammar)
 		{
-			if (t.isParameter())
-				result[result_index++] = parameter_index;;
-			parameter_index++;
+			String tm = tokens[i++];
+			if (!tg.matches(tm, pv) && !tg.isOptional())
+				return null;
+			else if (tg.isParameter())
+				l.add(i);
 		}
-		return result;
+		return (Integer[]) l.toArray();
 	}	
+
 	/**
 	 * @return the definition
 	 */
@@ -85,12 +101,5 @@ public class Syntax {
 		return definition;
 	}
 
-	/**
-	 * @param definition the definition to set
-	 */
-	public void setDefinition(String definition) {
-		this.definition = definition;
-		this.generateGrammar();
-	}
-	
+
 }

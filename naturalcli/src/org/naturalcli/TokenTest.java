@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.naturalcli.commands;
+package org.naturalcli;
 
 import org.junit.Assert.*;
 
@@ -33,7 +33,7 @@ public class TokenTest {
 
 
 	/**
-	 * Test method for {@link org.naturalcli.commands.Token#isOptional()}.
+	 * Test method for {@link org.naturalcli.Token#isOptional()}.
 	 */
 	@Test
 	public final void testIsOptional() {
@@ -48,7 +48,7 @@ public class TokenTest {
 	}
 
 	/**
-	 * Test method for {@link org.naturalcli.commands.Token#isParameter()}.
+	 * Test method for {@link org.naturalcli.Token#isParameter()}.
 	 */
 	@Test
 	public final void testIsParameter() {
@@ -66,7 +66,7 @@ public class TokenTest {
 	}
 
 	/**
-	 * Test method for {@link org.naturalcli.commands.Token#getParameterName()}.
+	 * Test method for {@link org.naturalcli.Token#getParameterName()}.
 	 */
 	@Test
 	public final void testGetParameterName() {
@@ -77,7 +77,7 @@ public class TokenTest {
 	}
 
 	/**
-	 * Test method for {@link org.naturalcli.commands.Token#getParameterTypeName()}.
+	 * Test method for {@link org.naturalcli.Token#getParameterTypeName()}.
 	 */
 	@Test
 	public final void testGetParameterTypeName() {
@@ -88,7 +88,7 @@ public class TokenTest {
 	}
 
 	/**
-	 * Test method for {@link org.naturalcli.commands.Token#isIdentifier()}.
+	 * Test method for {@link org.naturalcli.Token#isIdentifier()}.
 	 */
 	@Test
 	public final void testIsIdentifier() {
@@ -106,7 +106,7 @@ public class TokenTest {
 	}
 
 	/**
-	 * Test method for {@link org.naturalcli.commands.Token#getWord()}.
+	 * Test method for {@link org.naturalcli.Token#getWord()}.
 	 */
 	@Test
 	public final void testGetWord() {
@@ -114,7 +114,7 @@ public class TokenTest {
 	}
 
 	/**
-	 * Test method for {@link org.naturalcli.commands.Token#matches(java.lang.String, org.naturalcli.parameters.ParameterValidator)}.
+	 * Test method for {@link org.naturalcli.Token#matches(java.lang.String, org.naturalcli.parameters.ParameterValidator)}.
 	 */
 	@Test
 	public final void testMatches() {

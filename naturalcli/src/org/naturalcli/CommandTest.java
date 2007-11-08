@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.naturalcli.commands;
+package org.naturalcli;
 
 import static org.junit.Assert.*;
 
@@ -38,7 +38,7 @@ public class CommandTest {
 	}
 
 	/**
-	 * Test method for {@link org.naturalcli.commands.Command#isHidden()}.
+	 * Test method for {@link org.naturalcli.Command#isHidden()}.
 	 */
 	@Test
 	public final void testIsHidden() {
@@ -46,7 +46,7 @@ public class CommandTest {
 	}
 
 	/**
-	 * Test method for {@link org.naturalcli.commands.Command#parse(java.lang.String[], int, org.naturalcli.parameters.ParameterValidator)}.
+	 * Test method for {@link org.naturalcli.Command#parse(java.lang.String[], int, org.naturalcli.parameters.ParameterValidator)}.
 	 */
 	@Test
 	public final void testParse() {
@@ -54,7 +54,7 @@ public class CommandTest {
 	}
 
 	/**
-	 * Test method for {@link org.naturalcli.commands.Command#getExecutor()}.
+	 * Test method for {@link org.naturalcli.Command#getExecutor()}.
 	 */
 	@Test
 	public final void testGetExecutor() {
@@ -62,7 +62,7 @@ public class CommandTest {
 	}
 
 	/**
-	 * Test method for {@link org.naturalcli.commands.Command#execute(java.lang.String[], int, org.naturalcli.parameters.ParameterValidator)}.
+	 * Test method for {@link org.naturalcli.Command#execute(java.lang.String[], int, org.naturalcli.parameters.ParameterValidator)}.
 	 */
 	@Test
 	public final void testExecute() {

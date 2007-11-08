@@ -25,6 +25,7 @@ import java.util.Set;
 import junit.framework.TestCase;
 
 import org.junit.*;
+import org.naturalcli.IParameterType;
 
 /**
  * @author Ferran Busquets

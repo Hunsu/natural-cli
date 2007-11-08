@@ -19,6 +19,8 @@
  */
 package org.naturalcli.parameters;
 
+import org.naturalcli.IParameterType;
+
 
 /**
  * @author Ferran Busquets

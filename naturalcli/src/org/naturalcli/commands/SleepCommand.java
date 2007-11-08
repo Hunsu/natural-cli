@@ -19,6 +19,8 @@
  */
 package org.naturalcli.commands;
 
+import org.naturalcli.Command;
+
 
 
 /**

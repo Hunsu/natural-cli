@@ -22,9 +22,6 @@ package org.naturalcli;
 
 import java.util.Set;
 
-import org.naturalcli.commands.Command;
-import org.naturalcli.parameters.ParameterValidator;
-import org.naturalcli.parameters.UnkownParameterType;
 
 /**
  * A set of commands understood by the CLI
@@ -70,7 +67,7 @@ public class NaturalCLI {
      * @param args  the arguments to be parsed
      * @param first the index on <code>args</code> of the first string for the arguments.
      * @return
-     * @throws UnkownParameterType 
+     * @throws UnknownParameterType 
      */
     public boolean execute(String[] args, int first) throws Exception
     {
@@ -79,7 +76,7 @@ public class NaturalCLI {
     	// Look for the command that matches
         Command command = null;
         for (Command c : commands)
-            if (c.parse(args, first, pv))
+            if (c.getSyntax().parse(args, first, pv))
             {
                 command = c;
                 break;
@@ -88,7 +85,7 @@ public class NaturalCLI {
         if (command == null)
         	return false;
 		// Obtain parameters		
-		int[] indexes = command.getParametersIndexs();
+		Integer[] indexes = command.getSyntax().getParameterIndexes(args, first, pv);
 		String[] params = new String[indexes.length];
 		int p = 0;
 		for (int i : indexes)

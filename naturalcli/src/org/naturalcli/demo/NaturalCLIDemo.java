@@ -25,7 +25,6 @@ import java.util.Set;
 
 import org.naturalcli.*;
 import org.naturalcli.commands.*;
-import org.naturalcli.parameters.ParameterValidator;
 
 
 /**
@@ -36,7 +35,7 @@ public class NaturalCLIDemo {
               
     public static synchronized void main(String args[])
     {
-		System.out.println("Demo started.");
+    	System.out.println("Demo started.");
 		try {
 			args = new String[] { "execute file " };
 			ParameterValidator pv = new ParameterValidator();
@@ -45,7 +44,7 @@ public class NaturalCLIDemo {
     		cs.add(new HelpCommand(cs));
     		cs.add(new HTMLHelpCommand(cs));
     		cs.add(new SleepCommand());  
-    		cs.add(new ExecuteFile(nc));  
+    		cs.add(new ExecuteFileCommand(nc));  
 			nc.execute(args, 0);
 		} catch (Exception e) {
 			e.printStackTrace();

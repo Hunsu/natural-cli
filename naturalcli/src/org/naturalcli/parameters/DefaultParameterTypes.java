@@ -20,7 +20,9 @@
 package org.naturalcli.parameters;
 
 import java.util.Set;
-import java.util.HashSet;;
+import java.util.HashSet;
+
+import org.naturalcli.IParameterType;
 
 
 
@@ -29,7 +31,7 @@ import java.util.HashSet;;
  *
  */
 public class DefaultParameterTypes {
-	static Set<IParameterType> createSet()
+	public static Set<IParameterType> createSet()
 	{
 		Set<IParameterType> s = new HashSet<IParameterType>();
 		s.add(new EmailParamType());

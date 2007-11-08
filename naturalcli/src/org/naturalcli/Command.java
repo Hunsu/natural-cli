@@ -18,10 +18,8 @@
  *
  */
 
-package org.naturalcli.commands;
+package org.naturalcli;
 
-import org.naturalcli.parameters.ParameterValidator;
-import org.naturalcli.parameters.UnkownParameterType;
 
 /*
  * Represents a command definition
@@ -65,8 +63,8 @@ public class Command {
 	 * 
 	 * @return A string with the syntax for the command.
 	 */
-	public String getSyntax() {
-		return this.syntax.getDefinition();
+	public Syntax getSyntax() {
+		return this.syntax;
 	}
 
 	/**
@@ -79,24 +77,6 @@ public class Command {
 	}
 
 	/**
-	 * @param tokens
-	 * @param first
-	 * @param pv
-	 * @return
-	 * @throws UnkownParameterType
-	 * @see org.naturalcli.commands.Syntax#parse(java.lang.String[], int, org.naturalcli.parameters.ParameterValidator)
-	 */
-	public boolean parse(String[] tokens, int first, ParameterValidator pv)
-			throws UnkownParameterType {
-		return syntax.parse(tokens, first, pv);
-	}
-
-	public int[] getParametersIndexs()
-	{
-		return this.syntax.getParameterIndexs();
-	}
-	
-	/**
 	 * @return the executor
 	 */
 	public ICommandExecutor getExecutor() {
@@ -106,7 +86,7 @@ public class Command {
 	public void execute(String args[], int first, ParameterValidator pv) throws Exception
 	{
 		// Parse
-		if (!this.parse(args, first, pv))
+		if (!this.syntax.parse(args, first, pv))
 			throw new RuntimeException("Cannot parse arguments."); 
 	}
 

@@ -21,7 +21,8 @@ package org.naturalcli.commands;
 
 import java.util.Set;
 
-import org.naturalcli.commands.ICommandExecutor;
+import org.naturalcli.Command;
+import org.naturalcli.ICommandExecutor;
 
 
 /**

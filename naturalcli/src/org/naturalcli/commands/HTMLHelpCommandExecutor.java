@@ -21,7 +21,8 @@ package org.naturalcli.commands;
 
 import java.util.Set;
 
-import org.naturalcli.commands.ICommandExecutor;
+import org.naturalcli.Command;
+import org.naturalcli.ICommandExecutor;
 
 
 /**
@@ -46,7 +47,7 @@ public class HTMLHelpCommandExecutor implements ICommandExecutor {
 		{
 			if (c.isHidden())
 				continue;
-			String syn = c.getSyntax().replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+			String syn = c.getSyntax().getDefinition().replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 			System.out.println("<b>" + syn + "</b><br>");
 			System.out.println("<p>&nbsp;&nbsp;&nbsp;" + c.getHelp()+ "<br>");
 			System.out.println("<p>");

@@ -1,5 +1,5 @@
-/* 
- * ExecuteFile.java
+/*
+ * CommandException.java
  *
  * Copyright (C) 2007 Ferran Busquets
  *
@@ -15,24 +15,35 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
-package org.naturalcli.commands;
 
-import org.naturalcli.NaturalCLI;
+package org.naturalcli;
 
 /**
+ * Thrown when something unexpected happens for a ParameterType
+ * 
  * @author Ferran Busquets
- *
  */
-public class ExecuteFile  extends Command {
-	
-	public ExecuteFile(NaturalCLI naturalCLI) 
-	{
-		super("execute file <filename:string>", "Execute the commands on file.",
-				new ExecuteFileCommandExecutor(naturalCLI)
-		);
-	}	
 
-}
+@SuppressWarnings("serial")
+public class UnknownParameterType extends java.lang.Exception {
+    
+    
+    /**
+     * Creates a new instance of ParameterTypeException
+     * @param m Exception message
+     */
+    public UnknownParameterType(String m) {
+        super(m);
+    }
 
+    /**
+     * Creates a new instance of ParameterTypeException
+     * @param m Exception message
+     * @param c Cause of this exception
+     */
+    public UnknownParameterType(String m, Throwable c) {
+        super(m);
+        this.initCause(c);
+    }
+ }
