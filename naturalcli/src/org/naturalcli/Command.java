@@ -28,27 +28,48 @@ package org.naturalcli;
  */
 public class Command {
 
+	/** Help message */
 	private String help;
 
+	/** Command exectutor */	
 	private ICommandExecutor executor;
+	
+	/** Syntax definition  */
 	private Syntax syntax;
 
 	/**
 	 * Constructs a new command
 	 * 
-	 * @param syntax
-	 *            the syntax or the command
-	 * @param help
-	 *            the help help of the command
-	 * @param ce
-	 *            command executor
+	 * @param syntax the syntax for the command
+	 * @param helpthe help help of the command
+	 * @param ce command executor
+	 * @throws InvalidSyntaxDefinionException 
 	 */
-	public Command(String syntax, String help, ICommandExecutor ce) {
+	public Command(String syntax, String help, ICommandExecutor ce) throws InvalidSyntaxDefinionException {
+		this.prepare(syntax, help, ce);
+	}
+
+	/**
+	 * Default constructor only for inheritors
+	 */
+	protected Command() {
+	}
+	
+	/**
+	 * Initialize the command
+	 * 
+	 * @param syntax the syntax for the command
+	 * @param helpthe help help of the command
+	 * @param ce command executor
+	 * @throws InvalidSyntaxDefinionException 
+	 */
+	protected void prepare(String syntax, String help, ICommandExecutor ce) throws InvalidSyntaxDefinionException
+	{
 		this.help = help;
 		this.syntax = new Syntax(syntax);
 		this.executor = ce;
 	}
-
+	
 	/**
 	 * Determine if this is a hidden command
 	 * 
@@ -86,7 +107,7 @@ public class Command {
 	public void execute(String args[], int first, ParameterValidator pv) throws Exception
 	{
 		// Parse
-		if (!this.syntax.parse(args, first, pv))
+		if (!this.syntax.matches(args, first, pv))
 			throw new RuntimeException("Cannot parse arguments."); 
 	}
 

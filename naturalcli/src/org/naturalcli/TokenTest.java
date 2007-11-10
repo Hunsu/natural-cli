@@ -19,10 +19,8 @@
  */
 package org.naturalcli;
 
-import org.junit.Assert.*;
+import static org.junit.Assert.*;
 
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -31,94 +29,139 @@ import org.junit.Test;
  */
 public class TokenTest {
 
-
 	/**
 	 * Test method for {@link org.naturalcli.Token#isOptional()}.
 	 */
 	@Test
-	public final void testIsOptional() {
-		// Ok
-		Assert.assertTrue(new Token("[marian]").isOptional());
-		// Not ok
-		Assert.assertFalse(new Token("marian").isOptional());
-		Assert.assertFalse(new Token("marian]").isOptional());
-		Assert.assertFalse(new Token("[marian").isOptional());
-		Assert.assertFalse(new Token("ma[]rian").isOptional());
-		Assert.assertFalse(new Token("<[marian]>").isOptional());
+	public final void testSetText() throws InvalidTokenException {
+		// ok
+		new Token("marian");
+		new Token("<marian>");
+		new Token("[marian]");
+		new Token("[<marian>]");
+		// not ok
+		try { new Token("marian]"); fail(); } catch (InvalidTokenException e) { }
+		try { new Token("marian>"); fail(); } catch (InvalidTokenException e) { }
+		try { new Token("marian>]"); fail(); } catch (InvalidTokenException e) { }
+		try { new Token("<marian"); fail(); } catch (InvalidTokenException e) { }
+		try { new Token("<marian]"); fail(); } catch (InvalidTokenException e) { }
+		try { new Token("<marian>]"); fail(); } catch (InvalidTokenException e) { }
+		try { new Token("<[marian"); fail(); } catch (InvalidTokenException e) { }
+		try { new Token("<[marian>"); fail(); } catch (InvalidTokenException e) { }
+		try { new Token("<[marian>]"); fail(); } catch (InvalidTokenException e) { }
+		try { new Token("[marian"); fail(); } catch (InvalidTokenException e) { }
+		try { new Token("[marian>"); fail(); } catch (InvalidTokenException e) { }
+		try { new Token("[marian>]"); fail(); } catch (InvalidTokenException e) { }
+		try { new Token(""); fail(); } catch (InvalidTokenException e) { }
+		try { new Token(null); fail(); } catch (InvalidTokenException e) { }
+	}
+	
+	/**
+	 * Test method for {@link org.naturalcli.Token#isOptional()}.
+	 */
+	@Test
+	public final void testIsOptional() throws InvalidTokenException {
+		// true
+		assertTrue(new Token("[marian]").isOptional());
+		// false
+		assertFalse(new Token("marian").isOptional());
+		assertFalse(new Token("ma[]rian").isOptional());
 	}
 
 	/**
 	 * Test method for {@link org.naturalcli.Token#isParameter()}.
 	 */
 	@Test
-	public final void testIsParameter() {
-		// Ok
-		Assert.assertTrue(new Token("<marian>").isParameter());
-		Assert.assertTrue(new Token("[<marian>]").isParameter());
-		// Not ok
-		Assert.assertFalse(new Token("marian").isParameter());
-		Assert.assertFalse(new Token("[marian>").isParameter());
-		Assert.assertFalse(new Token("marian>").isParameter());
-		Assert.assertFalse(new Token("[marian>]").isParameter());
-		Assert.assertFalse(new Token("<marian").isParameter());
-		Assert.assertFalse(new Token("ma<>rian").isParameter());
-		Assert.assertFalse(new Token("<[marian]>").isParameter());
+	public final void testIsParameter() throws InvalidTokenException {
+		// true
+		assertTrue(new Token("<marian>").isParameter());
+		assertTrue(new Token("[<marian>]").isParameter());
+		// false
+		assertFalse(new Token("marian").isParameter());
+		assertFalse(new Token("ma<>rian").isParameter());
 	}
 
+	/**
+	 * Test method for {@link org.naturalcli.Token#isOptionalParameter()}.
+	 */
+	@Test
+	public final void testIsOptionalParameter() throws InvalidTokenException {
+		// true
+		assertTrue(new Token("[<marian>]").isOptionalParameter());
+		assertTrue(new Token("[<marian:integer>]").isOptionalParameter());
+		// false
+		assertFalse(new Token("marian").isOptionalParameter());
+		assertFalse(new Token("[marian]").isOptionalParameter());
+		assertFalse(new Token("<marian:integer>").isOptionalParameter());
+	}
+	
 	/**
 	 * Test method for {@link org.naturalcli.Token#getParameterName()}.
 	 */
 	@Test
-	public final void testGetParameterName() {
-		Assert.assertNull(new Token("marian").getParameterName());
-		Assert.assertEquals("marian", new Token("<marian>").getParameterName());
-		Assert.assertEquals("marian", new Token("<marian:integer>").getParameterName());
-		Assert.assertEquals("marian", new Token("<marian:email>").getParameterName());
+	public final void testGetParameterName() throws InvalidTokenException {
+		// null
+		assertNull(new Token("marian").getParameterName());
+		// equals
+		assertEquals("marian", new Token("<marian>").getParameterName());
+		assertEquals("marian", new Token("<marian:integer>").getParameterName());
+		assertEquals("marian", new Token("<marian:email>").getParameterName());
 	}
 
 	/**
 	 * Test method for {@link org.naturalcli.Token#getParameterTypeName()}.
 	 */
 	@Test
-	public final void testGetParameterTypeName() {
-		Assert.assertNull(new Token("marian").getParameterName());
-		Assert.assertEquals("marian", new Token("<marian>").getParameterName());
-		Assert.assertEquals("integer", new Token("<marian:integer>").getParameterName());
-		Assert.assertEquals("email", new Token("<marian:email>").getParameterName());
+	public final void testGetParameterTypeName() throws InvalidTokenException {
+		// null
+		assertNull(new Token("marian").getParameterTypeName());
+		// equals
+		assertEquals("integer", new Token("<integer>").getParameterTypeName());
+		assertEquals("integer", new Token("<marian:integer>").getParameterTypeName());
+		assertEquals("email", new Token("<marian:email>").getParameterTypeName());
 	}
 
 	/**
 	 * Test method for {@link org.naturalcli.Token#isIdentifier()}.
 	 */
 	@Test
-	public final void testIsIdentifier() {
+	public final void testIsIdentifier() throws InvalidTokenException {
 		// Ok
-		Assert.assertTrue(new Token("marian").isIdentifier());
-		Assert.assertTrue(new Token("[marian]").isIdentifier());
+		assertTrue(new Token("marian").isIdentifier());
+		assertTrue(new Token("[marian]").isIdentifier());
 		// Not ok
-		Assert.assertFalse(new Token("<marian>").isIdentifier());
-		Assert.assertFalse(new Token("[marian>").isIdentifier());
-		Assert.assertFalse(new Token("marian>").isIdentifier());
-		Assert.assertFalse(new Token("[marian>]").isIdentifier());
-		Assert.assertFalse(new Token("<marian").isIdentifier());
-		Assert.assertFalse(new Token("ma<>rian").isIdentifier());
-		Assert.assertFalse(new Token("<[marian]>").isIdentifier());
+		assertFalse(new Token("<marian>").isIdentifier());
+		assertFalse(new Token("[<marian>]").isIdentifier());
 	}
 
 	/**
 	 * Test method for {@link org.naturalcli.Token#getWord()}.
 	 */
 	@Test
-	public final void testGetWord() {
-		Assert.fail("Not yet implemented");
+	public final void testGetWord() throws InvalidTokenException {
+		assertEquals("marian", new Token("<marian>").getWord());
+		assertEquals("marian", new Token("[marian]").getWord());
+		assertEquals("marian:integer", new Token("<marian:integer>").getWord());
+		assertEquals("marian:email", new Token("[<marian:email>]").getWord());
 	}
 
 	/**
 	 * Test method for {@link org.naturalcli.Token#matches(java.lang.String, org.naturalcli.parameters.ParameterValidator)}.
+	 * @throws UnknownParameterType 
 	 */
 	@Test
-	public final void testMatches() {
-		Assert.fail("Not yet implemented");
+	public final void testMatches() throws InvalidTokenException, UnknownParameterType {
+		ParameterValidator pv = new ParameterValidator();
+		// Ok
+		assertTrue(new Token("marian").matches("marian", pv));
+		assertTrue(new Token("<integer>").matches("1234", pv));
+		assertTrue(new Token("<marian:email>").matches("marian@marian.org", pv));
+		// Not ok
+		assertFalse(new Token("marian").matches("1234", pv));
+		assertFalse(new Token("marian").matches(null, pv));
+		assertFalse(new Token("marian").matches("", pv));
+		assertFalse(new Token("<integer>").matches("marian", pv));
+		assertFalse(new Token("<marian:email>").matches("marian", pv));
 	}
 
 }

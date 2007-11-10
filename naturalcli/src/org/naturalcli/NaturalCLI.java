@@ -76,7 +76,7 @@ public class NaturalCLI {
     	// Look for the command that matches
         Command command = null;
         for (Command c : commands)
-            if (c.getSyntax().parse(args, first, pv))
+            if (c.getSyntax().matches(args, first, pv))
             {
                 command = c;
                 break;

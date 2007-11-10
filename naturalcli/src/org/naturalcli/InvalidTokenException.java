@@ -1,5 +1,5 @@
 /* 
- * HelpCommand.java
+ * InvalidTokenException.java
  *
  * Copyright (C) 2007 Ferran Busquets
  *
@@ -17,31 +17,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.naturalcli.commands;
-
-import java.util.Set;
-
-import org.naturalcli.Command;
-import org.naturalcli.InvalidSyntaxDefinionException;
-
+package org.naturalcli;
 
 /**
- * 
+ * Is thrown when a token is not well formed 
  * 
  * @author Ferran Busquets
  *
  */
-public class HelpCommand extends Command {
-	
-	public HelpCommand(Set<Command> commands) 
-	{
-		try {
-			prepare("help", "Shows the commands help on plain text.",
-					new HelpCommandExecutor(commands)
-			);
-		} catch (InvalidSyntaxDefinionException e) {
-			throw new RuntimeException(e);
-		}
-	}	
+@SuppressWarnings("serial")
+public class InvalidTokenException extends Exception {
+
+	/**
+	 * @param arg0
+	 */
+	public InvalidTokenException(String m) {
+		super(m);
+	}
 
 }

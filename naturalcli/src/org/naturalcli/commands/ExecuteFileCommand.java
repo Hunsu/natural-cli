@@ -20,6 +20,7 @@
 package org.naturalcli.commands;
 
 import org.naturalcli.Command;
+import org.naturalcli.InvalidSyntaxDefinionException;
 import org.naturalcli.NaturalCLI;
 
 /**
@@ -30,9 +31,13 @@ public class ExecuteFileCommand  extends Command {
 	
 	public ExecuteFileCommand(NaturalCLI naturalCLI) 
 	{
-		super("execute file <filename:string>", "Execute the commands on file.",
-				new ExecuteFileCommandExecutor(naturalCLI)
-		);
+		try {
+			prepare("execute file <filename:string>", "Execute the commands on file.",
+					new ExecuteFileCommandExecutor(naturalCLI)
+			);
+		} catch (InvalidSyntaxDefinionException e) {
+			throw new RuntimeException(e);
+		}
 	}	
 
 }

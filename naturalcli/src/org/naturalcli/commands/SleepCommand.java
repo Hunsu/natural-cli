@@ -20,6 +20,7 @@
 package org.naturalcli.commands;
 
 import org.naturalcli.Command;
+import org.naturalcli.InvalidSyntaxDefinionException;
 
 
 
@@ -33,7 +34,11 @@ public class SleepCommand extends Command {
 	
 	public SleepCommand() 
 	{
-		super("sleep <seconds:number>", "Wait for seconds.", new SleepCommandExecutor());
+		try {
+			prepare("sleep <seconds:number>", "Wait for seconds.", new SleepCommandExecutor());
+		} catch (InvalidSyntaxDefinionException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	

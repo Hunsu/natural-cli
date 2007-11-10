@@ -30,55 +30,120 @@ import java.util.Vector;
  */
 public class Syntax {
 
+	/** Syntax definition */
 	private String definition;
-	private List<Token> grammar;
-	private int parametersMin;
-	private int parametersMax;
 	
-	public Syntax(String definition)
+	/** List of tokens defining the grammar */
+	private List<Token> grammar;
+	
+	/**
+	 * Constructor for the Syntax class
+	 * 
+	 * @param definition the syntax definition
+	 * @throws InvalidSyntaxDefinionException 
+	 * @throws InvalidTokenException 
+	 */
+	public Syntax(String definition) throws InvalidSyntaxDefinionException 
 	{
 		this.setDefinition(definition);
 	}
 
+
 	/**
-	 * @param definition the definition to set
+	 * Gets the syntax definition
+	 * 
+	 * @return the definition
 	 */
-	private void setDefinition(String definition) {
+	public String getDefinition() {
+		return definition;
+	}
+	
+	/**
+	 * Sets the definition for the syntax
+	 * 
+	 * @param definition the definition to set
+	 * @throws InvalidSyntaxDefinionException 
+	 * @throws InvalidTokenException 
+	 */
+	private void setDefinition(String definition) throws InvalidSyntaxDefinionException {
 		this.definition = definition;
-		this.generateGrammar();
+		try {
+			this.generateGrammar();
+		} catch (InvalidTokenException e) {
+			throw new InvalidSyntaxDefinionException(e);
+		}
 	}
 		
-	private void generateGrammar()
+	/**
+	 * Creates the grammar for the command
+	 * 
+	 * @throws InvalidTokenException
+	 */
+	private void generateGrammar() throws InvalidTokenException
 	{
 		grammar = new LinkedList<Token>();
-		parametersMin = 0;
-		parametersMax = 0;
+		String lastTypeName = "";
+		boolean lastOpt = false;
    		for (String s : definition.split(" "))
    		{
    			Token t = new Token(s);
+   			if (lastOpt && t.getParameterTypeName().equals(lastTypeName))
+   				throw new InvalidTokenException("An optional parameter cannot be followed by a parameter of the same type.");
    			grammar.add(t);
-   			if (t.isParameter())
+   			if (t.isOptionalParameter())
    			{
-   				parametersMax++;
-   				if (t.isOptional())
-   					parametersMin++;
+   				lastTypeName = t.getParameterTypeName();
+   				lastOpt = true;
    			}
    		}
 	}
 
-	public boolean parse(String[] tokens, int first, ParameterValidator pv) throws UnknownParameterType
+	/**
+	 * Parse the tokens to see if match with the syntax
+	 * 
+	 * @param tokens the tokens to match
+	 * @param first the first item in the tokens list 
+	 * @param pv the parameter validator
+	 * @return <code>true</code> if the tokens matches the syntax, otherwise <code>false</code>
+	 * @throws UnknownParameterType
+	 */
+	public boolean matches(String[] tokens, int first, ParameterValidator pv) throws UnknownParameterType
 	{
-		int i = first;
-		for (Token tg : grammar)
+		int im = first; 
+		int ig = 0; 
+		while (ig < grammar.size() && im < tokens.length)
 		{
-			String tm = tokens[i++];
-			if (!tg.matches(tm, pv) && !tg.isOptional())
+			boolean match = grammar.get(ig).matches(tokens[im], pv);
+			boolean opt = grammar.get(ig).isOptional();
+			// If !opt 			
+			//		If !match => return false
+			//		If match => continue
+			// If opt
+			//		If match => continue
+			//		If !match => no increment the token index and continue 
+			if (!opt && !match)
 				return false;
+			if (opt && !match)
+				ig++;
+			else
+			{
+				ig++;
+				im++;
+			}
 		}
-		return i == tokens.length;
+		return ig == grammar.size() && im == tokens.length;
 	}
 
-
+	/**
+	 * Get the indexes for the tokens that are parameters
+	 * 
+	 * @param tokens the tokens to match
+	 * @param first the first token on index
+	 * @param pv the parameter validator
+	 * @return Integer array with the indexes
+	 * 
+	 * @throws UnknownParameterType
+	 */
  	public Integer[] getParameterIndexes(String[] tokens, int first, ParameterValidator pv) throws UnknownParameterType
 	{
  		Vector<Integer> l = new Vector<Integer>();
@@ -93,13 +158,6 @@ public class Syntax {
 		}
 		return (Integer[]) l.toArray();
 	}	
-
-	/**
-	 * @return the definition
-	 */
-	public String getDefinition() {
-		return definition;
-	}
 
 
 }
