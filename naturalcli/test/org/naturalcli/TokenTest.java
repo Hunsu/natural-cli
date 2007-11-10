@@ -22,6 +22,10 @@ package org.naturalcli;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.naturalcli.InvalidTokenException;
+import org.naturalcli.ParameterValidator;
+import org.naturalcli.Token;
+import org.naturalcli.UnknownParameterType;
 
 /**
  * @author Ferran Busquets

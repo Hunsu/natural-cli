@@ -31,7 +31,7 @@ public class Command {
 	/** Help message */
 	private String help;
 
-	/** Command exectutor */	
+	/** Command executor */	
 	private ICommandExecutor executor;
 	
 	/** Syntax definition  */
@@ -104,9 +104,9 @@ public class Command {
 		return executor;
 	}
 
+	
 	public void execute(String args[], int first, ParameterValidator pv) throws Exception
 	{
-		// Parse
 		if (!this.syntax.matches(args, first, pv))
 			throw new RuntimeException("Cannot parse arguments."); 
 	}

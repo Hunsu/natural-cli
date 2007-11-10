@@ -87,17 +87,24 @@ public class Syntax {
    		for (String s : definition.split(" "))
    		{
    			Token t = new Token(s);
-   			if (lastOpt && t.getParameterTypeName().equals(lastTypeName))
+   			if (t.isParameter() && lastOpt && t.getParameterTypeName().equals(lastTypeName))
+   			{
+   				System.out.println("lastOpt="+lastOpt);
+   				System.out.println("lasTypeName="+lastTypeName);
+   				System.out.println("t.isParameter()="+t.isParameter());
+   				System.out.println("t.getParameterTypeName()="+t.getParameterTypeName());
    				throw new InvalidTokenException("An optional parameter cannot be followed by a parameter of the same type.");
+   			}
    			grammar.add(t);
    			if (t.isOptionalParameter())
    			{
    				lastTypeName = t.getParameterTypeName();
    				lastOpt = true;
-   			}
+   			} else
+   				lastOpt = false;
    		}
-	}
-
+	} 
+	
 	/**
 	 * Parse the tokens to see if match with the syntax
 	 * 

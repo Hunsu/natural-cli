@@ -23,6 +23,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.naturalcli.InvalidSyntaxDefinionException;
+import org.naturalcli.ParameterValidator;
+import org.naturalcli.Syntax;
+import org.naturalcli.UnknownParameterType;
 
 /**
  * @author Ferran Busquets
@@ -50,6 +54,12 @@ public class SyntaxTest {
 		new Syntax("marian [is] [the] best");
 		new Syntax("marian [<integer>] [the] best");
 		new Syntax("marian is [<integer>] <identifier>");
+		try {
+			new Syntax("marian is the [<best:identifier>] <really:identifier>");
+			fail();
+		} catch (InvalidSyntaxDefinionException e) { 
+		}
+		
 	}
 	
 	/**
@@ -81,13 +91,11 @@ public class SyntaxTest {
 		assertTrue(new Syntax(s).matches(new String[] { "marian", "1", "the", "best"}, 0, pv));
 		assertTrue(new Syntax(s).matches(new String[] { "marian", "the", "best"}, 0, pv));
 		//
-		s = "marian [<hi:integer>] the [<hello:identifier>] <bye:identifier>";
-//		assertTrue(new Syntax(s).matches(new String[] { "marian", "the", "best"}, 0, pv));
-		assertTrue(new Syntax(s).matches(new String[] { "marian", "the", "best", "really"}, 0, pv));
-//		assertTrue(new Syntax(s).matches(new String[] { "marian", "1", "the", "best"}, 0, pv));
-		assertTrue(new Syntax(s).matches(new String[] { "marian", "1", "the", "best", "really"}, 0, pv));
+		s = "marian [<hi:integer>] the [<hello:integer>] <bye:identifier>";
+		assertTrue(new Syntax(s).matches(new String[] { "marian", "the", "best"}, 0, pv));
+		assertTrue(new Syntax(s).matches(new String[] { "marian", "1", "the", "123", "really"}, 0, pv));
 		assertFalse(new Syntax(s).matches(new String[] { "marian", "1", "the", "123"}, 0, pv));
-		assertFalse(new Syntax(s).matches(new String[] { "marian", "1", "the", "123", "best"}, 0, pv));
+		assertFalse(new Syntax(s).matches(new String[] { "marian", "1", "the", "best", "really"}, 0, pv));
 		assertFalse(new Syntax(s).matches(new String[] { "marian", "1", "the"}, 0, pv));
 		//
 		s = "marian [<integer>] the [<identifier>] <integer>";

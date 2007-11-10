@@ -21,6 +21,7 @@ package org.naturalcli;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.naturalcli.ParameterValidator;
 
 /**
  * @author Ferran Busquets

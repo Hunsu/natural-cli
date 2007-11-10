@@ -33,4 +33,5 @@ public interface ICommandExecutor {
 	 * @param params the parameters for the command.
 	 */
     public void execute(Object[] params) throws Exception;
+
 }
