@@ -31,7 +31,7 @@ public class NullCommandExecutor implements ICommandExecutor {
 	 * @see org.naturalcli.ICommandExecutor#execute(java.lang.Object[])
 	 */
 	@Override
-	public void execute(Object[] params) throws Exception {
+	public void execute(Object[] params) {
 		//Nothing to do
 	}
 

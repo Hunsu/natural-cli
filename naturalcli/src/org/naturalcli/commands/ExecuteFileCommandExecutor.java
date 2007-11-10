@@ -45,17 +45,21 @@ public class ExecuteFileCommandExecutor implements ICommandExecutor {
 	 * @see org.naturalcli.ICommandExecutor#execute(java.lang.Object[])
 	 */
 	@Override
-	public void execute(Object[] params) throws Exception {
-		String file_name = params[0].toString();
-        BufferedReader in = new BufferedReader(new FileReader(file_name));
-        String command;
-        while ((command = in.readLine()) != null)
-        {
-        	if (command.startsWith(COMMENT))
-        		continue;
-    		this.naturalCLI.execute(command, 0);
-        }
-        in.close();
+	public void execute(Object[] params)  {
+		try {
+			String file_name = params[0].toString();
+	        BufferedReader in = new BufferedReader(new FileReader(file_name));
+	        String command;
+	        while ((command = in.readLine()) != null)
+	        {
+	        	if (command.startsWith(COMMENT))
+	        		continue;
+	    		this.naturalCLI.execute(command, 0);
+	        }
+	        in.close();
+		} catch (Exception e) {
+			throw new RuntimeException("Execution aborted", e);
+		}
 	}
 
 }

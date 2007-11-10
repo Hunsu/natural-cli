@@ -41,9 +41,8 @@ public class Syntax {
 	 * 
 	 * @param definition the syntax definition
 	 * @throws InvalidSyntaxDefinionException 
-	 * @throws InvalidTokenException 
 	 */
-	public Syntax(String definition) throws InvalidSyntaxDefinionException 
+	public Syntax(String definition) throws InvalidSyntaxDefinionException
 	{
 		this.setDefinition(definition);
 	}
@@ -63,38 +62,35 @@ public class Syntax {
 	 * 
 	 * @param definition the definition to set
 	 * @throws InvalidSyntaxDefinionException 
+	 * @throws InvalidSyntaxDefinionException 
 	 * @throws InvalidTokenException 
 	 */
 	private void setDefinition(String definition) throws InvalidSyntaxDefinionException {
 		this.definition = definition;
-		try {
-			this.generateGrammar();
-		} catch (InvalidTokenException e) {
-			throw new InvalidSyntaxDefinionException(e);
-		}
+		this.generateGrammar();
 	}
 		
 	/**
 	 * Creates the grammar for the command
+	 * @throws InvalidSyntaxDefinionException 
 	 * 
 	 * @throws InvalidTokenException
 	 */
-	private void generateGrammar() throws InvalidTokenException
+	private void generateGrammar() throws InvalidSyntaxDefinionException
 	{
 		grammar = new LinkedList<Token>();
 		String lastTypeName = "";
 		boolean lastOpt = false;
    		for (String s : definition.split(" "))
    		{
-   			Token t = new Token(s);
+   			Token t;
+			try {
+				t = new Token(s);
+			} catch (InvalidTokenException e) {
+				throw new InvalidSyntaxDefinionException("Bad token", e);
+			}
    			if (t.isParameter() && lastOpt && t.getParameterTypeName().equals(lastTypeName))
-   			{
-   				System.out.println("lastOpt="+lastOpt);
-   				System.out.println("lasTypeName="+lastTypeName);
-   				System.out.println("t.isParameter()="+t.isParameter());
-   				System.out.println("t.getParameterTypeName()="+t.getParameterTypeName());
-   				throw new InvalidTokenException("An optional parameter cannot be followed by a parameter of the same type.");
-   			}
+   				throw new InvalidSyntaxDefinionException("An optional parameter cannot be followed by a parameter of the same type.");
    			grammar.add(t);
    			if (t.isOptionalParameter())
    			{

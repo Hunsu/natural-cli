@@ -54,8 +54,9 @@ public class Token {
      * 
      * @param text the token text
      * @throws InvalidTokenException 
+     * @throws InvalidTokenException 
      */
-	public Token(String text) throws InvalidTokenException 
+	public Token(String text) throws InvalidTokenException
 	{
 		this.setText(text);
 	}
@@ -76,13 +77,14 @@ public class Token {
 	 * 
 	 * @param text the token text to set
 	 * @throws InvalidTokenException 
+	 * @throws InvalidTokenException 
 	 */
-	public void setText(String text) throws InvalidTokenException {
+	public void setText(String text) throws InvalidTokenException  {
 		validate(text);
 		this.text = text;
 	}
 	
-	private void validate(String text) throws InvalidTokenException
+	private void validate(String text) throws InvalidTokenException 
 	{
 		// Validate null
 		if (text == null)
@@ -222,9 +224,10 @@ public class Token {
      * @param text the text to match
      * @param pv the parameter validator
      * @return <code>true</code> if matches, <code>false</code> if not
+     * @throws UnknownParameterType 
      * @throws UnknownParameterType
      */
-    public boolean matches(String t, ParameterValidator pv) throws UnknownParameterType
+    public boolean matches(String t, ParameterValidator pv) throws UnknownParameterType 
     {
     	if (this.isIdentifier())
     		return this.getWord().equals(t);

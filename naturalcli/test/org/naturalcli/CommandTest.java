@@ -29,14 +29,7 @@ public class CommandTest {
 	@Test
 	public final void testIsHidden() throws InvalidSyntaxDefinionException {
 		assertTrue(new Command("marian is the best", ". Hello world", new NullCommandExecutor()).isHidden());
-	}
-
-	/**
-	 * Test method for {@link org.naturalcli.Command#parse(java.lang.String[], int, org.naturalcli.parameters.ParameterValidator)}.
-	 */
-	@Test
-	public final void testParse() {
-		fail("Not yet implemented");
+		assertFalse(new Command("marian is the best", "Hello world", new NullCommandExecutor()).isHidden());
 	}
 
 	/**

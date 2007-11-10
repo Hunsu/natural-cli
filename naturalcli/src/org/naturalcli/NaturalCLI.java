@@ -56,7 +56,7 @@ public class NaturalCLI {
      * @param args  the string arguments to run.
      * @param first the index on <code>args</code> of the first string for the arguments.
      */
-    public void execute(String args, int first) throws Exception
+    public void execute(String args, int first)
     {
     	this.execute(args.split(" "), first);
     }
@@ -69,7 +69,7 @@ public class NaturalCLI {
      * @return
      * @throws UnknownParameterType 
      */
-    public boolean execute(String[] args, int first) throws Exception
+    public boolean execute(String[] args, int first) 
     {
     	if (args.length == 0)
     		return false;
@@ -95,7 +95,7 @@ public class NaturalCLI {
         return true;
     }
   
-    public boolean execute(String[] args) throws Exception
+    public boolean execute(String[] args)
     {
     	return execute(args, 0);
     }

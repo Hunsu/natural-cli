@@ -37,6 +37,8 @@ public class Command {
 	/** Syntax definition  */
 	private Syntax syntax;
 
+	private final char CHAR_HIDDEN_COMMAND = '.';
+	
 	/**
 	 * Constructs a new command
 	 * 
@@ -45,7 +47,7 @@ public class Command {
 	 * @param ce command executor
 	 * @throws InvalidSyntaxDefinionException 
 	 */
-	public Command(String syntax, String help, ICommandExecutor ce) throws InvalidSyntaxDefinionException {
+	public Command(String syntax, String help, ICommandExecutor ce) throws InvalidSyntaxDefinionException{
 		this.prepare(syntax, help, ce);
 	}
 
@@ -63,8 +65,12 @@ public class Command {
 	 * @param ce command executor
 	 * @throws InvalidSyntaxDefinionException 
 	 */
-	protected void prepare(String syntax, String help, ICommandExecutor ce) throws InvalidSyntaxDefinionException
+	protected void prepare(String syntax, String help, ICommandExecutor ce) throws InvalidSyntaxDefinionException 
 	{
+		if (help == null || help.length() == 0)
+			throw new IllegalArgumentException("Syntax cannot be empty.");
+		if (ce == null)
+			throw new IllegalArgumentException("Command executor cannot be null.");
 		this.help = help;
 		this.syntax = new Syntax(syntax);
 		this.executor = ce;
@@ -76,7 +82,7 @@ public class Command {
 	 * @return <code>true</code> if it's a hidden command, <code>false</code> if not.
 	 */
 	public boolean isHidden() {
-		return this.getHelp().charAt(0) == '.';
+		return getHelp().charAt(0) == CHAR_HIDDEN_COMMAND;
 	}
 
 	/**
@@ -85,7 +91,7 @@ public class Command {
 	 * @return A string with the syntax for the command.
 	 */
 	public Syntax getSyntax() {
-		return this.syntax;
+		return syntax;
 	}
 
 	/**
@@ -94,21 +100,30 @@ public class Command {
 	 * @return The help for the command.
 	 */
 	public String getHelp() {
-		return this.help;
+		return help;
 	}
 
 	/**
+	 * Get the executor for the command
+	 * 
 	 * @return the executor
 	 */
 	public ICommandExecutor getExecutor() {
 		return executor;
 	}
 
-	
-	public void execute(String args[], int first, ParameterValidator pv) throws Exception
-	{
+	/**
+	 * 
+	 * @param args
+	 * @param first
+	 * @param pv
+	 * @throws ExecutionException
+	 * @throws UnknownParameterType
+	 */
+	public void execute(String args[], int first, ParameterValidator pv) throws ExecutionException, UnknownParameterType 
+	{ 
 		if (!this.syntax.matches(args, first, pv))
-			throw new RuntimeException("Cannot parse arguments."); 
+			throw new ExecutionException("Syntax error."); 
 	}
 
 

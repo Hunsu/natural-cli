@@ -26,7 +26,7 @@ package org.naturalcli;
  */
 
 @SuppressWarnings("serial")
-public class UnknownParameterType extends java.lang.Exception {
+public class UnknownParameterType extends Exception {
     
     
     /**

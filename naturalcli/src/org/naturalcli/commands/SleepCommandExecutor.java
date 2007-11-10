@@ -32,8 +32,12 @@ public class SleepCommandExecutor implements ICommandExecutor {
 	 * @see org.naturalcli.ICommandExecutor#execute(java.lang.Object[])
 	 */
 	@Override
-	public void execute(Object[] params) throws Exception {
-		Thread.sleep((Integer) params[0]);
+	public void execute(Object[] params) {
+		try {
+			Thread.sleep((Integer) params[0]);
+		} catch (InterruptedException e) {
+			// Just ignore
+		}
 	}
 
 }

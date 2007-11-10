@@ -1,5 +1,5 @@
 /* 
- * InvalidTokenException.java
+ * ExecutionException.java
  *
  * Copyright (C) 2007 Ferran Busquets
  *
@@ -20,19 +20,38 @@
 package org.naturalcli;
 
 /**
- * Is thrown when a token is not well formed 
- * 
  * @author Ferran Busquets
  *
  */
 @SuppressWarnings("serial")
-public class InvalidTokenException extends Exception {
+public class ExecutionException extends Exception {
 
 	/**
-	 * @param arg0
+	 * 
 	 */
-	public InvalidTokenException(String m) {
-		super(m);
+	public ExecutionException() {
+	}
+
+	/**
+	 * @param message
+	 */
+	public ExecutionException(String message) {
+		super(message);
+	}
+
+	/**
+	 * @param cause
+	 */
+	public ExecutionException(Throwable cause) {
+		super(cause);
+	}
+
+	/**
+	 * @param message
+	 * @param cause
+	 */
+	public ExecutionException(String message, Throwable cause) {
+		super(message, cause);
 	}
 
 }
