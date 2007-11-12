@@ -112,19 +112,4 @@ public class Command {
 		return executor;
 	}
 
-	/**
-	 * 
-	 * @param args
-	 * @param first
-	 * @param pv
-	 * @throws ExecutionException
-	 * @throws UnknownParameterType
-	 */
-	public void execute(String args[], int first, ParameterValidator pv) throws ExecutionException, UnknownParameterType 
-	{ 
-		if (!this.syntax.matches(args, first, pv))
-			throw new ExecutionException("Syntax error."); 
-	}
-
-
 }

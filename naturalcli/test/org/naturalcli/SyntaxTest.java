@@ -63,7 +63,7 @@ public class SyntaxTest {
 	}
 	
 	/**
-	 * Test method for {@link org.naturalcli.Syntax#matches(java.lang.String[], int, org.naturalcli.ParameterValidator)}.
+	 * Test method for {@link org.naturalcli.Syntax#parse(java.lang.String[], int, org.naturalcli.ParameterValidator)}.
 	 * @throws InvalidSyntaxDefinionException 
 	 * @throws UnknownParameterType 
 	 * @throws InvalidSyntaxDefinionException 
@@ -74,48 +74,34 @@ public class SyntaxTest {
 		String s;
 		// 
 		s = "marian is the best";
-		assertTrue(new Syntax(s).matches(new String[] { "marian", "is", "the", "best"}, 0, pv));
-		assertTrue(new Syntax(s).matches(new String[] { "a", "b", "c", "marian", "is", "the", "best"}, 3, pv));
-		assertFalse(new Syntax(s).matches(new String[] { "marian", "is", "the", "best"}, 1, pv));
-		assertFalse(new Syntax(s).matches(new String[] { "marian", "the", "best"}, 0, pv));
-		assertFalse(new Syntax(s).matches(new String[] { "marian", "is", "the", "best", "really"}, 0, pv));
+		assertNotNull(new Syntax(s).parse(new String[] { "marian", "is", "the", "best"}, 0, pv));
+		assertNotNull(new Syntax(s).parse(new String[] { "a", "b", "c", "marian", "is", "the", "best"}, 3, pv));
+		assertNull(new Syntax(s).parse(new String[] { "marian", "is", "the", "best"}, 1, pv));
+		assertNull(new Syntax(s).parse(new String[] { "marian", "the", "best"}, 0, pv));
+		assertNull(new Syntax(s).parse(new String[] { "marian", "is", "the", "best", "really"}, 0, pv));
 		// 
 		s = "marian <hi:integer> the <bye:identifier>";
-		assertTrue(new Syntax(s).matches(new String[] { "marian", "3", "the", "best"}, 0, pv));
-		assertTrue(new Syntax(s).matches(new String[] { "marian", "31231", "the", "best"}, 0, pv));
-		assertFalse(new Syntax(s).matches(new String[] { "marian", "is", "the", "best"}, 0, pv));
-		assertFalse(new Syntax(s).matches(new String[] { "marian", "-1", "the", "best"}, 0, pv));
-		assertFalse(new Syntax(s).matches(new String[] { "marian", "1.2", "the", "best"}, 0, pv));
+		assertNotNull(new Syntax(s).parse(new String[] { "marian", "3", "the", "best"}, 0, pv));
+		assertNotNull(new Syntax(s).parse(new String[] { "marian", "31231", "the", "best"}, 0, pv));
+		assertNull(new Syntax(s).parse(new String[] { "marian", "is", "the", "best"}, 0, pv));
+		assertNull(new Syntax(s).parse(new String[] { "marian", "-1", "the", "best"}, 0, pv));
+		assertNull(new Syntax(s).parse(new String[] { "marian", "1.2", "the", "best"}, 0, pv));
 		// 
 		s = "marian [<hi:integer>] the <bye:identifier>";
-		assertTrue(new Syntax(s).matches(new String[] { "marian", "1", "the", "best"}, 0, pv));
-		assertTrue(new Syntax(s).matches(new String[] { "marian", "the", "best"}, 0, pv));
+		assertNotNull(new Syntax(s).parse(new String[] { "marian", "1", "the", "best"}, 0, pv));
+		assertNotNull(new Syntax(s).parse(new String[] { "marian", "the", "best"}, 0, pv));
 		//
 		s = "marian [<hi:integer>] the [<hello:integer>] <bye:identifier>";
-		assertTrue(new Syntax(s).matches(new String[] { "marian", "the", "best"}, 0, pv));
-		assertTrue(new Syntax(s).matches(new String[] { "marian", "1", "the", "123", "really"}, 0, pv));
-		assertFalse(new Syntax(s).matches(new String[] { "marian", "1", "the", "123"}, 0, pv));
-		assertFalse(new Syntax(s).matches(new String[] { "marian", "1", "the", "best", "really"}, 0, pv));
-		assertFalse(new Syntax(s).matches(new String[] { "marian", "1", "the"}, 0, pv));
+		assertNotNull(new Syntax(s).parse(new String[] { "marian", "the", "best"}, 0, pv));
+		assertNotNull(new Syntax(s).parse(new String[] { "marian", "1", "the", "123", "really"}, 0, pv));
+		assertNull(new Syntax(s).parse(new String[] { "marian", "1", "the", "123"}, 0, pv));
+		assertNull(new Syntax(s).parse(new String[] { "marian", "1", "the", "best", "really"}, 0, pv));
+		assertNull(new Syntax(s).parse(new String[] { "marian", "1", "the"}, 0, pv));
 		//
 		s = "marian [<integer>] the [<identifier>] <integer>";
-		assertTrue(new Syntax(s).matches(new String[] { "marian", "the", "best", "123"}, 0, pv));
-		assertTrue(new Syntax(s).matches(new String[] { "marian", "the", "123"}, 0, pv));
+		assertNotNull(new Syntax(s).parse(new String[] { "marian", "the", "best", "123"}, 0, pv));
+		assertNotNull(new Syntax(s).parse(new String[] { "marian", "the", "123"}, 0, pv));
 	}
 
-	/**
-	 * Test method for {@link org.naturalcli.Syntax#getParameterIndexs()}.
-	 */
-/*	@Test
-	public final void testGetParameterIndexs() {
-		try {
-			assertEquals(0, new Syntax("marian is the best").getParameterIndexs().length);
-			assertEquals(2, new Syntax("marian <hi:integer> the <bye:identifier>").getParameterIndexs().length);
-			assertEquals(2, new Syntax("marian [<hi:integer>] the <bye:identifier>").getParameterIndexs().length);
-			assertEquals(3, new Syntax("marian [<hi:integer>] the [<hello:identifier>] <bye:identifier>").getParameterIndexs().length);
-		} catch (Exception e) {
-			fail();
-		}		
-	}
-*/
+
 }

@@ -32,20 +32,4 @@ public class CommandTest {
 		assertFalse(new Command("marian is the best", "Hello world", new NullCommandExecutor()).isHidden());
 	}
 
-	/**
-	 * Test method for {@link org.naturalcli.Command#getExecutor()}.
-	 */
-	@Test
-	public final void testGetExecutor() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link org.naturalcli.Command#execute(java.lang.String[], int, org.naturalcli.parameters.ParameterValidator)}.
-	 */
-	@Test
-	public final void testExecute() {
-		fail("Not yet implemented");
-	}
-
 }

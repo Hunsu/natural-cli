@@ -21,7 +21,6 @@ package org.naturalcli;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Vector;
 
 
 /**
@@ -36,6 +35,9 @@ public class Syntax {
 	/** List of tokens defining the grammar */
 	private List<Token> grammar;
 	
+	/** Number of parameters */
+	private int paramCount;
+
 	/**
 	 * Constructor for the Syntax class
 	 * 
@@ -92,6 +94,8 @@ public class Syntax {
    			if (t.isParameter() && lastOpt && t.getParameterTypeName().equals(lastTypeName))
    				throw new InvalidSyntaxDefinionException("An optional parameter cannot be followed by a parameter of the same type.");
    			grammar.add(t);
+   			if (t.isParameter())
+   				paramCount++;
    			if (t.isOptionalParameter())
    			{
    				lastTypeName = t.getParameterTypeName();
@@ -104,63 +108,47 @@ public class Syntax {
 	/**
 	 * Parse the tokens to see if match with the syntax
 	 * 
-	 * @param tokens the tokens to match
+	 * @param candidates the candidate tokens to match
 	 * @param first the first item in the tokens list 
 	 * @param pv the parameter validator
-	 * @return <code>true</code> if the tokens matches the syntax, otherwise <code>false</code>
+	 * @return <code>null</code> if the candidate does not match, or an array with
+	 *         the index of the parameters on the candidates. If an optional
+	 *         parameter is not found, then the value for the index is <code>-1</code>
 	 * @throws UnknownParameterType
 	 */
-	public boolean matches(String[] tokens, int first, ParameterValidator pv) throws UnknownParameterType
+	public int[] parse(String[] candidates, int first, ParameterValidator pv) throws UnknownParameterType
 	{
-		int im = first; 
+		int[] paramIndexes = new int[paramCount];
+		int ip = 0;
 		int ig = 0; 
-		while (ig < grammar.size() && im < tokens.length)
+		int ic = first; 
+		while (ig < grammar.size() && ic < candidates.length)
 		{
-			boolean match = grammar.get(ig).matches(tokens[im], pv);
-			boolean opt = grammar.get(ig).isOptional();
-			// If !opt 			
-			//		If !match => return false
-			//		If match => continue
-			// If opt
-			//		If match => continue
-			//		If !match => no increment the token index and continue 
-			if (!opt && !match)
-				return false;
-			if (opt && !match)
-				ig++;
-			else
-			{
-				ig++;
-				im++;
-			}
-		}
-		return ig == grammar.size() && im == tokens.length;
-	}
-
-	/**
-	 * Get the indexes for the tokens that are parameters
-	 * 
-	 * @param tokens the tokens to match
-	 * @param first the first token on index
-	 * @param pv the parameter validator
-	 * @return Integer array with the indexes
-	 * 
-	 * @throws UnknownParameterType
-	 */
- 	public Integer[] getParameterIndexes(String[] tokens, int first, ParameterValidator pv) throws UnknownParameterType
-	{
- 		Vector<Integer> l = new Vector<Integer>();
-		int i = first;
-		for (Token tg : grammar)
-		{
-			String tm = tokens[i++];
-			if (!tg.matches(tm, pv) && !tg.isOptional())
+			Token tgrammar = grammar.get(ig); 
+			boolean match = tgrammar.matches(candidates[ic], pv);
+			boolean opt = tgrammar.isOptional();
+			boolean param = tgrammar.isParameter();			
+			/* 
+			 *   comparison       increment    return
+			 * match opt param   ip  ig  ic
+			 *   0    0    ?      -   -   -     null
+			 *   0    1    0	  0   1   0
+			 *   0    1    1      1   1   0
+			 *   1    ?    0      0   1   1       
+			 *   1    ?    1      1   1   1
+			 *   
+			 */
+			if (!match && !opt)
 				return null;
-			else if (tg.isParameter())
-				l.add(i);
+			if (param)
+				paramIndexes[ip++] = match ? ic : -1; 
+			if (match)
+				ic++;
+			ig++;
 		}
-		return (Integer[]) l.toArray();
-	}	
-
+		if (ig == grammar.size() && ic == candidates.length)
+			return paramIndexes;
+		return null;
+	}
 
 }
