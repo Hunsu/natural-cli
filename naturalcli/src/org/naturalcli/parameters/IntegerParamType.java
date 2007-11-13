@@ -23,7 +23,7 @@ import org.naturalcli.IParameterType;
 
 
 /**
- * The class implements a Parameter type for a number
+ * The class implements an integer parameter type.
  * 
  * @author Ferran Busquets
  *

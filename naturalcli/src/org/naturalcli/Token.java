@@ -32,19 +32,19 @@ package org.naturalcli;
 public class Token {
 	
 	/** Beginning char for a parameter */
-    private final char CHAR_BEGIN_PARAM = '<';
+    static private final char CHAR_BEGIN_PARAM = '<';
     
     /** Ending char for a parameter */
-    private final char CHAR_END_PARAM = '>';
+    static private final char CHAR_END_PARAM = '>';
 
     /** Beginning char for an optional token*/
-    private final char CHAR_BEGIN_OPT = '[';
+    static private final char CHAR_BEGIN_OPT = '[';
 
     /** Ending char for an optional token */
-    private final char CHAR_END_OPT= ']';
+    static private final char CHAR_END_OPT= ']';
     
     /** Char separator for a parameter name and type */
-    private final char CHAR_NAME_TYPE = ':';
+    static private final char CHAR_NAME_TYPE = ':';
         
     /** Texts giving sense to the token */
     private String text;
@@ -235,4 +235,5 @@ public class Token {
     		return pv.validate(t, this.getParameterTypeName()) == null;
     	return false;
     }
+    
 }

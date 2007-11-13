@@ -35,6 +35,12 @@ public class NaturalCLI {
 	
     private ParameterValidator pv;
     
+    /**
+     * Creates a new instance.
+     * 
+     * @param commands the set of commands that can be executed.
+     * @param pv the parameter validator.
+     */
     public NaturalCLI(Set<Command> commands, ParameterValidator pv)    
     {
     	this.commands = commands;
@@ -42,9 +48,9 @@ public class NaturalCLI {
     }
     
     /** 
-     * Creates a new instance of Commands
+     * Creates a new instance with the default parameter validator.
      * 
-     * @param c List of commands  
+     * @param commands the set of commands that can be executed.
      */
     public NaturalCLI(Set<Command> commands) 
     {

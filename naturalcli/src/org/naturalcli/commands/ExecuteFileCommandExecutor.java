@@ -27,8 +27,10 @@ import org.naturalcli.NaturalCLI;
 
 
 /**
+ * Executor for <code>ExecuteFileCommand</code>
+ *  
+ * @see ExecuteFileCommand
  * @author Ferran Busquets
- *
  */
 public class ExecuteFileCommandExecutor implements ICommandExecutor {
 

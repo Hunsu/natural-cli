@@ -26,10 +26,11 @@ import org.naturalcli.InvalidSyntaxDefinionException;
 
 
 /**
+ * Implements a command that outputs help information 
+ * to the console.
  * 
- * 
+ * @see HelpCommandExecutor
  * @author Ferran Busquets
- *
  */
 public class HelpCommand extends Command {
 	

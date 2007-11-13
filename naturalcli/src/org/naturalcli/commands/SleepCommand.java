@@ -22,13 +22,11 @@ package org.naturalcli.commands;
 import org.naturalcli.Command;
 import org.naturalcli.InvalidSyntaxDefinionException;
 
-
-
 /**
+ * Implements a command that waits for some seconds.
  * 
- * 
+ * @see SleepCommandExecutor 
  * @author Ferran Busquets
- *
  */
 public class SleepCommand extends Command {
 	

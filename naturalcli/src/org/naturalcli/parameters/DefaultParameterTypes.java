@@ -24,13 +24,23 @@ import java.util.HashSet;
 
 import org.naturalcli.IParameterType;
 
-
-
 /**
+ * Helper class to obtain a set of default parameter types.
+ * 
  * @author Ferran Busquets
- *
  */
 public class DefaultParameterTypes {
+	
+	/**
+	 * Creates a set with a default parameter types.
+	 * 
+	 * @return a set with the default parameter types.
+	 * @see EmailParamType
+	 * @see IdentifierParamType
+	 * @see IntegerParamType
+	 * @see StringParamType
+	 * @see FileParamType
+	 */
 	public static Set<IParameterType> createSet()
 	{
 		Set<IParameterType> s = new HashSet<IParameterType>();
@@ -38,6 +48,7 @@ public class DefaultParameterTypes {
 		s.add(new IdentifierParamType());
 		s.add(new IntegerParamType());
 		s.add(new StringParamType());
+		s.add(new FileParamType());
 		return s;
 	}
 }

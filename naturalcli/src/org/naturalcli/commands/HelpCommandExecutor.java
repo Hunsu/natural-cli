@@ -26,13 +26,20 @@ import org.naturalcli.ICommandExecutor;
 
 
 /**
+ * Executor for <code>HelpCommand</code>
+ *  
+ * @see HelpCommandExecutor
  * @author Ferran Busquets
- *
  */
 public class HelpCommandExecutor implements ICommandExecutor {
 
+	/** Commands set */
 	private Set<Command> commands;
 
+	/**
+	 * Constructor.
+	 * @param commands the set of commands for the help
+	 */	
 	public HelpCommandExecutor(Set<Command> commands)
 	{
 		this.commands = commands;

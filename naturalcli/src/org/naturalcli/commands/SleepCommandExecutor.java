@@ -23,8 +23,10 @@ import org.naturalcli.ICommandExecutor;
 
 
 /**
+ * Executor for <code>SleepCommand</code>
+ *  
+ * @see SleepCommandExecutor
  * @author Ferran Busquets
- *
  */
 public class SleepCommandExecutor implements ICommandExecutor {
 

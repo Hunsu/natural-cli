@@ -22,8 +22,10 @@ package org.naturalcli.commands;
 import org.naturalcli.ICommandExecutor;
 
 /**
+ * Executor for <code>NullCommand</code>
+ *  
+ * @see NullCommandExecutor
  * @author Ferran Busquets
- *
  */
 public class NullCommandExecutor implements ICommandExecutor {
 

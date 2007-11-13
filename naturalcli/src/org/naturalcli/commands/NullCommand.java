@@ -23,13 +23,16 @@ import org.naturalcli.Command;
 import org.naturalcli.InvalidSyntaxDefinionException;
 
 /**
+ * Implements a NOP command that does nothing.
+ * 
+ * @see NullCommandExecutor
  * @author Ferran Busquets
  *
  */
 public class NullCommand extends Command  {
 
 	/**
-	 * 
+	 * Default contructor.
 	 */
 	public NullCommand() {
 		try {

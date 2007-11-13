@@ -20,6 +20,8 @@
 package org.naturalcli;
 
 /**
+ * Thrown when token with and invalid format is found. 
+ * 
  * @author Ferran Busquets
  *
  */

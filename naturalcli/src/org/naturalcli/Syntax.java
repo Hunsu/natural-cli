@@ -24,6 +24,8 @@ import java.util.List;
 
 
 /**
+ * Implements a class with a syntax definition and parser.
+ * 
  * @author Ferran Busquets
  *
  */

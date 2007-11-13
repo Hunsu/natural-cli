@@ -26,14 +26,18 @@ import org.naturalcli.InvalidSyntaxDefinionException;
 
 
 /**
+ * Implements a command that outputs help information 
+ * to the console in HTML format.
  * 
- * 
+ * @see HTMLHelpCommandExecutor
  * @author Ferran Busquets
- *
  */
 public class HTMLHelpCommand extends Command {
 
-	
+	/**
+	 * Constructor.
+	 * @param commands the set of commands for the help
+	 */	
 	public HTMLHelpCommand(Set<Command> commands) 
 	{
 		try {

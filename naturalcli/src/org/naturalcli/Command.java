@@ -21,8 +21,8 @@
 package org.naturalcli;
 
 
-/*
- * Represents a command definition
+/**
+ * Represents a command definition 
  * 
  * @author Ferran Busquets
  */
@@ -40,30 +40,30 @@ public class Command {
 	private final char CHAR_HIDDEN_COMMAND = '.';
 	
 	/**
-	 * Constructs a new command
+	 * Constructs a new command.
 	 * 
-	 * @param syntax the syntax for the command
-	 * @param helpthe help help of the command
-	 * @param ce command executor
-	 * @throws InvalidSyntaxDefinionException 
+	 * @param syntax the syntax for the command.
+	 * @param helpthe help help of the command.
+	 * @param ce command executor.
+	 * @throws InvalidSyntaxDefinionException.
 	 */
 	public Command(String syntax, String help, ICommandExecutor ce) throws InvalidSyntaxDefinionException{
 		this.prepare(syntax, help, ce);
 	}
 
 	/**
-	 * Default constructor only for inheritors
+	 * Default constructor only for inheritors.
 	 */
 	protected Command() {
 	}
 	
 	/**
-	 * Initialize the command
+	 * Initialize the command.
 	 * 
-	 * @param syntax the syntax for the command
-	 * @param helpthe help help of the command
-	 * @param ce command executor
-	 * @throws InvalidSyntaxDefinionException 
+	 * @param syntax the syntax for the command.
+	 * @param helpthe help help of the command.
+	 * @param ce command executor.
+	 * @throws InvalidSyntaxDefinionException.
 	 */
 	protected void prepare(String syntax, String help, ICommandExecutor ce) throws InvalidSyntaxDefinionException 
 	{
@@ -77,7 +77,7 @@ public class Command {
 	}
 	
 	/**
-	 * Determine if this is a hidden command
+	 * Determine if this is a hidden command.
 	 * 
 	 * @return <code>true</code> if it's a hidden command, <code>false</code> if not.
 	 */
@@ -86,7 +86,7 @@ public class Command {
 	}
 
 	/**
-	 * Returns a string with the syntax for the commend.
+	 * Returns a string with the syntax for the command.
 	 * 
 	 * @return A string with the syntax for the command.
 	 */
@@ -104,9 +104,9 @@ public class Command {
 	}
 
 	/**
-	 * Get the executor for the command
+	 * Get the executor for the command.
 	 * 
-	 * @return the executor
+	 * @return the executor.
 	 */
 	public ICommandExecutor getExecutor() {
 		return executor;

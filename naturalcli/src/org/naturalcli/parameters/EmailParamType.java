@@ -23,6 +23,8 @@ import org.naturalcli.IParameterType;
 
 
 /**
+ * The class implements an email parameter type.
+ * 
  * @author Ferran Busquets
  *
  */
@@ -49,7 +51,7 @@ public class EmailParamType implements IParameterType {
 	 */
 	@Override
 	public String validationMessage(String value) {
-		return this.validateParameter(value) ? null : "Bad email";
+		return this.validateParameter(value) ? null : "Bad email.";
 	}
 
 }

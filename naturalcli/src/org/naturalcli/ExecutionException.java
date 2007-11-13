@@ -20,35 +20,35 @@
 package org.naturalcli;
 
 /**
+ * Thrown when something unexpected happens executing a command.
+ * 
  * @author Ferran Busquets
- *
  */
 @SuppressWarnings("serial")
 public class ExecutionException extends Exception {
 
-	/**
-	 * 
+	/* (non-Javadoc)
+	 * @see java.lang.Exception#Exception()
 	 */
 	public ExecutionException() {
 	}
 
-	/**
-	 * @param message
+	/* (non-Javadoc)
+	 * @see java.lang.Exception#Exception(String)
 	 */
 	public ExecutionException(String message) {
 		super(message);
 	}
 
-	/**
-	 * @param cause
+	/* (non-Javadoc)
+	 * @see java.lang.Exception#Exception(Throwable)
 	 */
 	public ExecutionException(Throwable cause) {
 		super(cause);
 	}
 
-	/**
-	 * @param message
-	 * @param cause
+	/* (non-Javadoc)
+	 * @see java.lang.Exception#Exception(String, Throwable)
 	 */
 	public ExecutionException(String message, Throwable cause) {
 		super(message, cause);

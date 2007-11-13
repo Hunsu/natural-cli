@@ -23,7 +23,7 @@ package org.naturalcli.parameters;
 import org.naturalcli.IParameterType;
 
 /**
- * The class implements a Parameter type for an identifier
+ * The class implements an identifier parameter type.
  * 
  * @author Ferran Busquets
  *

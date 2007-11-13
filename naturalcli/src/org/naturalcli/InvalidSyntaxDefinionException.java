@@ -20,8 +20,10 @@
 package org.naturalcli;
 
 /**
+ * Thrown when an invalid syntax definition is found.
+ * 
  * @author Ferran Busquets
- *
+ * 
  */
 @SuppressWarnings("serial")
 public class InvalidSyntaxDefinionException extends Exception {

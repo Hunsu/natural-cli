@@ -24,11 +24,18 @@ import org.naturalcli.InvalidSyntaxDefinionException;
 import org.naturalcli.NaturalCLI;
 
 /**
+ * Implements a command that executes a command list inside a file.
+ * 
+ * @see ExecuteFileCommandExecutor
  * @author Ferran Busquets
- *
  */
 public class ExecuteFileCommand  extends Command {
 	
+	/**
+	 * Constructor.
+	 * 
+	 * @param naturalCLI the naturalCLI processor to use.
+	 */
 	public ExecuteFileCommand(NaturalCLI naturalCLI) 
 	{
 		try {

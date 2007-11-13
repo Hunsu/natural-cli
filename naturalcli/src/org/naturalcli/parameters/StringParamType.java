@@ -24,7 +24,7 @@ import org.naturalcli.IParameterType;
 
 
 /**
- * The class implements a Parameter type for an string
+ * The class implements an string parameter type.
  * 
  * @author Ferran Busquets
  *
