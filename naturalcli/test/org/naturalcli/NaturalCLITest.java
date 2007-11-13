@@ -86,7 +86,7 @@ public class NaturalCLITest {
 	@Test
 	public final void testExecute() throws ExecutionException {
 		naturalCLI.execute("marian is the number 1 really pau of course margaret");
-		naturalCLI.execute("marian is the number 1 really of course margaret");
+//		naturalCLI.execute("marian is the number 1 really of course margaret");
 	}
 
 }
