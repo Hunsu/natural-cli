@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Natural CLI - Examples</title>
+
+</head>
+
+<body>
+
+
+<span style="font-family: Century Gothic">
+
+<div style="color: rgb(51, 0, 153);">
+<center>
+<big><big><big><b>Natural CLI - Examples</b></big></big></big>
+</center>
+<br>
+</div>
+
+
+The main page is <a href="index.html">here</a><br>
+<br>
+
+Example 1. Simple one
+
+
+<br>
+
+<div style="background-color: rgb(204, 204, 255)"><br>
+
+<small>
+<pre>
+   <b>public</b> static synchronized void main(String args[])
+   {
+     try {
+       <i>// Create a default parameter validator
+       </i>ParameterValidator pv = new ParameterValidator();
+       <i>// Create an empty command set
+       </i>Set&lt;Command&gt; cs = new HashSet<Command>();
+       <i>// Create the interpreter
+       </i>NaturalCLI nc = new NaturalCLI(cs, pv);
+       <i>// Add the commands that can be understood
+       </i>cs.add(new HelpCommand(cs));
+       cs.add(new HTMLHelpCommand(cs));
+       cs.add(new SleepCommand());  
+       cs.add(new ExecuteFileCommand(nc));
+       <i>// Execute the command lines </i> 
+       nc.execute(args, 0);
+     } catch (Exception e) {
+       e.printStackTrace();
+     }
+   }
+</pre>
+</small>
+
+<br>
+
+</div>
+
+<br>
+
+<br><b>How to obtain Natural CLI</b>:
+<br>
+<br>For sources, checkout from  SVN <a href="https://naturalcli.svn.sourceforge.net/svnroot/naturalcli">repository</a>.
+
+<br>For binaries go <a href="http://sourceforge.net/project/showfiles.php?group_id=208949">here</a>.
+
+
+<br>
+<br><br>
+
+
+<span style="font-weight: bold">
+How to use it?</span>
+<br>
+
+<br>
+
+Please, visit the <a href="examples.html">examples page</a>.<br>
+<br>
+
+</span>
+
+
+
+
+<br>
+
+
+
+</span>
+
+<center>
+<a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=185682&amp;type=2" alt="SourceForge.net Logo" border="0" height="37" width="125"></a>
+</center>
+
+</body>
+</html>
