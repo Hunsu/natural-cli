@@ -1,79 +1,71 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html lang=en>
 <head>
-
   <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
   <title>Natural CLI</title>
-
-
+  <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
-
 
 <body>
 
-<div style="text-align: center; font-family: Century Gothic;"><big style="font-weight: bold;"><span style="color: rgb(51, 0, 153);"><big><big>Natural CLI</big></big></span></big><br>
+<h1>Natural CLI</h1>
 
-</div>
+<!-- Top -->
 
-<span style="font-family: Century Gothic;"><span style="font-weight: bold;"></span><br>
+<p>
+<b>Natural CLI</b> is a set of Java classes to provide command line interface with human readable 
+sentences. It means, sentences like the following:
+</p>
 
-<big><span style="font-weight: bold;">Natural CLI </span></big>
-is an open
-source set of classes to be able to provide command line interface with human readable sentences. It means, sentences like the following::<br>
+<pre style="background-color: #ECEEFF">
 
-<br>
+   acme start daemon &lt;daemon_name&gt;
+   acme stop daemon &lt;daemon_name&gt;
+   acme send file &lt;file_name&gt; to &lt;email_address&gt;
+   acme start backup at 10:50
 
-<p style="background-color: rgb(204, 204, 255);"><br>
+</pre>
 
-<code>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold;">acme start daemon &lt;daemon_name&gt;<br>
-
-&nbsp;&nbsp;&nbsp; acme stop daemon &lt;daemon_name&gt;<br>
-
-&nbsp;&nbsp;&nbsp; acme send file &lt;file_name&gt; to &lt;email_address&gt;<br> 
-&nbsp;&nbsp;&nbsp; acme start backup at 10:50 <br>
-
-<br>
-
-</span></code></p>
-
-<br>
-
-<br><b>How to obtain Natural CLI</b>:
-<br>
-<br>For sources, checkout from  SVN <a href="https://naturalcli.svn.sourceforge.net/svnroot/naturalcli">repository</a>.
-
-<br>For binaries go <a href="http://sourceforge.net/project/showfiles.php?group_id=208949">here</a>.
-
-</span>
-<br>
-<br><br>
+<p>
+<b>Main Features:</b>
+<ul>
+<li>Java implementation.</li>
+<li>Easy implementation. Please, visit the <a href="examples.html">examples page</a>.</li>
+<li>Typed parameters with user defined types.</li>
+<li>Optional parameters and tokens.</li>
+<li>It is compatible with <a href="http://commons.apache.org/cli/">Apache Commons CLI</a>.</li>
+</ul>
 
 
-<span style="font-weight: bold; font-family: Century Gothic;">
-How to use it?</span>
-<span style="font-family: Century Gothic;"><br>
-
-<br>
-
-Please, visit the <a href="examples.html">examples page</a>.<br>
-<br>
-
-</span>
+<p>
+<b>Limitations:</b>
+<ul>
+<li>It's not a complier and only can be used very simple syntax. if you are interested in something more complex: tell me! ;-).</li>
+<li>There are some combinations of parameters not allowed: there is no <i>look ahead</i>.</li>
+</ul>
 
 
 
+<p>
+<b>It seems nice? the most important</b>:
+<ul>
+<li>For the binaries go <a href="http://sourceforge.net/project/showfiles.php?group_id=208949">here</a>.</li>
+<li>For the sources, checkout from the SVN <a href="https://naturalcli.svn.sourceforge.net/svnroot/naturalcli">repository</a>.</li>
+<li>The javadoc <a href="doc">here</a>.</li>
+<li>Any <a href="http://sourceforge.net/forum/?group_id=208949">comments</a>, <a href="http://sourceforge.net/tracker/?group_id=208949&atid=1007750">bugs</a>, <a href="http://sourceforge.net/tracker/?group_id=208949&atid=1007753">feature requests</a> are welcome ;-)</li>
+</ul>
 
-<br>
-
-<br style="font-family: Century Gothic;">
+<!-- Bottom -->
 
 
-<span style="font-family: Century Gothic;"><br>
-</span>
-
+<hr>
+<p>
 <center>
-<a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=185682&amp;type=2" alt="SourceForge.net Logo" border="0" height="37" width="125"></a>
+<small>(C) Copyright 2007. Ferran Busquets</small>
+<br>
+<a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=185682&amp;type=2" alt="SourceForge.net Logo" border="0" height="37" width="125" alt="sourceforege logo"></a>
 </center>
+
 
 </body>
 </html>
