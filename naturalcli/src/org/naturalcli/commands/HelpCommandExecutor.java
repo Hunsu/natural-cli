@@ -22,6 +22,7 @@ package org.naturalcli.commands;
 import java.util.Set;
 
 import org.naturalcli.Command;
+import org.naturalcli.ParseResult;
 import org.naturalcli.ICommandExecutor;
 
 
@@ -49,7 +50,7 @@ public class HelpCommandExecutor implements ICommandExecutor {
 	 * @see org.naturalcli.ICommandExecutor#execute(java.lang.Object[])
 	 */
 	@Override
-	public void execute(Object[] params) {
+	public void execute(ParseResult parseResult)  {
 		for (Command c : commands) 
 		{
 			if (c.isHidden())

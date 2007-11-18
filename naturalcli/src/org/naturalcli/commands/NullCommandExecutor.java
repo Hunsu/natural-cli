@@ -19,6 +19,7 @@
  */
 package org.naturalcli.commands;
 
+import org.naturalcli.ParseResult;
 import org.naturalcli.ICommandExecutor;
 
 /**
@@ -33,7 +34,7 @@ public class NullCommandExecutor implements ICommandExecutor {
 	 * @see org.naturalcli.ICommandExecutor#execute(java.lang.Object[])
 	 */
 	@Override
-	public void execute(Object[] params) {
+	public void execute(ParseResult parseResult)  {
 		//Nothing to do
 	}
 

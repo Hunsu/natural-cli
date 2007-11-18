@@ -66,10 +66,10 @@ public class Syntax {
 	 * 
 	 * @param definition the definition to set
 	 * @throws InvalidSyntaxDefinionException 
-	 * @throws InvalidSyntaxDefinionException 
-	 * @throws InvalidTokenException 
 	 */
 	private void setDefinition(String definition) throws InvalidSyntaxDefinionException {
+		if (definition == null || definition.length() == 0)
+			throw new IllegalArgumentException("The definition cannot be null or empty string.");
 		this.definition = definition;
 		this.generateGrammar();
 	}
@@ -78,7 +78,6 @@ public class Syntax {
 	 * Creates the grammar for the command
 	 * @throws InvalidSyntaxDefinionException 
 	 * 
-	 * @throws InvalidTokenException
 	 */
 	private void generateGrammar() throws InvalidSyntaxDefinionException
 	{
@@ -113,17 +112,25 @@ public class Syntax {
 	 * @param candidates the candidate tokens to match
 	 * @param first the first item in the tokens list 
 	 * @param pv the parameter validator
-	 * @return <code>null</code> if the candidate does not match, or an array with
-	 *         the index of the parameters on the candidates. If an optional
-	 *         parameter is not found, then the value for the index is <code>-1</code>
+	 * @return <code>null</code> if the candidate does not match, 
+	 *         or a <code>ParseData</code> object
 	 * @throws UnknownParameterType
+	 * @see ParseResult
 	 */
-	public int[] parse(String[] candidates, int first, ParameterValidator pv) throws UnknownParameterType
+	public ParseResult parse(String[] candidates, int first, ParameterValidator pv) throws UnknownParameterType
 	{
-		int[] paramIndexes = new int[paramCount];
-		int ip = 0;
-		int ig = 0; 
-		int ic = first; 
+		if (candidates == null)
+			throw new IllegalArgumentException("The string array to parse cannot be null.");
+		if (pv == null)
+			throw new IllegalArgumentException("Parameter validator cannot be null.");
+		if (first < 0)
+			throw new IllegalArgumentException("First token index have to be 0 or greater.");
+		String[] paramValues = new String[paramCount];
+		boolean[] tokenGiven = new boolean[this.grammar.size()];
+		int ip = 0; // index for paramValues
+		int it = 0; // index for tokensGiven
+		int ig = 0; // index for the grammar
+		int ic = first; // index for the candidates
 		while (ig < grammar.size() && ic < candidates.length)
 		{
 			Token tgrammar = grammar.get(ig); 
@@ -131,25 +138,26 @@ public class Syntax {
 			boolean opt = tgrammar.isOptional();
 			boolean param = tgrammar.isParameter();			
 			/* 
-			 *   comparison       increment    return
-			 * match opt param   ip  ig  ic
-			 *   0    0    ?      -   -   -     null
-			 *   0    1    0	  0   1   0
-			 *   0    1    1      1   1   0
-			 *   1    ?    0      0   1   1       
-			 *   1    ?    1      1   1   1
+			 *          increment       
+			 * match opt param   ip  it  ig  ic
+			 *   0    0    ?      -   -   -   -   return null
+			 *   0    1    0	  0   1   1   0    
+			 *   0    1    1      1   1   1   0    
+			 *   1    ?    0      0   1   1   1         
+			 *   1    ?    1      1   1   1   1   
 			 *   
 			 */
 			if (!match && !opt)
 				return null;
 			if (param)
-				paramIndexes[ip++] = match ? ic : -1; 
+				paramValues[ip++] = (opt && !match) ? null : candidates[ic]; 
 			if (match)
 				ic++;
+			tokenGiven[it++] = match;  
 			ig++;
 		}
 		if (ig == grammar.size() && ic == candidates.length)
-			return paramIndexes;
+			return new ParseResult(paramValues, tokenGiven);
 		return null;
 	}
 

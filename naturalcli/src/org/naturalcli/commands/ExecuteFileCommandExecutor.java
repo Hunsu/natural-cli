@@ -22,6 +22,7 @@ package org.naturalcli.commands;
 
 import java.io.*;
 
+import org.naturalcli.ParseResult;
 import org.naturalcli.ICommandExecutor;
 import org.naturalcli.NaturalCLI;
 
@@ -47,9 +48,9 @@ public class ExecuteFileCommandExecutor implements ICommandExecutor {
 	 * @see org.naturalcli.ICommandExecutor#execute(java.lang.Object[])
 	 */
 	@Override
-	public void execute(Object[] params)  {
+	public void execute(ParseResult parseResult)  {
 		try {
-			String file_name = params[0].toString();
+			String file_name = parseResult.getParameterValue(0).toString();
 	        BufferedReader in = new BufferedReader(new FileReader(file_name));
 	        String command;
 	        while ((command = in.readLine()) != null)

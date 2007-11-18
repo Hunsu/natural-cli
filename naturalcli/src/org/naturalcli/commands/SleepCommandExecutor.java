@@ -19,6 +19,7 @@
  */
 package org.naturalcli.commands;
 
+import org.naturalcli.ParseResult;
 import org.naturalcli.ICommandExecutor;
 
 
@@ -34,9 +35,9 @@ public class SleepCommandExecutor implements ICommandExecutor {
 	 * @see org.naturalcli.ICommandExecutor#execute(java.lang.Object[])
 	 */
 	@Override
-	public void execute(Object[] params) {
+	public void execute(ParseResult parseResult)  {
 		try {
-			Thread.sleep((Integer) params[0]);
+			Thread.sleep((Integer) parseResult.getParameterValue(0));
 		} catch (InterruptedException e) {
 			// Just ignore
 		}

@@ -67,6 +67,8 @@ public class NaturalCLI {
      */
     public void execute(String args, int first) throws ExecutionException
     {
+    	if (args == null)
+    		throw new IllegalArgumentException("The parameter argument string cannot be null.");
     	execute(args.split(" "), first);
     }
     
@@ -79,15 +81,17 @@ public class NaturalCLI {
      */
     public void execute(String[] args, int first) throws ExecutionException 
     {
-    	if (args == null || args.length == 0)
-    		throw new ExecutionException("Nothing to execute.");
+    	if (args == null)
+    		throw new IllegalArgumentException("The parameter for the arguments cannot be null.");
+    	if (args.length == 0)
+    		return;
     	// Look for the command that the parse works
-    	int[] iparameters = null;
+    	ParseResult parseResult = null;
         Command command = null;
         for (Command c : commands)
 			try {
-				iparameters = c.getSyntax().parse(args, first, pv);
-				if (iparameters != null)
+				parseResult = c.getSyntax().parse(args, first, pv);
+				if (parseResult != null)
 				{
 				    command = c;
 				    break;
@@ -97,15 +101,8 @@ public class NaturalCLI {
 			}
         if (command == null)
         	throw new ExecutionException("No command matches.");
-        if (iparameters == null)
-        	throw new NullPointerException("Null parameters list.");
-		// Obtain parameters		
-		String[] params = new String[iparameters.length];
-		int p = 0;
-		for (int i : iparameters)
-			params[p++] = (i == -1) ? null : args[first+i];
 		// Execute the command
-        command.getExecutor().execute(params);
+        command.getExecutor().execute(parseResult);
     }
     
     public void execute(String[] args) throws ExecutionException

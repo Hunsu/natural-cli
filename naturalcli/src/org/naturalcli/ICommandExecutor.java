@@ -29,11 +29,9 @@ public interface ICommandExecutor {
     
 	/**
 	 * Execute the command.
-	 * 
-	 * @param params the parameters for the command. A parameter can 
-	 * 				 be <code>null</code> if no value was provided
-	 * 				 because an optional parameter.
+	 *
+	 * @param parseResult the parse data for the command.
 	 */
-    public void execute(Object[] params);
+    public void execute(ParseResult parseResult);
 
 }

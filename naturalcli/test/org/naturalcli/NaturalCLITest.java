@@ -62,11 +62,11 @@ public class NaturalCLITest {
             "marian is the number <integer> really [<string>] of course <string>", 
             "Just a test",
             new ICommandExecutor() {
-               public void execute(Object[] params) 
+               public void execute(ParseResult parseResult) 
                {
-            	   System.out.println("Number:"+params[0]);
-            	   System.out.println("String1:"+params[1]);
-            	   System.out.println("String2:"+params[2]);
+            	   System.out.println("Number:"+parseResult.getParameterValue(0));
+            	   System.out.println("String1:"+parseResult.getParameterValue(1));
+            	   System.out.println("String2:"+parseResult.getParameterValue(2));
                }
             }
             )
