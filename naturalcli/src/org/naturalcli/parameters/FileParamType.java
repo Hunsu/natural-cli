@@ -56,4 +56,11 @@ public class FileParamType implements IParameterType {
 		return this.validateParameter(value) ? null : "File does not exists.";
 	}
 
+	/* (non-Javadoc)
+	 * @see org.naturalcli.paramtypes.IParameterType#convertParameterValue(java.lang.String)
+	 */
+	@Override
+	public Object convertParameterValue(String strRepresentation) {
+		return new File(strRepresentation);
+	}	
 }

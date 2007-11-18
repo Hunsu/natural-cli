@@ -67,6 +67,22 @@ public class ParameterValidator {
      */
     public String validate(String value, String type) throws UnknownParameterType
     {
+    	IParameterType pt = getParameterType(type);
+    	// If not found throw exception
+    	if (pt == null)
+            throw new UnknownParameterType(type);
+    	// Validate the parameter
+    	return pt.validationMessage(value);
+    }
+        
+    /**
+     * Gets the parameter type for the given type name
+     *  
+     * @param type the type name
+     * @return the paramter type object
+     */
+    public IParameterType getParameterType(String type)
+    {
     	IParameterType pt = null;
     	// Look for the parameter type
     	for (IParameterType s : this.parameterTypes)
@@ -77,11 +93,6 @@ public class ParameterValidator {
     			break;
     		}
     	}
-    	// If not found throw exception
-    	if (pt == null)
-            throw new UnknownParameterType(type);
-    	// Validate the parameter
-    	return pt.validationMessage(value);
+    	return pt;
     }
-        
 }

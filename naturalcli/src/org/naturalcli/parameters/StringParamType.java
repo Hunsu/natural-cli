@@ -56,4 +56,11 @@ public class StringParamType implements IParameterType {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.naturalcli.paramtypes.IParameterType#convertParameterValue(java.lang.String)
+	 */
+	@Override
+	public Object convertParameterValue(String strRepresentation) {
+		return strRepresentation;
+	}		
 }

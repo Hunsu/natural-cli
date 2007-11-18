@@ -125,7 +125,7 @@ public class Syntax {
 			throw new IllegalArgumentException("Parameter validator cannot be null.");
 		if (first < 0)
 			throw new IllegalArgumentException("First token index have to be 0 or greater.");
-		String[] paramValues = new String[paramCount];
+		Object[] paramValues = new Object[paramCount];
 		boolean[] tokenGiven = new boolean[this.grammar.size()];
 		int ip = 0; // index for paramValues
 		int it = 0; // index for tokensGiven
@@ -149,8 +149,13 @@ public class Syntax {
 			 */
 			if (!match && !opt)
 				return null;
-			if (param)
-				paramValues[ip++] = (opt && !match) ? null : candidates[ic]; 
+			if (param) {
+				if (opt && !match)
+					paramValues[ip] = null;
+				else
+					paramValues[ip] = pv.getParameterType(tgrammar.getParameterTypeName()).convertParameterValue(candidates[ic]);
+				ip++;
+			}
 			if (match)
 				ic++;
 			tokenGiven[it++] = match;  

@@ -54,4 +54,11 @@ public class IntegerParamType implements IParameterType {
 		return this.validateParameter(value) ? null : "Bad integer";
 	}
 
+	/* (non-Javadoc)
+	 * @see org.naturalcli.paramtypes.IParameterType#convertParameterValue(java.lang.String)
+	 */
+	@Override
+	public Object convertParameterValue(String strRepresentation) {
+		return new Integer(strRepresentation);
+	}		
 }

@@ -20,6 +20,8 @@
 
 package org.naturalcli.parameters;
 
+import java.io.File;
+
 import org.naturalcli.IParameterType;
 
 /**
@@ -54,5 +56,12 @@ public class IdentifierParamType implements IParameterType {
 		return this.validateParameter(value) ? null : "Bad identifier";
 	}
 
-	
+	/* (non-Javadoc)
+	 * @see org.naturalcli.paramtypes.IParameterType#convertParameterValue(java.lang.String)
+	 */
+	@Override
+	public Object convertParameterValue(String strRepresentation) {
+		return strRepresentation;
+	}	
+		
 }

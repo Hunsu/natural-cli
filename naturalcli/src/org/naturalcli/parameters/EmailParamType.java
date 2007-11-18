@@ -54,4 +54,12 @@ public class EmailParamType implements IParameterType {
 		return this.validateParameter(value) ? null : "Bad email.";
 	}
 
+	/* (non-Javadoc)
+	 * @see org.naturalcli.paramtypes.IParameterType#convertParameterValue(java.lang.String)
+	 */
+	@Override
+	public Object convertParameterValue(String strRepresentation) {
+		return strRepresentation;
+	}
+
 }

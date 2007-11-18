@@ -54,5 +54,13 @@ public interface IParameterType {
 	 *         a detailed message if something it's wrong
 	 */
 	public String validationMessage(String value);
-	
+
+	/**
+	 * Converts the string representing the parameter value to
+	 * the corresponding type value.
+	 *  
+	 * @param strRepresentation the string representation of the value
+	 * @return real object value
+	 */
+	public Object convertParameterValue(String strRepresentation);		
 }
