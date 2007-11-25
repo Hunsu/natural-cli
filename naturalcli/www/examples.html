@@ -13,7 +13,8 @@
 
 <p>
 If you are looking for the main page, please go <a href="index.html">here</a>.
-Also can be interesting to undersand the code read the <a href="doc">Javadoc</a>.
+<br><br>To understand better the code, please check the <a href="doc">Javadoc</a>.
+<br><br>Any <a href="http://sourceforge.net/forum/?group_id=208949">comments</a>, <a href="http://sourceforge.net/tracker/?group_id=208949&atid=1007750">bugs</a>, <a href="http://sourceforge.net/tracker/?group_id=208949&atid=1007753">feature requests</a> are welcome ;-)
 
 
 
@@ -21,99 +22,162 @@ Also can be interesting to undersand the code read the <a href="doc">Javadoc</a>
 <b>Example 1.</b> The first two commands:
 <pre>
 
-       <i>// Create the command
-       </i>Command showDateCommand =
-       new Command(
-         &quot;show date&quot;, 
-         &quot;Shows the current date and time&quot;, 
-         new ICommandExecutor ()
-         {
-           public void execute(Object[] params ) 
-           {  System.out.println(new java.util.Date().toString());  }
-         }		
-       );
-       Command helloWorldCommand =
-       new Command(
-         &quot;hello world&quot;, 
-         &quot;Says hello.&quot;, 
-         new ICommandExecutor ()
-         {
-           public void execute(Object[] params ) 
-           {  System.out.println("Hello world!");  }
-         }		
-       );
-       <i>// Create the set of commands
-       </i>Set<Command> cs = new HashSet<Command>();
-       cs.add(showDateCommand);
-       cs.add(helloWorldCommand);
-       <i>// Execute
-       </i>new NaturalCLI(cs).execute(args);
+  <i>// Create the commands
+  </i>Command showDateCommand =
+    new Command(
+    &quot;show date&quot;, 
+    &quot;Shows the current date and time&quot;, 
+    new ICommandExecutor ()
+    {
+       public void execute(ParseResult pr) 
+       {  System.out.println(new java.util.Date().toString());  }
+    }		
+  );
+  Command helloWorldCommand =
+    new Command(
+    &quot;hello world&quot;, 
+    &quot;Says hello.&quot;, 
+    new ICommandExecutor ()
+    {
+      public void execute(ParseResult pr ) 
+      {  System.out.println(&quot;Hello world!&quot;);  }
+    }		
+  );
+   
+  <i>// Create the set of commands
+  </i>Set<Command> cs = new HashSet<Command>();
+  cs.add(showDateCommand);
+  cs.add(helloWorldCommand);
+   
+  <i>// Execute
+  </i>new NaturalCLI(cs).execute(args);
        
 </pre>
 
 <p>
-<b>Example 2</b>. A command with a parameter:
+<b>Example 2</b>. The first parameter
 <pre>
 
-       Command showDateCommand =
-         new Command(
-           "hello world &lt;string&gt;", 
-           "Says hello to the world and especially to some one.", 
-           new ICommandExecutor ()
-           {
-             public void execute(Object[] params ) 
-             {  System.out.println("Hello world! And hello especially to "+params[0]);  }
-           }		
-       );
+  <i>// Create the command
+  </i>Command helloWorldCommand =
+    new Command(
+      &quot;hello world <name:string>&quot;, 
+      &quot;Says hello to the world and especially to some one.&quot;, 
+      new ICommandExecutor ()
+      {
+        public void execute(ParseResult pr) 
+        {
+          System.out.println(&quot;Hello world! And hello especially to &quot;+pr.getParameterValue(0));  }
+        }		
+      );
+      
+  <i>// Create the set of commands
+  </i>Set<Command> cs = new HashSet<Command>();
+  cs.add(helloWorldCommand);
+   
+  <i>// Execute
+  </i>new NaturalCLI(cs).execute(args);
        
 </pre>
 
 <p>
-<b>Example 3</b>. An optional parameter:
+<b>Example 3</b>. A command with optional parameter:
 <pre>
 
-       Command showDateCommand =
-         new Command(
-           "hello world [&lt;name:string&gt;]", 
-           "Says hello to the world and, why not, especially to some one.", 
-           new ICommandExecutor ()
-           {
-             public void execute(Object[] params ) 
-             {  
-                System.out.print("Hello world!");
-                if (params[0] == null)
-                   System.out.println();
-                else
-                   System.out.println(" And hello especially to "+params[0]);
-             }  
-           }
-         }		
-       );
+  Command showDateCommand =
+  new Command(
+    "hello world [&lt;name:string&gt;]", 
+    "Says hello to the world and, may be, especially to some one.", 
+    new ICommandExecutor ()
+    {
+      public void execute(ParseResult pr) 
+      {  
+        System.out.print("Hello world!");
+        String p0 = pr.getParameterValue(0).toString();
+        if (p0 == null)
+      	  System.out.println();
+        else
+          System.out.println(" And hello especially to "+p0);  
+      }
+    }		
+  );
 
 </pre>
 
 <p>
-<b>Example 3</b>. The default commands.
+<b>Example 6</b>. An user defined type.
 <pre>
 
-       <i>// Create a default parameter validator
-       </i>ParameterValidator pv = new ParameterValidator();
-       <i>// Create an empty command set
-       </i>Set&lt;Command&gt; cs = new HashSet<Command>();
-       <i>// Create the interpreter
-       </i>NaturalCLI nc = new NaturalCLI(cs, pv);
-       <i>// Add the commands that can be understood
-       </i>cs.add(new HelpCommand(cs));
-       cs.add(new HTMLHelpCommand(cs));
-       cs.add(new SleepCommand());  
-       cs.add(new ExecuteFileCommand(nc));
-       <i>// Execute the command lines </i> 
-       nc.execute(args, 0);
-       
+  <i>// Create the type
+  </i>IParameterType type = 
+    new IParameterType()
+    {
+      public Object convertParameterValue(String strRepresentation) {
+        return strRepresentation;
+      }
+      public String getParameterTypeName() {
+        return &quot;dayofweek&quot;;
+      }
+      public boolean validateParameter(String value) {						
+        String[] dof = new String[] {&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;};
+        return Arrays.binarySearch(dof, value) != -1;
+      }
+      public String validationMessage(String value) {
+        return this.validateParameter(value) ? null : &quot;Bad day of the week name.&quot;;
+      }				
+    };
+    
+  <i>// Create the command
+  </i>Command helloWorldCommand =
+    new Command(
+      &quot;hello world on <day:dayofweek>&quot;, 
+      &quot;Says hello to the world for that day.&quot;, 
+      new ICommandExecutor ()
+      {
+        public void execute(ParseResult pr) 
+        {  
+          System.out.println(&quot;Hello world on &quot;+pr.getParameterValue(0));
+        }
+      }		
+   );
+   
+   <i>// Create the parameter validator
+   </i>Set<IParameterType> pts = new HashSet<IParameterType>();
+   pts.add(type);
+   ParameterValidator pv = new ParameterValidator(pts); 
+   
+   <i>// Create the set of commands
+   </i>Set<Command> cs = new HashSet<Command>();
+   cs.add(helloWorldCommand);
+   
+   <i>// Execute
+   </i>new NaturalCLI(cs, pv).execute(args);
+
 </pre>
 
 <p>
-<b>Example Next one</b>. More examples to come!
+<b>Example 5</b>. The default commands.
+<pre>
+
+   <i>// Create an empty command set
+   </i>Set&lt;Command&gt; cs = new HashSet<Command>();
+  
+   <i>// Create the interpreter
+   </i>NaturalCLI nc = new NaturalCLI(cs);
+  
+   <i>// Add the commands that can be understood
+   </i>cs.add(new HelpCommand(cs)); <i>// help
+   </i>cs.add(new HTMLHelpCommand(cs)); <i>// htmlhelp
+   </i>cs.add(new SleepCommand());  <i>// sleep &lt;seconds:number&gt; 
+   </i>cs.add(new ExecuteFileCommand(nc)); <i>// execute file &lt;filename:string&gt;
+  
+   // Execute the command line</i> 
+   nc.execute(args, 0);
+    
+</pre>
+
+<p>
+<b>Example of...</b>. If you want an especific example, please request it <a href="http://sourceforge.net/forum/?group_id=208949">here</a>!
 
 
 <!-- Bottom -->
@@ -125,7 +189,7 @@ Also can be interesting to undersand the code read the <a href="doc">Javadoc</a>
 <p>
 <small>(C) Copyright 2007. Ferran Busquets</small>
 <br>
-<a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=185682&amp;type=2" alt="SourceForge.net Logo"  height="37" width="125" ></a>
+<a href="http://sourceforge.net"><img border=0 src="http://sflogo.sourceforge.net/sflogo.php?group_id=185682&amp;type=2" alt="SourceForge.net Logo"  height="37" width="125" ></a>
 <br>
 
 </div>
