@@ -20,6 +20,7 @@
 
 package org.naturalcli.demo;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -40,36 +41,47 @@ public class NaturalCLIDemo {
     
 
     /**
-     * Example 1. The fist two commands
+     * Example 1. The first command
      * 
      * @param args
      */
     public static void example1(String args[])
     {
 		try {
-			// Create the command
-			Command showDateCommand =
-				new Command(
-				    "show date", 
-				    "Shows the current date and time", 
-					new ICommandExecutor ()
-					{
-		               public void execute(ParseResult pd) 
-		               {  System.out.println(new java.util.Date().toString());  }
-		            }		
-				);
-			// Create the set of commands
-    		Set<Command> cs = new HashSet<Command>();
-    		cs.add(showDateCommand);
-    		// Execute
-    		new NaturalCLI(cs).execute(args);
+	 	   // Create the command
+           Command showDateCommand =
+	         new Command(
+		        "show date", 
+		        "Shows the current date and time", 
+		        new ICommandExecutor ()
+		        {
+		          public void execute(ParseResult pr) 
+		          {  System.out.println(new java.util.Date().toString());  }
+		        }		
+		     );
+		   Command helloWorldCommand =
+		     new Command(
+		         "hello world", 
+		         "Says hello.", 
+		         new ICommandExecutor ()
+		         {
+		           public void execute(ParseResult pr ) 
+		           {  System.out.println("Hello world!");  }
+		         }		
+		       );
+		    // Create the set of commands
+		    Set<Command> cs = new HashSet<Command>();
+		    cs.add(showDateCommand);
+		    cs.add(helloWorldCommand);
+		    // Execute
+		    new NaturalCLI(cs).execute(args);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
     }
 
     /**
-     * Example 2. Adding a parameter
+     * Example 2. The first parameter
      * 
      * @param args
      */
@@ -77,19 +89,19 @@ public class NaturalCLIDemo {
     {
 		try {
 			// Create the command
-			Command showDateCommand =
+			Command helloWorldCommand =
 				new Command(
 				    "hello world <name:string>", 
 				    "Says hello to the world and especially to some one.", 
 					new ICommandExecutor ()
 					{
-		               public void execute(ParseResult pd ) 
-		               {  System.out.println("Hello world! And hello especially to "+pd.getParameterValue(0));  }
+		               public void execute(ParseResult pr) 
+		               {  System.out.println("Hello world! And hello especially to "+pr.getParameterValue(0));  }
 		            }		
 				);
 			// Create the set of commands
     		Set<Command> cs = new HashSet<Command>();
-    		cs.add(showDateCommand);
+    		cs.add(helloWorldCommand);
     		// Execute
     		new NaturalCLI(cs).execute(args);
 		} catch (Exception e) {
@@ -98,7 +110,7 @@ public class NaturalCLIDemo {
     }
 
     /**
-     * Example 2. Adding a parameter
+     * Example 3. A command with an optional parameter
      * 
      * @param args
      */
@@ -106,15 +118,15 @@ public class NaturalCLIDemo {
     {
 		try {
 			// Create the command
-			Command showDateCommand =
+			Command helloWorldCommand =
 				new Command(
 				    "hello world [<name:string>]", 
 				    "Says hello to the world and, may be, especially to some one.", 
 					new ICommandExecutor ()
 					{
-		               public void execute(ParseResult pd) 
+		               public void execute(ParseResult pr) 
 		               {  System.out.print("Hello world!");
-		               	  String p0 = pd.getParameterValue(0).toString();
+		               	  String p0 = pr.getParameterValue(0).toString();
 		                  if (p0 == null)
 		                	  System.out.println();
 		                  else
@@ -124,24 +136,85 @@ public class NaturalCLIDemo {
 				);
 			// Create the set of commands
     		Set<Command> cs = new HashSet<Command>();
-    		cs.add(showDateCommand);
+    		cs.add(helloWorldCommand);
     		// Execute
     		new NaturalCLI(cs).execute(args);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
     }    
+
     /**
-     * Example 3. The defaults
+     * Example 4. An user defined type
      * 
      * @param args
      */
     public static void example4(String args[])
+    {
+		try {
+			// Create the type
+			IParameterType type = 
+				new IParameterType()
+				{
+					@Override
+					public Object convertParameterValue(String strRepresentation) {
+						return strRepresentation;
+					}
+
+					@Override
+					public String getParameterTypeName() {
+						return "dayofweek";
+					}
+
+					@Override
+					public boolean validateParameter(String value) {						
+						String[] dof = new String[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+						return Arrays.binarySearch(dof, value) != -1;
+					}
+
+					@Override
+					public String validationMessage(String value) {
+						return this.validateParameter(value) ? null : "Bad day of the week name.";
+					}				
+				};
+			// Create the command
+			Command helloWorldCommand =
+				new Command(
+				    "hello world on <day:dayofweek>", 
+				    "Says hello to the world for that day.", 
+					new ICommandExecutor ()
+					{
+		               public void execute(ParseResult pr) 
+		               {  
+		            	  System.out.println("Hello world on "+pr.getParameterValue(0));
+		               }
+		            }		
+				);
+			// Create the parameter validator
+			Set<IParameterType> pts = new HashSet<IParameterType>();
+			pts.add(type);
+			ParameterValidator pv = new ParameterValidator(pts); 
+			// Create the set of commands
+    		Set<Command> cs = new HashSet<Command>();
+    		cs.add(helloWorldCommand);
+    		// Execute
+    		new NaturalCLI(cs, pv).execute(args);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }    
+        
+    
+    /**
+     * Example 5. The default commands
+     * 
+     * @param args
+     */
+    public static void example5(String args[])
     {    
 		try {
-			ParameterValidator pv = new ParameterValidator();
     		Set<Command> cs = new HashSet<Command>();
-    		NaturalCLI nc = new NaturalCLI(cs, pv);
+    		NaturalCLI nc = new NaturalCLI(cs);
     		cs.add(new HelpCommand(cs));
     		cs.add(new HTMLHelpCommand(cs));
     		cs.add(new SleepCommand());  
