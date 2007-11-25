@@ -57,22 +57,7 @@ public class NaturalCLI {
     	this(commands, new ParameterValidator());
     }
     
-    /**
-     * Runs a command based on the arguments.
-     * 
-     * @param args  the string arguments to run.
-     * @param first the index on <code>args</code> of the first string for the arguments.
-     * @throws ExecutionException 
-     * @throws UnknownParameterType 
-     */
-    public void execute(String args, int first) throws ExecutionException
-    {
-    	if (args == null)
-    		throw new IllegalArgumentException("The parameter argument string cannot be null.");
-    	execute(args.split(" "), first);
-    }
-    
-    /**
+   /**
      * Runs a command based on the arguments.
      * 
      * @param args  the arguments to be parsed
@@ -105,16 +90,45 @@ public class NaturalCLI {
         command.getExecutor().execute(parseResult);
     }
     
+    /**
+     * Runs a command based on the arguments.
+     * 
+     * @param args  the string arguments to run.
+     * @param first the index on <code>args</code> of the first string for the arguments.
+     * @throws ExecutionException 
+     * @throws UnknownParameterType 
+     */
+    public void execute(String args, int first) throws ExecutionException
+    {
+    	if (args == null)
+    		throw new IllegalArgumentException("The parameter argument string cannot be null.");
+    	execute(args.split(" "), first);
+    }    
+    
+    /**
+     * Runs a command based on the arguments.
+     * 
+     * @param args  the arguments to be parsed
+     * @throws ExecutionException 
+     */
     public void execute(String[] args) throws ExecutionException
     {
     	execute(args, 0);
     }
     
+    /**
+     * Runs a command based on the arguments in the string.
+     * 
+     * @param args  the string with the arguments to be parsed
+     * @throws ExecutionException 
+     */
     public void execute(String args) throws ExecutionException
     {
     	execute(args, 0);
     }
      
     
+
+     
     
 }

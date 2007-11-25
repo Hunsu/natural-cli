@@ -71,7 +71,7 @@ public class Syntax {
 		if (definition == null || definition.length() == 0)
 			throw new IllegalArgumentException("The definition cannot be null or empty string.");
 		this.definition = definition;
-		this.generateGrammar();
+		this.compile();
 	}
 		
 	/**
@@ -79,7 +79,7 @@ public class Syntax {
 	 * @throws InvalidSyntaxDefinionException 
 	 * 
 	 */
-	private void generateGrammar() throws InvalidSyntaxDefinionException
+	private void compile() throws InvalidSyntaxDefinionException
 	{
 		grammar = new LinkedList<Token>();
 		String lastTypeName = "";
