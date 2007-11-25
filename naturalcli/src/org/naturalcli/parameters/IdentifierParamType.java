@@ -20,8 +20,6 @@
 
 package org.naturalcli.parameters;
 
-import java.io.File;
-
 import org.naturalcli.IParameterType;
 
 /**
