@@ -112,6 +112,7 @@ If you are looking for the main page, please go <a href="index.html">here</a>.
   </i>IParameterType type = 
     new IParameterType()
     {
+      private final String[] dof = new String[] {&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;};
       public Object convertParameterValue(String strRepresentation) {
         return strRepresentation;
       }
@@ -119,7 +120,6 @@ If you are looking for the main page, please go <a href="index.html">here</a>.
         return &quot;dayofweek&quot;;
       }
       public boolean validateParameter(String value) {						
-        String[] dof = new String[] {&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;};
         return Arrays.binarySearch(dof, value) != -1;
       }
       public String validationMessage(String value) {
@@ -177,7 +177,7 @@ If you are looking for the main page, please go <a href="index.html">here</a>.
 </pre>
 
 <p>
-<b>Example of...</b>. If you want an especific example, please request it <a href="http://sourceforge.net/forum/?group_id=208949">here</a>!
+<b>Example of...</b>. If you want any  other example, please request it <a href="http://sourceforge.net/forum/?group_id=208949">here</a>!
 
 
 <!-- Bottom -->
