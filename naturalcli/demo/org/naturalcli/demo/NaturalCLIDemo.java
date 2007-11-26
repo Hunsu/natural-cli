@@ -156,7 +156,9 @@ public class NaturalCLIDemo {
 			IParameterType type = 
 				new IParameterType()
 				{
-					@Override
+					private final String[] dof = new String[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+
+  					@Override
 					public Object convertParameterValue(String strRepresentation) {
 						return strRepresentation;
 					}
@@ -168,7 +170,6 @@ public class NaturalCLIDemo {
 
 					@Override
 					public boolean validateParameter(String value) {						
-						String[] dof = new String[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 						return Arrays.binarySearch(dof, value) != -1;
 					}
 
