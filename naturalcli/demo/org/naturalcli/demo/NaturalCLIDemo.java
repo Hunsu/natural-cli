@@ -41,7 +41,9 @@ public class NaturalCLIDemo {
     
 
     /**
-     * Example 1. The first command
+     * Example 1. The firsts commands
+     * 
+     * This example creates two simple commands with a very easy syntax. 
      * 
      * @param args
      */
@@ -81,7 +83,11 @@ public class NaturalCLIDemo {
     }
 
     /**
-     * Example 2. The first parameter
+     * Example 2. A command with a parameter.
+     * 
+     * The parameters are typed and you can define your own type also. 
+     * A parameter can have a type name or a type name with a parameter name to be
+     * shown when showing the help.
      * 
      * @param args
      */
@@ -111,6 +117,8 @@ public class NaturalCLIDemo {
 
     /**
      * Example 3. A command with an optional parameter
+     * 
+     * Defining optional parameters the possible interesting command lines are more interesting.
      * 
      * @param args
      */
@@ -145,7 +153,9 @@ public class NaturalCLIDemo {
     }    
 
     /**
-     * Example 4. An user defined type
+     * Example 4. An user defined type.
+     * 
+     * It's possible to define your own types to extend the parameter type and value checking. 
      * 
      * @param args
      */
@@ -207,7 +217,41 @@ public class NaturalCLIDemo {
         
     
     /**
-     * Example 5. The default commands
+     * Example 6. Command executor extends.
+     * 
+     * 
+     * 
+     * @param args
+     */
+    public static void example6(String args[])
+    {
+		try {
+			// Create the command
+			@SuppressWarnings("unused")
+			Command helloWorldCommand =
+				new Command(
+				    "hello world on <day:dayofweek>", 
+				    "Says hello to the world for that day.", 
+					new MyCommandExecutor(3)
+					{
+		               public void execute(ParseResult pr) 
+		               {  
+		            	  for (int i = 0 ; i < this.myvalue ; i++)
+		            	    System.out.println("Hello world on "+pr.getParameterValue(0));
+		               }
+		            }		
+				);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }    
+    
+    /**
+     * Example 5. The default commands.
+     * 
+     * There are default commands that you can use. Help commands o be able
+     * to output the command possibilities, execute a file with a list of
+     * commands, ...  
      * 
      * @param args
      */
