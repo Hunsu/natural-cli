@@ -32,6 +32,6 @@ public interface ICommandExecutor {
 	 *
 	 * @param parseResult the parse data for the command.
 	 */
-    public void execute(ParseResult parseResult);
+    public void execute(ParseResult parseResult) throws ExecutionException;
 
 }
