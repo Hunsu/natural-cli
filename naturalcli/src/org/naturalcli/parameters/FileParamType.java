@@ -25,7 +25,7 @@ import org.naturalcli.IParameterType;
 
 
 /**
- * The class implements an parameter type that checks if a file exists.
+ * The class implements a parameter type with an existing a file name.
  * 
  * @author Ferran Busquets
  *

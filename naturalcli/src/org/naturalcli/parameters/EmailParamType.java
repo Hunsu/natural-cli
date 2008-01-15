@@ -1,5 +1,5 @@
 /* 
- * Email.java
+ * EmailParamType.java
  *
  * Copyright (C) 2007 Ferran Busquets
  *

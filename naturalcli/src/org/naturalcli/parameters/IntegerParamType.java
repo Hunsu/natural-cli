@@ -1,5 +1,5 @@
 /* 
- * Number.java
+ * IntegerParamType.java
  *
  * Copyright (C) 2007 Ferran Busquets
  *
