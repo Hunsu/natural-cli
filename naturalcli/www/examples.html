@@ -18,7 +18,7 @@ If you are looking for the main page, please go <a href="index.html">here</a>.
 
 
 
-<p>
+<br><br>If you are looking for the binaries go <a href="http://sourceforge.net/project/showfiles.php?group_id=208949">here</a>.<p>
 <b>Example 1.</b> The first two commands.<br>
 <i>
 This example creates two simple commands with a very easy syntax.
@@ -69,7 +69,7 @@ shown when showing the help.
   <i>// Create the command
   </i>Command helloWorldCommand =
     new Command(
-      &quot;hello world <name:string>&quot;, 
+      &quot;hello world &lt;name:string&gt;&quot;, 
       &quot;Says hello to the world and especially to some one.&quot;, 
       new ICommandExecutor ()
       {
@@ -91,7 +91,7 @@ shown when showing the help.
 <p>
 <b>Example 3</b>. A command with optional parameter.<br>
 <i>
-Defining optional parameters the possible interesting command lines are more interesting.
+Defining optional parameters the command lines are more powerful.
 </i>
 <pre>
 
@@ -144,7 +144,7 @@ It's possible to define your own types to extend the parameter type and value ch
   <i>// Create the command
   </i>Command helloWorldCommand =
     new Command(
-      &quot;hello world on <day:dayofweek>&quot;, 
+      &quot;hello world on &lt;day:dayofweek&gt;&quot;, 
       &quot;Says hello to the world for that day.&quot;, 
       new ICommandExecutor ()
       {
@@ -207,7 +207,7 @@ commands, ...
 <div align="center">
 
 <p>
-<small>(C) Copyright 2007. Ferran Busquets</small>
+<small>(C) Copyright 2007. Ferran Busquets.</small>
 <br>
 <a href="http://sourceforge.net"><img border=0 src="http://sflogo.sourceforge.net/sflogo.php?group_id=208949&amp;type=2" alt="SourceForge.net Logo"  height="37" width="125" ></a>
 <br>
