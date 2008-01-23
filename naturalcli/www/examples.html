@@ -48,7 +48,7 @@ This example creates two simple commands with a very easy syntax.
   );
    
   <i>// Create the set of commands
-  </i>Set<Command> cs = new HashSet<Command>();
+  </i>Set&lt;Command&gt; cs = new HashSet&lt;Command&gt;();
   cs.add(showDateCommand);
   cs.add(helloWorldCommand);
    
@@ -80,7 +80,7 @@ shown when showing the help.
       );
       
   <i>// Create the set of commands
-  </i>Set<Command> cs = new HashSet<Command>();
+  </i>Set&lt;CommandGt; cs = new HashSet&lt;Command&gt;();
   cs.add(helloWorldCommand);
    
   <i>// Execute
@@ -156,12 +156,12 @@ It's possible to define your own types to extend the parameter type and value ch
    );
    
    <i>// Create the parameter validator
-   </i>Set<IParameterType> pts = new HashSet<IParameterType>();
+   </i>Set&lt;IParameterType&gt; pts = new HashSet&lt;IParameterType&gt;();
    pts.add(type);
    ParameterValidator pv = new ParameterValidator(pts); 
    
    <i>// Create the set of commands
-   </i>Set<Command> cs = new HashSet<Command>();
+   </i>Set&lt;Command&gt; cs = new HashSet&lt;Command&gt;();
    cs.add(helloWorldCommand);
    
    <i>// Execute
@@ -180,7 +180,7 @@ commands, ...
 <pre>
 
    <i>// Create an empty command set
-   </i>Set&lt;Command&gt; cs = new HashSet<Command>();
+   </i>Set&lt;Command&gt; cs = new HashSet&lt;Command&gt;();
   
    <i>// Create the interpreter
    </i>NaturalCLI nc = new NaturalCLI(cs);
