@@ -56,8 +56,25 @@ public class SyntaxTest {
 		new Syntax("marian [is] [the] best");
 		new Syntax("marian [<integer>] [the] best");
 		new Syntax("marian is [<integer>] <identifier>");
+		new Syntax("marian is <integer> ...");
+		try {
+			new Syntax("marian is [<integer>] ...");
+			fail();
+		} catch (InvalidSyntaxDefinionException e) { 
+		}
+		try {
+			new Syntax("marian is ...");
+			fail();
+		} catch (InvalidSyntaxDefinionException e) { 
+		}
 		try {
 			new Syntax("marian is the [<best:identifier>] <really:identifier>");
+			fail();
+		} catch (InvalidSyntaxDefinionException e) { 
+		}
+
+		try {
+			new Syntax("marian is ... [<best:identifier>] <really:identifier>");
 			fail();
 		} catch (InvalidSyntaxDefinionException e) { 
 		}
@@ -145,6 +162,23 @@ public class SyntaxTest {
 		  assertEquals(3, pr.getParameterCount());
 		  assertTrue(Arrays.equals(new Object[] { null, null, 123}, pr.getParameterValues()));
 		  assertTrue(Arrays.equals(new boolean[] { true, false, true, false, true}, pr.getTokensGiven()));		  
+		//
+		s = "marian is the <integer> ...";
+		pr = new Syntax(s).parse(new String[] { "marian", "is", "the", "1" }, 0, pv); 
+		  assertNotNull(pr);
+		  assertEquals(1, pr.getParameterCount());
+		  assertTrue(Arrays.equals(new Object[] { 1 }, pr.getParameterValues()));
+		  assertTrue(Arrays.equals(new boolean[] { true, true, true, true, false }, pr.getTokensGiven()));		  
+		pr = new Syntax(s).parse(new String[] { "marian", "is", "the", "1", "2"}, 0, pv); 
+		  assertNotNull(pr);
+		  assertEquals(2, pr.getParameterCount());
+		  assertTrue(Arrays.equals(new Object[] { 1, 2 }, pr.getParameterValues()));
+		  assertTrue(Arrays.equals(new boolean[] { true, true, true, true, true }, pr.getTokensGiven()));		  
+		pr = new Syntax(s).parse(new String[] { "marian", "is", "the", "1", "2", "3"}, 0, pv); 
+		  assertNotNull(pr);
+		  assertEquals(3, pr.getParameterCount());
+		  assertTrue(Arrays.equals(new Object[] { 1, 2, 3 }, pr.getParameterValues()));
+		  assertTrue(Arrays.equals(new boolean[] { true, true, true, true, true }, pr.getTokensGiven()));		  
 	}
 
 

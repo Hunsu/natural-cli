@@ -45,7 +45,10 @@ public class Token {
     
     /** Char separator for a parameter name and type */
     static private final char CHAR_NAME_TYPE = ':';
-        
+
+    /** String for variable arguments token */
+    static private final String VAR_ARGS = "...";
+    
     /** Texts giving sense to the token */
     private String text;
 	
@@ -152,6 +155,16 @@ public class Token {
         return isParameter() && isOptional();
     }
 	
+	/**
+	 * Checks if it's a mandatory parameter token
+	 * 
+	 * @return <code>true</code> if it's mandatory parameter, <code>false</code> otherwise
+	 */
+    public boolean isMandatoryParameter()
+    {
+        return isParameter() && !isOptional();
+    }    
+    
     /**
      * Helper method for {@link org.naturalcli.Token#getParameterName()} and
      * {@link org.naturalcli.Token#getParameterName()}
@@ -201,6 +214,16 @@ public class Token {
     {
     	return !this.isParameter();
     }
+
+    /**
+     * Determines if it's a variable arguments token
+     * 
+     * @return <code>true</code> if it's a variable arguments token, <code>false</code> otherwise
+     */
+    public boolean isVarArgs()
+    {
+    	return this.text.equals(VAR_ARGS);
+    }    
     
     /**
      * Obtains the word that represents the token, it means

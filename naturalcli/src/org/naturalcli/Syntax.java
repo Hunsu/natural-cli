@@ -82,27 +82,39 @@ public class Syntax {
 	private void compile() throws InvalidSyntaxDefinionException
 	{
 		grammar = new LinkedList<Token>();
-		String lastTypeName = "";
-		boolean lastOpt = false;
-   		for (String s : definition.split(" "))
+		String[] tokens = definition.split(" "); 
+		Token last_t = null;
+   		for (int i = 0; i < tokens.length ; i++)
    		{
+   			String s = tokens[i];
+   			// Create the token
    			Token t;
 			try {
 				t = new Token(s);
 			} catch (InvalidTokenException e) {
-				throw new InvalidSyntaxDefinionException("Bad token", e);
+				throw new InvalidSyntaxDefinionException("Bad token.", e);
 			}
-   			if (t.isParameter() && lastOpt && t.getParameterTypeName().equals(lastTypeName))
+			// Validating the variable argument token
+			if (t.isVarArgs())
+			{
+				if (last_t == null || i != tokens.length-1)
+					throw new InvalidSyntaxDefinionException("Variable arguments token only allowed at the end.");
+				if (!last_t.isMandatoryParameter())
+					throw new InvalidSyntaxDefinionException("Variable arguments have to follow a mandatory parameter.");
+			}
+			// Validating optional parameters
+   			if (t.isParameter() && last_t != null && last_t.isOptional() && 
+   			    t.getParameterTypeName().equals(last_t.getParameterTypeName()))
+   			{
    				throw new InvalidSyntaxDefinionException("An optional parameter cannot be followed by a parameter of the same type.");
+   			}
+   			// Add the token
    			grammar.add(t);
+   			// 
    			if (t.isParameter())
    				paramCount++;
-   			if (t.isOptionalParameter())
-   			{
-   				lastTypeName = t.getParameterTypeName();
-   				lastOpt = true;
-   			} else
-   				lastOpt = false;
+   			//    			
+   			last_t = t;
    		}
 	} 
 	
@@ -125,44 +137,78 @@ public class Syntax {
 			throw new IllegalArgumentException("Parameter validator cannot be null.");
 		if (first < 0)
 			throw new IllegalArgumentException("First token index have to be 0 or greater.");
-		Object[] paramValues = new Object[paramCount];
+		List<Object> ParamValues = new LinkedList<Object>();
 		boolean[] tokenGiven = new boolean[this.grammar.size()];
 		int ip = 0; // index for paramValues
 		int it = 0; // index for tokensGiven
 		int ig = 0; // index for the grammar
 		int ic = first; // index for the candidates
+		boolean varargs = false;
+		/* 
+		 *                          increment       
+		 * match opt param   ip  it  ig  ic
+		 *   0    0    ?      -   -   -   -   return null
+		 *   0    1    0      0   1   1   0    
+		 *   0    1    1      1   1   1   0    
+		 *   1    ?    0      0   1   1   1         
+		 *   1    ?    1      1   1   1   1   
+		 *   
+		 */
 		while (ig < grammar.size() && ic < candidates.length)
 		{
-			Token tgrammar = grammar.get(ig); 
+			Token tgrammar = grammar.get(ig);
+			// check if there are varargs
+			varargs = tgrammar.isVarArgs();		
+			if (varargs)
+				break;
 			boolean match = tgrammar.matches(candidates[ic], pv);
 			boolean opt = tgrammar.isOptional();
-			boolean param = tgrammar.isParameter();			
-			/* 
-			 *          increment       
-			 * match opt param   ip  it  ig  ic
-			 *   0    0    ?      -   -   -   -   return null
-			 *   0    1    0	  0   1   1   0    
-			 *   0    1    1      1   1   1   0    
-			 *   1    ?    0      0   1   1   1         
-			 *   1    ?    1      1   1   1   1   
-			 *   
-			 */
+			boolean param = tgrammar.isParameter();		
+			// Validate the token
 			if (!match && !opt)
 				return null;
+			// Increment ip and add value to paramValues
 			if (param) {
 				if (opt && !match)
-					paramValues[ip] = null;
+					ParamValues.add(null);
 				else
-					paramValues[ip] = pv.getParameterType(tgrammar.getParameterTypeName()).convertParameterValue(candidates[ic]);
+					ParamValues.add(pv.getParameterType(tgrammar.getParameterTypeName()).convertParameterValue(candidates[ic]));
 				ip++;
 			}
+			// Increment ic if matches
 			if (match)
 				ic++;
-			tokenGiven[it++] = match;  
+			// Increment it and ig and add value to tokenGiven
+			tokenGiven[it++] = match;
 			ig++;
 		}
-		if (ig == grammar.size() && ic == candidates.length)
-			return new ParseResult(paramValues, tokenGiven);
+		// Go for the variable arguments
+		if (varargs)
+		{
+			tokenGiven[it] = true;
+			Token token = grammar.get(ig-1);
+			ig++;
+			// Validate
+			if (token.isOptional())
+				throw new RuntimeException("Internal error: Parameter for variable arguments cannot be optional.");			
+			// Go for values
+			while(ic < candidates.length)
+			{
+				if (!token.matches(candidates[ic], pv))
+					return null;
+				ParamValues.add(pv.getParameterType(token.getParameterTypeName()).convertParameterValue(candidates[ic]));
+				ic++;
+			}
+		}
+		// Validate ParamValuesAux
+		if (!varargs && ParamValues.size() > paramCount)
+			throw new RuntimeException("Internal error: Invalid parameter count.");
+		// Determine if the bucle is finished ok
+		if (ic == candidates.length && ig == grammar.size())
+			return new ParseResult(ParamValues.toArray(), tokenGiven);
+		if (ic == candidates.length && ig == grammar.size()-1 && grammar.get(grammar.size()-1).isVarArgs())
+			return new ParseResult(ParamValues.toArray(), tokenGiven);
+		// Not enough values o matching error 
 		return null;
 	}
 
