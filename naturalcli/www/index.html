@@ -21,6 +21,7 @@ sentences. It means, your software can understand easily command lines like the 
    $acme start daemon mailservice
    $acme send file /tmp/pau.jpg to you@somehost.com
    $acme start backup in 10 minutes
+   $acne zip to todaywork.zip files a.txt b.txt c.txt
 
 </pre>
 
@@ -31,8 +32,18 @@ It's very easy to define, only need the following strings:
    start daemon &lt;name:string&gt;
    send file &lt;file&gt; to &lt;email&gt;
    start backup in &lt;number&gt; [minutes]
+   zip to &lt;file&gt; files &lt;filename&gt; ...
 
 </pre>
+
+<p>
+<b>New release 1.1:</b>
+<ul>
+<li>BUG: Renamed <code>InvalidSyntaxDefinionException</code> to <code>InvalidSyntaxException</code>.
+<li>NEW FEATURE: Variable parameter values number for the last one. For examples, go to the <a href="examples.html">examples page</a>.</li>
+</ul>
+
+
 
 <p>
 <b>Main Features:</b>

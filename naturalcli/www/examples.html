@@ -197,6 +197,39 @@ commands, ...
 </pre>
 
 <p>
+<b>Example 6</b>. Variable parameter values number.<br>
+<i>
+For the last parameter (and token) it's possible to define it tp get variable values number.  
+
+</i>
+<pre>
+
+   <i>// Create the command</i>
+   Command helloWorldCommand =
+      new Command(
+         "hello world &lt;name:string&gt; ...", 
+         "Says hello to the world and especially to some people.", 
+         new ICommandExecutor ()
+         {
+            public void execute(ParseResult pr) 
+            { 
+               System.out.print("Hello world! And hello especially to ");
+               for (int i= 0 ; i &lt; pr.getParameterCount() ; i++)
+                  System.out.print(pr.getParameterValue(i)+" ");  
+               System.out.println();
+            }
+         }		
+    );
+    <i>// Create the set of commands</i>
+    Set&lt;Command&gt; cs = new HashSet&lt;Command&gt;();
+    cs.add(helloWorldCommand);
+    <i>// Execute</i>
+    new NaturalCLI(cs).execute(args);
+
+    
+</i></pre>
+
+<p>
 <b>Example of...</b>. If you want any  other example, please request it <a href="http://sourceforge.net/forum/?group_id=208949">here</a>!
 
 
