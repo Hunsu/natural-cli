@@ -269,5 +269,42 @@ public class NaturalCLIDemo {
 			e.printStackTrace();
 		}
     }
+
+    /**
+     * Example 7. Variable optional parameters
+     * 
+     * You can add a parameter and, optionally, can get any number of values.
+     * Variable parameter token can only as the last one.
+     * 
+     * @param args
+     */
+    public static void example7(String args[])
+    {
+		try {
+			// Create the command
+			Command helloWorldCommand =
+				new Command(
+				    "hello world <name:string> ...", 
+				    "Says hello to the world and especially to some people.", 
+					new ICommandExecutor ()
+					{
+		               public void execute(ParseResult pr) 
+		               { 
+		            	   System.out.print("Hello world! And hello especially to ");
+		            	   for (int i= 0 ; i < pr.getParameterCount() ; i++)
+		            		  System.out.print(pr.getParameterValue(i)+" ");  
+		            	   System.out.println();
+		               }
+		            }		
+				);
+			// Create the set of commands
+    		Set<Command> cs = new HashSet<Command>();
+    		cs.add(helloWorldCommand);
+    		// Execute
+    		new NaturalCLI(cs).execute(args);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }    
     
 }

@@ -20,7 +20,7 @@
 package org.naturalcli.commands;
 
 import org.naturalcli.Command;
-import org.naturalcli.InvalidSyntaxDefinionException;
+import org.naturalcli.InvalidSyntaxException;
 
 /**
  * Implements a command that waits for some seconds.
@@ -34,7 +34,7 @@ public class SleepCommand extends Command {
 	{
 		try {
 			prepare("sleep <seconds:number>", "Wait for seconds.", new SleepCommandExecutor());
-		} catch (InvalidSyntaxDefinionException e) {
+		} catch (InvalidSyntaxException e) {
 			throw new RuntimeException(e);
 		}
 	}

@@ -47,7 +47,7 @@ public class Command {
 	 * @param ce command executor.
 	 * @throws InvalidSyntaxDefinionException.
 	 */
-	public Command(String syntax, String help, ICommandExecutor ce) throws InvalidSyntaxDefinionException{
+	public Command(String syntax, String help, ICommandExecutor ce) throws InvalidSyntaxException{
 		this.prepare(syntax, help, ce);
 	}
 
@@ -65,7 +65,7 @@ public class Command {
 	 * @param ce command executor.
 	 * @throws InvalidSyntaxDefinionException.
 	 */
-	protected void prepare(String syntax, String help, ICommandExecutor ce) throws InvalidSyntaxDefinionException 
+	protected void prepare(String syntax, String help, ICommandExecutor ce) throws InvalidSyntaxException 
 	{
 		if (help == null || help.length() == 0)
 			throw new IllegalArgumentException("Syntax cannot be empty.");

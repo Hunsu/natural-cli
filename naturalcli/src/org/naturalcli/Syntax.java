@@ -44,9 +44,9 @@ public class Syntax {
 	 * Constructor for the Syntax class
 	 * 
 	 * @param definition the syntax definition
-	 * @throws InvalidSyntaxDefinionException 
+	 * @throws InvalidSyntaxException 
 	 */
-	public Syntax(String definition) throws InvalidSyntaxDefinionException
+	public Syntax(String definition) throws InvalidSyntaxException
 	{
 		this.setDefinition(definition);
 	}
@@ -65,9 +65,9 @@ public class Syntax {
 	 * Sets the definition for the syntax
 	 * 
 	 * @param definition the definition to set
-	 * @throws InvalidSyntaxDefinionException 
+	 * @throws InvalidSyntaxException 
 	 */
-	private void setDefinition(String definition) throws InvalidSyntaxDefinionException {
+	private void setDefinition(String definition) throws InvalidSyntaxException {
 		if (definition == null || definition.length() == 0)
 			throw new IllegalArgumentException("The definition cannot be null or empty string.");
 		this.definition = definition;
@@ -76,10 +76,10 @@ public class Syntax {
 		
 	/**
 	 * Creates the grammar for the command
-	 * @throws InvalidSyntaxDefinionException 
+	 * @throws InvalidSyntaxException 
 	 * 
 	 */
-	private void compile() throws InvalidSyntaxDefinionException
+	private void compile() throws InvalidSyntaxException
 	{
 		grammar = new LinkedList<Token>();
 		String[] tokens = definition.split(" "); 
@@ -92,21 +92,21 @@ public class Syntax {
 			try {
 				t = new Token(s);
 			} catch (InvalidTokenException e) {
-				throw new InvalidSyntaxDefinionException("Bad token.", e);
+				throw new InvalidSyntaxException("Bad token.", e);
 			}
 			// Validating the variable argument token
 			if (t.isVarArgs())
 			{
 				if (last_t == null || i != tokens.length-1)
-					throw new InvalidSyntaxDefinionException("Variable arguments token only allowed at the end.");
+					throw new InvalidSyntaxException("Variable arguments token only allowed at the end.");
 				if (!last_t.isMandatoryParameter())
-					throw new InvalidSyntaxDefinionException("Variable arguments have to follow a mandatory parameter.");
+					throw new InvalidSyntaxException("Variable arguments have to follow a mandatory parameter.");
 			}
 			// Validating optional parameters
    			if (t.isParameter() && last_t != null && last_t.isOptional() && 
    			    t.getParameterTypeName().equals(last_t.getParameterTypeName()))
    			{
-   				throw new InvalidSyntaxDefinionException("An optional parameter cannot be followed by a parameter of the same type.");
+   				throw new InvalidSyntaxException("An optional parameter cannot be followed by a parameter of the same type.");
    			}
    			// Add the token
    			grammar.add(t);

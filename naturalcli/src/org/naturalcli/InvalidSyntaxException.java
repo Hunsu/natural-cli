@@ -26,19 +26,19 @@ package org.naturalcli;
  * 
  */
 @SuppressWarnings("serial")
-public class InvalidSyntaxDefinionException extends Exception {
+public class InvalidSyntaxException extends Exception {
 
 	/**
 	 * 
 	 */
-	public InvalidSyntaxDefinionException() {
+	public InvalidSyntaxException() {
 		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @param message
 	 */
-	public InvalidSyntaxDefinionException(String message) {
+	public InvalidSyntaxException(String message) {
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
@@ -46,7 +46,7 @@ public class InvalidSyntaxDefinionException extends Exception {
 	/**
 	 * @param cause
 	 */
-	public InvalidSyntaxDefinionException(Throwable cause) {
+	public InvalidSyntaxException(Throwable cause) {
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}
@@ -55,7 +55,7 @@ public class InvalidSyntaxDefinionException extends Exception {
 	 * @param message
 	 * @param cause
 	 */
-	public InvalidSyntaxDefinionException(String message, Throwable cause) {
+	public InvalidSyntaxException(String message, Throwable cause) {
 		super(message, cause);
 		// TODO Auto-generated constructor stub
 	}

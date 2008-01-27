@@ -20,7 +20,7 @@
 package org.naturalcli.commands;
 
 import org.naturalcli.Command;
-import org.naturalcli.InvalidSyntaxDefinionException;
+import org.naturalcli.InvalidSyntaxException;
 
 /**
  * Implements a NOP command that does nothing.
@@ -37,7 +37,7 @@ public class NullCommand extends Command  {
 	public NullCommand() {
 		try {
 			prepare("null command", ".Do nothing.", new NullCommandExecutor());
-		} catch (InvalidSyntaxDefinionException e) {
+		} catch (InvalidSyntaxException e) {
 			throw new RuntimeException(e);
 		}
 	}

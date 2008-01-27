@@ -22,7 +22,7 @@ package org.naturalcli.commands;
 import java.util.Set;
 
 import org.naturalcli.Command;
-import org.naturalcli.InvalidSyntaxDefinionException;
+import org.naturalcli.InvalidSyntaxException;
 
 
 /**
@@ -44,7 +44,7 @@ public class HTMLHelpCommand extends Command {
 			prepare("htmlhelp", "Shows the commands help on HTML format.",
 					new HTMLHelpCommandExecutor(commands)
 			);
-		} catch (InvalidSyntaxDefinionException e) {
+		} catch (InvalidSyntaxException e) {
 			throw new RuntimeException(e);
 		}
 	}

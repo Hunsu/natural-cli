@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.naturalcli.Command;
-import org.naturalcli.InvalidSyntaxDefinionException;
+import org.naturalcli.InvalidSyntaxException;
 import org.naturalcli.commands.NullCommandExecutor;
 
 /**
@@ -24,10 +24,10 @@ public class CommandTest {
 
 	/**
 	 * Test method for {@link org.naturalcli.Command#isHidden()}.
-	 * @throws InvalidSyntaxDefinionException 
+	 * @throws InvalidSyntaxException 
 	 */
 	@Test
-	public final void testIsHidden() throws InvalidSyntaxDefinionException {
+	public final void testIsHidden() throws InvalidSyntaxException {
 		assertTrue(new Command("marian is the best", ". Hello world", new NullCommandExecutor()).isHidden());
 		assertFalse(new Command("marian is the best", "Hello world", new NullCommandExecutor()).isHidden());
 	}

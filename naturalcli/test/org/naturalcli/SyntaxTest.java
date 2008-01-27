@@ -25,7 +25,7 @@ import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.naturalcli.InvalidSyntaxDefinionException;
+import org.naturalcli.InvalidSyntaxException;
 import org.naturalcli.ParameterValidator;
 import org.naturalcli.Syntax;
 import org.naturalcli.UnknownParameterType;
@@ -48,10 +48,10 @@ public class SyntaxTest {
 
 	/**
 	 * Test method for {@link org.naturalcli.Syntax#Syntax(java.lang.String)}.
-	 * @throws InvalidSyntaxDefinionException 
+	 * @throws InvalidSyntaxException 
 	 */
 	@Test
-	public final void testSyntax() throws InvalidSyntaxDefinionException {
+	public final void testSyntax() throws InvalidSyntaxException {
 		new Syntax("marian is the best");
 		new Syntax("marian [is] [the] best");
 		new Syntax("marian [<integer>] [the] best");
@@ -60,37 +60,37 @@ public class SyntaxTest {
 		try {
 			new Syntax("marian is [<integer>] ...");
 			fail();
-		} catch (InvalidSyntaxDefinionException e) { 
+		} catch (InvalidSyntaxException e) { 
 		}
 		try {
 			new Syntax("marian is ...");
 			fail();
-		} catch (InvalidSyntaxDefinionException e) { 
+		} catch (InvalidSyntaxException e) { 
 		}
 		try {
 			new Syntax("marian is the [<best:identifier>] <really:identifier>");
 			fail();
-		} catch (InvalidSyntaxDefinionException e) { 
+		} catch (InvalidSyntaxException e) { 
 		}
 
 		try {
 			new Syntax("marian is ... [<best:identifier>] <really:identifier>");
 			fail();
-		} catch (InvalidSyntaxDefinionException e) { 
+		} catch (InvalidSyntaxException e) { 
 		}
 		
 	}
 	
 	/**
 	 * Test method for {@link org.naturalcli.Syntax#parse(java.lang.String[], int, org.naturalcli.ParameterValidator)}.
-	 * @throws InvalidSyntaxDefinionException 
+	 * @throws InvalidSyntaxException 
 	 * @throws UnknownParameterType 
-	 * @throws InvalidSyntaxDefinionException 
+	 * @throws InvalidSyntaxException 
 	 * @throws UnknownParameterType 
 	 */
 	@SuppressWarnings("deprecation")
 	@Test
-	public final void testParse() throws UnknownParameterType, InvalidSyntaxDefinionException {
+	public final void testParse() throws UnknownParameterType, InvalidSyntaxException {
 		String s;
 		ParseResult pr;
 		// 
