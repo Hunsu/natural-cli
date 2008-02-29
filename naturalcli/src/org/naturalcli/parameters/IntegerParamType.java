@@ -43,15 +43,21 @@ public class IntegerParamType implements IParameterType {
 	 */
 	@Override
 	public boolean validateParameter(String value) {
-		return value.matches("\\d+");
-	}
+        try {
+            Integer.valueOf(value);
+            return true;
+        } catch (NumberFormatException e)
+        {
+            return false;
+        }
+    }
 
 	/* (non-Javadoc)
 	 * @see org.naturalcli.paramtypes.IParameterType#validationMessage(java.lang.String)
 	 */
 	@Override
 	public String validationMessage(String value) {
-		return this.validateParameter(value) ? null : "Bad integer";
+		return this.validateParameter(value) ? null : "Bad integer.";
 	}
 
 	/* (non-Javadoc)

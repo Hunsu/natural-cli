@@ -51,7 +51,7 @@ public class IdentifierParamType implements IParameterType {
 	 */
 	@Override
 	public String validationMessage(String value) {		
-		return this.validateParameter(value) ? null : "Bad identifier";
+		return this.validateParameter(value) ? null : "Bad identifier.";
 	}
 
 	/* (non-Javadoc)
