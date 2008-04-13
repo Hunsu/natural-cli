@@ -1,0 +1,28 @@
+1.0
+    Initial release!
+
+1.1
+    BUG FIX: Renamed InvalidSyntaxDefinionException to InvalidSyntaxException. 
+    NEW FEATURE: Variable parameter values number for the last one. For examples, go to the examples page. 
+
+1.2
+    NEW FEATURE: Added more predefined parameter types: working_url, url, byte, short, long, double, float, hexadecimal, octal and binary. 
+
+1.2.1
+    BUG FIX: Missing toString in Syntax class
+    BUG FIX: Parameter types added on 1.2 release are missing from DefaultParameterTypes
+    BUG FIX: Bad name for URLParameterType, must be URLParamType
+    BUG FIX: Bad name for WorkingURLParameterType, must be WorkingURLParamType
+    BUG FIX: Not checked "Infinite" values on DoubleParamType and FloatParamType
+    BUG FIX: WorkingURLParameterType validation is true ever
+
+1.x
+
+-Use "decode" to parse Integer, Short, Long parameters types.
+-Choice list feature, single and multiple:
+    daemon start|stop|restart
+    daemon status,dump,sync
+
+
+
+       
