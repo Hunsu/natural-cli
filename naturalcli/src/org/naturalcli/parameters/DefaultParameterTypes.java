@@ -44,11 +44,21 @@ public class DefaultParameterTypes {
 	public static Set<IParameterType> createSet()
 	{
 		Set<IParameterType> s = new HashSet<IParameterType>();
+        s.add(new BinaryParamType());
+        s.add(new ByteParamType());
+        s.add(new DoubleParamType());
 		s.add(new EmailParamType());
+        s.add(new FileParamType());
+        s.add(new FloatParamType());
+        s.add(new HexadecimalParamType());
 		s.add(new IdentifierParamType());
 		s.add(new IntegerParamType());
+        s.add(new LongParamType());
+        s.add(new OctalParamType());
+        s.add(new ShortParamType());
 		s.add(new StringParamType());
-		s.add(new FileParamType());
+        s.add(new URLParamType());
+        s.add(new WorkingURLParamType());
 		return s;
 	}
 }
