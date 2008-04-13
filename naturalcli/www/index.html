@@ -66,12 +66,30 @@ It's very easy to define, only need strings like:
 <p>
 <b>Changelog</b>
 <ul>
-<li><b>Release 1.2</b> - NEW: Added more predefined parameter types: <code>working_url</code>, <code>url</code>, <code>byte</code>, <code>short</code>, <code>long</code>, <code>double</code>, <code>float</code>, <code>hexadecimal</code>, <code>octal</code> and <code>binary</code>.</li>
-<li><b>Release 1.1</b> - BUG: Renamed <code>InvalidSyntaxDefinionException</code> to <code>InvalidSyntaxException</code>.
-<li><b>Release 1.1</b> - NEW FEATURE: Variable parameter values number for the last one. For examples, go to the <a href="examples.html">examples page</a>.</li>
-</ul>
-
-
+<li><b>Release 1.1:</b>
+<br>
+- BUG: Renamed <code>InvalidSyntaxDefinionException</code> to <code>InvalidSyntaxException</code>.
+<br>
+- NEW: Variable parameter values number for the last one. For examples, go to the <a href="examples.html">examples page</a>.</li>
+<br>
+<li><b>Release 1.2</b>
+<br>
+- NEW: Added more predefined parameter types: <code>working_url</code>, <code>url</code>, <code>byte</code>, <code>short</code>, <code>long</code>, <code>double</code>, <code>float</code>, <code>hexadecimal</code>, <code>octal</code> and <code>binary</code>.</li>
+<br>
+<li><b>Release 1.2.1</b>
+<br>
+- <a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1939488&group_id=208949&atid=1007750">BUG FIX</a>: Missing toString in Syntax class.
+<br>
+- <a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1939536&group_id=208949&atid=1007750">BUG FIX</a>: Parameter types added on 1.2 release are missing from <code>DefaultParameterTypes</code>.
+<br>
+- BUG FIX: Bad name for <code>URLParameterType</code>, must be <code>URLParamType</code>.
+<br>
+- BUG FIX: Bad name for <code>WorkingURLParameterType</code>, must be <code>WorkingURLParamType</code>.
+<br>
+- BUG FIX: Not checked <code>Infinite</code> values on <code>DoubleParamType</code> and <code>FloatParamType</code>.
+<br>
+- BUG FIX: <code>WorkingURLParameterType</code> validation is ever true.
+<br>
 </ul>
 
 
