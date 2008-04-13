@@ -45,7 +45,9 @@ public class DoubleParamType implements IParameterType {
 	@Override
 	public boolean validateParameter(String value) {
 	    try {
-		    Double.valueOf(value);
+		    Double d = Double.valueOf(value);
+            if (d == Double.POSITIVE_INFINITY || d == Double.NEGATIVE_INFINITY)
+                return false;
 		    return true;
 	    } catch (NumberFormatException e)
 	    {

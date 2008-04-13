@@ -45,7 +45,9 @@ public class FloatParamType implements IParameterType {
 	@Override
 	public boolean validateParameter(String value) {
 	    try {
-		    Float.valueOf(value);
+		    Float f = Float.valueOf(value);
+		    if (f == Float.POSITIVE_INFINITY || f == Float.NEGATIVE_INFINITY)
+		        return false;
 		    return true;
 	    } catch (NumberFormatException e)
 	    {
