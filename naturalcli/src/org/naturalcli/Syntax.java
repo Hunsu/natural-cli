@@ -212,4 +212,13 @@ public class Syntax {
 		return null;
 	}
 
+	/*
+	 * Returns the definition for this Syntax
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+	    return this.getDefinition();
+	}
 }
