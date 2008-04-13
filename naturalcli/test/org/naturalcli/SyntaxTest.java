@@ -121,7 +121,6 @@ public class SyntaxTest {
 		  assertEquals(2, pr.getParameterCount());
 		  assertTrue(Arrays.equals(new Object[] { 31231, "best"}, pr.getParameterValues()));
 		assertNull(new Syntax(s).parse(new String[] { "marian", "is", "the", "best"}, 0, pv));
-		assertNull(new Syntax(s).parse(new String[] { "marian", "-1", "the", "best"}, 0, pv));
 		assertNull(new Syntax(s).parse(new String[] { "marian", "1.2", "the", "best"}, 0, pv));
 		// 
 		s = "marian [<hi:integer>] the <bye:identifier>";
