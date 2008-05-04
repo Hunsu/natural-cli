@@ -29,7 +29,7 @@ class NaturalCLI :
         self.commands = commands
         self.pv = ParameterValidator()
 
-    def execute(self, String[] args, int first) :
+    def execute_args_list(self, args, first) :
         """
           Runs a command based on the arguments.
           
@@ -57,7 +57,7 @@ class NaturalCLI :
         # Execute the command
         command.getExecutor().execute(parseResult)
 
-    def execute(self, String args, int first) :
+    def execute(self, args, first) :
         """
           Runs a command based on the arguments.
           
@@ -68,18 +68,18 @@ class NaturalCLI :
         """
         if args == None :
             raise IllegalArgumentError, "The parameter argument string cannot be None."
-        execute(args.split(" "), first)
+        execute_args_list(args.split(" "), first)
 
-    def execute(self, String[] args) :
+    def execute_args_list(self, args) :
         """
           Runs a command based on the arguments.
           
           @param args  the arguments to be parsed
           @throws ExecutionError 
         """
-        execute(args, 0)
+        execute_args_list(args, 0)
 
-    def execute(self, String args) :
+    def execute(self, args) :
         """
           Runs a command based on the arguments in the string.
           

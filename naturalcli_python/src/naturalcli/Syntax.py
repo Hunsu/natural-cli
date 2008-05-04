@@ -13,7 +13,6 @@ class InvalidSyntaxError(Exception):
 
 
 class Syntax:
-
     def __init__ (self, definition):
         """
          Constructor for the Syntax class
@@ -57,18 +56,18 @@ class Syntax:
             t = None
             try :
                 t = Token(s)
-            except InvalidTokenException :
-                raise InvalidSyntaxException, "Bad token."+e
+            except InvalidTokenError :
+                raise InvalidSyntaxError, "Bad token."+e
             # Validating the variable argument token
             if t.isVarArgs() : 
                 if last_t == None or i != len(tokens.length)-1 :
-                    raise InvalidSyntaxException, "Variable arguments token only allowed at the end."
+                    raise InvalidSyntaxError, "Variable arguments token only allowed at the end."
                 if not last_t.isMandatoryParameter() :
-                    raise InvalidSyntaxException, "Variable arguments have to follow a mandatory parameter."
+                    raise InvalidSyntaxError, "Variable arguments have to follow a mandatory parameter."
             # Validating optional parameters
             if t.isParameter() and last_t != None and last_t.isOptional() \
                and t.getParameterTypeName() == last_t.getParameterTypeName() :
-               raise InvalidSyntaxException, "An optional parameter cannot be followed by a parameter of the same type."
+               raise InvalidSyntaxError, "An optional parameter cannot be followed by a parameter of the same type."
             # Add the token
             grammar.append(t);
             # 
@@ -161,3 +160,7 @@ class Syntax:
             return ParseResult(ParamValues, tokenGiven)
         # Not enough values o matching error 
         return None
+    
+    def __str__(self) : 
+        return getDefinition()
+    

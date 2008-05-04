@@ -1,0 +1,59 @@
+public +class +(\w*) +\{
+class $1 :
+
+public +class +(\w*) +extends +(\w*) +\{
+class $1 ($2) :
+
+
+^(\s*)/\*\*
+$1"""
+
+^(\s*) \*/
+$1"""
+
+(^\s*)\*
+$1
+
+^\s*(\{|\})\s*$
+
+
+if \((.*)\)
+if $1 :
+
+\&\&
+and
+
+||
+or
+
+;$
+
+
+null
+None
+
+(\w*)Exception
+$1Error
+
+throw new
+raise
+
+this\.
+self.
+
+//
+#
+
+\.equals\(
+==
+
+\t
+    
+
+(\w+)\.length
+len($1)
+
+try \{
+try :
+
+

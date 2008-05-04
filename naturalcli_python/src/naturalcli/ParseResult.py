@@ -10,7 +10,7 @@ class ParseResult :
 	parameterValues=[]	
 	tokensGiven=[]
 
-	def __init__(parameterValues, tokensGiven) :
+	def __init__(self, parameterValues, tokensGiven) :
 		"""
 		  Constructor
 		  
@@ -21,13 +21,13 @@ class ParseResult :
 	                         the value will be always <code>true</code>.
 		"""
 		if parameterValues == None :
-			raise IllegalArgumentError("Parameter values array cannot be None.")
+			raise IllegalArgumentError, "Parameter values array cannot be None."
 		if tokensGiven == None :
-			raise IllegalArgumentError("Tokens found array cannot be None.")
+			raise IllegalArgumentError, "Tokens found array cannot be None."
 		self.parameterValues = parameterValues
 		self.tokensGiven = tokensGiven
 
-	def getParameterValue(parameterIndex) :
+	def getParameterValue(self, parameterIndex) :
 		"""
 		  Get the parameter value in the given index.
 		  
@@ -37,7 +37,7 @@ class ParseResult :
 		"""
 		return self.parameterValues[parameterIndex]
 
-	def getParameterValues() :
+	def getParameterValues(self) :
 		"""
 		  Get a copy of the parameter values
 		  
@@ -47,7 +47,7 @@ class ParseResult :
 		aux.extend(self.parameterValues)
 		return aux
 
-	def getParameterCount() :
+	def getParameterCount(self) :
 		"""
 		  Get the number of all possible parameters
 		   
@@ -55,7 +55,7 @@ class ParseResult :
 		"""
 		return len(self.parameterValues)
 
-	def isTokenGiven(tokenIndex) :
+	def isTokenGiven(self, tokenIndex) :
 		"""
 		  Get if the token is given or not.
 		  
@@ -66,7 +66,7 @@ class ParseResult :
 		"""
 		return self.tokensGiven[tokenIndex]
 
-	def getTokensGiven() :
+	def getTokensGiven(self) :
 		"""
 		  Get a copy of the tokens given.
 		  
