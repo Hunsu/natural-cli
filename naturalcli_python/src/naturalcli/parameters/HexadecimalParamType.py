@@ -1,5 +1,4 @@
-import org.naturalcli.IParameterType
-
+import naturalcli
 
 """
   The class implements an hexadecimal number parameter type.

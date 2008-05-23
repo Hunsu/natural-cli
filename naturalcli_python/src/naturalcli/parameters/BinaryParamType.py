@@ -1,6 +1,4 @@
-
-import org.naturalcli.IParameterType
-
+import naturalcli
 
 """
   The class implements a binary number parameter type.

@@ -1,6 +1,4 @@
-
-import org.naturalcli.IParameterType
-
+import naturalcli
 
 """
   The class implements a parameter type with an existing a file name.

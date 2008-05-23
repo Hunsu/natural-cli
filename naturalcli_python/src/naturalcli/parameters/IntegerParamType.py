@@ -1,7 +1,4 @@
-
-
-import org.naturalcli.IParameterType
-
+import naturalcli
 
 """
   The class implements an integer parameter type.

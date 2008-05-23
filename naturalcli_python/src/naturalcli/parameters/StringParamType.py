@@ -1,8 +1,4 @@
-
-
-import org.naturalcli.IParameterType;
-
-
+import naturalcli
 
 """
   The class implements an string parameter type.

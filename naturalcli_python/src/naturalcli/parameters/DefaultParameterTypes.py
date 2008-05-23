@@ -1,5 +1,5 @@
+import naturalcli
 
-import org.naturalcli.IParameterType;
 """
   Helper class to obtain a set of default parameter types.
   

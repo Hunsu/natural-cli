@@ -1,3 +1,4 @@
+import naturalcli
 """
   Executor for <code>HTMLHelpCommand</code>
    

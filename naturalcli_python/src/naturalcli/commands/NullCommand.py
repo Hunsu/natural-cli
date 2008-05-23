@@ -1,4 +1,4 @@
-
+import naturalcli
 """
   Implements a NOP command that does nothing.
   

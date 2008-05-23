@@ -1,5 +1,5 @@
-import org.naturalcli.IParameterType
 import re
+import naturalcli
 
 """
   The class implements an email parameter type.

@@ -1,3 +1,4 @@
+import naturalcli
 """
   Implements a command that outputs help information 
   to the console in HTML format.

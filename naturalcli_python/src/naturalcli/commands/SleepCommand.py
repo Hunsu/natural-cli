@@ -1,4 +1,4 @@
-
+import naturalcli
 """
   Implements a command that waits for some seconds.
   

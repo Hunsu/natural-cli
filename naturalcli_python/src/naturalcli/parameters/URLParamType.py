@@ -1,5 +1,6 @@
-import org.naturalcli.IParameterType
+import naturalcli
 import urllib
+
 """
   The class implements an URL parameter type. 
   @author Ferran Busquets 

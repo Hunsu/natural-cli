@@ -1,6 +1,5 @@
-import org.naturalcli.IParameterType
+import naturalcli
 import urllib
-
 
 """
   The class implements an URL which is validated parameter type. 

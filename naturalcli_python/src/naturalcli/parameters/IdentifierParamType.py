@@ -1,5 +1,4 @@
-
-import org.naturalcli.IParameterType
+import naturalcli
 import re
 
 """

@@ -1,3 +1,4 @@
+import naturalcli
 """
   Implements a command that executes a command list inside a file.
   
