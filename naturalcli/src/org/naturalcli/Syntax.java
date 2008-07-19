@@ -163,7 +163,7 @@ public class Syntax {
 				break;
 			boolean match = tgrammar.matches(candidates[ic], pv);
 			boolean opt = tgrammar.isOptional();
-			boolean param = tgrammar.isParameter();		
+			boolean param = tgrammar.isParameter();
 			// Validate the token
 			if (!match && !opt)
 				return null;
@@ -182,13 +182,17 @@ public class Syntax {
 			tokenGiven[it++] = match;
 			ig++;
 		}
-		// Go for the variable arguments
+		// Process the variable arguments
 		if (varargs)
 		{
+		    // Validate for the last token 
+            if (ig != grammar.size()-1)
+                throw new RuntimeException("Internal error: Varargs token have to be the last one.");         
+		    // Get token
 			tokenGiven[it] = true;
-			Token token = grammar.get(ig-1);
-			ig++;
-			// Validate
+			Token token = grammar.get(ig-1); // Token before the varargs token
+			ig++; 
+			// Validate optional
 			if (token.isOptional())
 				throw new RuntimeException("Internal error: Parameter for variable arguments cannot be optional.");			
 			// Go for values
@@ -203,13 +207,24 @@ public class Syntax {
 		// Validate ParamValuesAux
 		if (!varargs && ParamValues.size() > paramCount)
 			throw new RuntimeException("Internal error: Invalid parameter count.");
-		// Determine if the bucle is finished ok
-		if (ic == candidates.length && ig == grammar.size())
+		// If too many candidates, fail
+		if (ic != candidates.length)
+		    return null;
+		// If all the grammar is parsed, it's ok
+		if (ig == grammar.size())
 			return new ParseResult(ParamValues.toArray(), tokenGiven);
-		if (ic == candidates.length && ig == grammar.size()-1 && grammar.get(grammar.size()-1).isVarArgs())
+		// If varargs but no arguments
+		if (ig == grammar.size()-1 && grammar.get(grammar.size()-1).isVarArgs())
 			return new ParseResult(ParamValues.toArray(), tokenGiven);
-		// Not enough values o matching error 
-		return null;
+        // Validate that the following tokens on grammar are all optional
+        while (ig < grammar.size())
+        {
+            if (grammar.get(ig).isOptional())
+                ig++;
+            else
+                return null;
+        }
+        return new ParseResult(ParamValues.toArray(), tokenGiven);
 	}
 
 	/*

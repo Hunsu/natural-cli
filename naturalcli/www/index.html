@@ -45,7 +45,7 @@ It's very easy to define, only need strings like:
 <li>Very easy to use. Please, visit the <a href="examples.html">examples page</a> and the <a href="doc">Javadocs</a>.</li>
 <li>Type checking for parameters and user defined types.</li>
 <li>Optional parameters and tokens.</li>
-<li>Build-id <code>help</code> command to automatically show the commands syntax and others.</li>
+<li>Build-in <code>help</code> command to automatically show the commands syntax and others.</li>
 <li>Full tested with <a href="http://www.junit.org/">JUnit</a>.</li>
 <li>Can be done compatible with <a href="http://commons.apache.org/cli/">Apache Commons CLI</a>.</li>
 
@@ -56,10 +56,10 @@ It's very easy to define, only need strings like:
 <p>
 <b>Project</b> <a href="http://sourceforge.net/export/rss2_project.php?group_id=208949"><img border="0" src="feed-icon-14x14.png"></a>
 <ul>
-<li>This project is hosted on <a href="http://sourceforge.net/projects/naturalcli">sourceforge</a>.
-<li>For the binaries go <a href="http://sourceforge.net/project/showfiles.php?group_id=208949">here</a>.</li>
-<li>For the sources, checkout from the SVN <a href="https://naturalcli.svn.sourceforge.net/svnroot/naturalcli">repository</a>. </li>
-<li>Any <a href="http://sourceforge.net/forum/?group_id=208949">comments</a>, <a href="http://sourceforge.net/tracker/?group_id=208949&atid=1007750">bugs</a>, <a href="http://sourceforge.net/tracker/?group_id=208949&atid=1007753">feature requests</a> are welcome ;-)</li>
+<li>Download the binaries <a href="http://sourceforge.net/project/showfiles.php?group_id=208949">here</a>.</li>
+<li>Obtain the sources <a href="http://sourceforge.net/project/showfiles.php?group_id=208949">here</a> or checkout them from the SVN <a href="https://naturalcli.svn.sourceforge.net/svnroot/naturalcli">repository</a>. </li>
+<li>Any <a href="http://sourceforge.net/forum/?group_id=208949">comments</a>, <a href="http://sourceforge.net/tracker/?group_id=208949&atid=1007750">bugs</a> and <a href="http://sourceforge.net/tracker/?group_id=208949&atid=1007753">feature requests</a> are welcome ;-)</li>
+<li>The project is hosted on <a href="http://sourceforge.net/projects/naturalcli">sourceforge</a>.
 </ul>
 
 
@@ -78,7 +78,7 @@ It's very easy to define, only need strings like:
 <br>
 <li><b>Release 1.2.1</b>
 <br>
-- <a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1939488&group_id=208949&atid=1007750">BUG FIX</a>: Missing toString in Syntax class.
+- <a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1939488&group_id=208949&atid=1007750">BUG FIX</a>: Missing <code>toString()</code> override in <code>Syntax</code> class.
 <br>
 - <a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1939536&group_id=208949&atid=1007750">BUG FIX</a>: Parameter types added on 1.2 release are missing from <code>DefaultParameterTypes</code>.
 <br>
@@ -90,7 +90,13 @@ It's very easy to define, only need strings like:
 <br>
 - BUG FIX: <code>WorkingURLParameterType</code> validation is ever true.
 <br>
+<li><b>Release 1.2.2</b>
+<br>
+- <a href="http://sourceforge.net/tracker/index.php?func=detail&aid=2014505&group_id=208949&atid=1007750">BUG FIX</a>: Parsing fails if last token is optional and not given .
+<br>
 </ul>
+<br>
+<br>
 
 
 <!-- Bottom -->
@@ -99,11 +105,8 @@ It's very easy to define, only need strings like:
 
 <div align="center">
 
-<p>
-<small>(C) Copyright 2007. Ferran Busquets</small>
-<br>
-<a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=208949&amp;type=2" alt="SourceForge.net Logo" height="37" border="0" width="125" ></a>
-<br>
+<small>(C) Copyright 2007-2008. Ferran Busquets</small>
+<p valign="center">ferranb@users.<a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=208949&amp;type=2" alt="SourceForge.net Logo" height="37" border="0" width="125" ></a></p>
 </div>
 
 <script src="http://www.google-analytics.com/urchin.js" type="text/javascript">

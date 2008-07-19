@@ -81,6 +81,7 @@ public class SyntaxTest {
 		
 	}
 	
+
 	/**
 	 * Test method for {@link org.naturalcli.Syntax#parse(java.lang.String[], int, org.naturalcli.ParameterValidator)}.
 	 * @throws InvalidSyntaxException 
@@ -91,8 +92,8 @@ public class SyntaxTest {
 	@SuppressWarnings("deprecation")
 	@Test
 	public final void testParse() throws UnknownParameterType, InvalidSyntaxException {
-		String s;
-		ParseResult pr;
+		String s; // Current syntax definition
+		ParseResult pr; // Current parse result
 		// 
 		s = "marian is the best";
 		pr = new Syntax(s).parse(new String[] { "marian", "is", "the", "best"}, 0, pv); 
@@ -165,7 +166,7 @@ public class SyntaxTest {
 		s = "marian is the <integer> ...";
 		pr = new Syntax(s).parse(new String[] { "marian", "is", "the", "1" }, 0, pv); 
 		  assertNotNull(pr);
-		  assertEquals(1, pr.getParameterCount());
+    	  assertEquals(1, pr.getParameterCount());
 		  assertTrue(Arrays.equals(new Object[] { 1 }, pr.getParameterValues()));
 		  assertTrue(Arrays.equals(new boolean[] { true, true, true, true, false }, pr.getTokensGiven()));		  
 		pr = new Syntax(s).parse(new String[] { "marian", "is", "the", "1", "2"}, 0, pv); 
@@ -178,6 +179,60 @@ public class SyntaxTest {
 		  assertEquals(3, pr.getParameterCount());
 		  assertTrue(Arrays.equals(new Object[] { 1, 2, 3 }, pr.getParameterValues()));
 		  assertTrue(Arrays.equals(new boolean[] { true, true, true, true, true }, pr.getTokensGiven()));		  
+        //
+        s = "marian is the best [woman]";
+        pr = new Syntax(s).parse(new String[] { "marian", "is", "the", "best", "woman" }, 0, pv); 
+          assertNotNull(pr);
+          assertEquals(0, pr.getParameterCount());
+          assertEquals(0, pr.getParameterValues().length);
+          assertTrue(Arrays.equals(new boolean[] { true, true, true, true, true }, pr.getTokensGiven()));        
+        pr = new Syntax(s).parse(new String[] { "marian", "is", "the", "best" }, 0, pv); 
+          assertNotNull(pr);
+          assertEquals(0, pr.getParameterCount());
+          assertEquals(0, pr.getParameterValues().length);
+          assertTrue(Arrays.equals(new boolean[] { true, true, true, true, false }, pr.getTokensGiven()));        
+        //
+        s = "marian [is] [the] [best]";
+        pr = new Syntax(s).parse(new String[] { "marian", "is", "the", "best" }, 0, pv); 
+          assertNotNull(pr);  
+          assertEquals(0, pr.getParameterCount());
+          assertEquals(0, pr.getParameterValues().length);
+          assertTrue(Arrays.equals(new boolean[] {true, true, true, true}, pr.getTokensGiven()));
+        pr = new Syntax(s).parse(new String[] { "marian", "is", "the"         }, 0, pv); 
+          assertNotNull(pr);  
+          assertEquals(0, pr.getParameterCount());
+          assertEquals(0, pr.getParameterValues().length); 
+          assertTrue(Arrays.equals(new boolean[] {true, true, true, false }, pr.getTokensGiven()));
+        pr = new Syntax(s).parse(new String[] { "marian", "is",        "best" }, 0, pv); 
+          assertNotNull(pr);  
+          assertEquals(0, pr.getParameterCount());
+          assertEquals(0, pr.getParameterValues().length);
+          assertTrue(Arrays.equals(new boolean[] {true, true, false, true}, pr.getTokensGiven()));
+        pr = new Syntax(s).parse(new String[] { "marian", "is",               }, 0, pv); 
+          assertNotNull(pr);  
+          assertEquals(0, pr.getParameterCount());
+          assertEquals(0, pr.getParameterValues().length);
+          assertTrue(Arrays.equals(new boolean[] {true, true, false, false}, pr.getTokensGiven()));
+        pr = new Syntax(s).parse(new String[] { "marian",       "the", "best" }, 0, pv); 
+          assertNotNull(pr);  
+          assertEquals(0, pr.getParameterCount());
+          assertEquals(0, pr.getParameterValues().length);
+          assertTrue(Arrays.equals(new boolean[] {true, false, true, true}, pr.getTokensGiven()));
+        pr = new Syntax(s).parse(new String[] { "marian",       "the"         }, 0, pv); 
+          assertNotNull(pr);  
+          assertEquals(0, pr.getParameterCount());
+          assertEquals(0, pr.getParameterValues().length);
+          assertTrue(Arrays.equals(new boolean[] {true, false, true, false}, pr.getTokensGiven()));
+        pr = new Syntax(s).parse(new String[] { "marian",              "best" }, 0, pv); 
+          assertNotNull(pr);  
+          assertEquals(0, pr.getParameterCount());
+          assertEquals(0, pr.getParameterValues().length);
+          assertTrue(Arrays.equals(new boolean[] {true, false, false, true}, pr.getTokensGiven()));
+        pr = new Syntax(s).parse(new String[] { "marian",                     }, 0, pv); 
+          assertNotNull(pr);  
+          assertEquals(0, pr.getParameterCount());
+          assertEquals(0, pr.getParameterValues().length); 
+          assertTrue(Arrays.equals(new boolean[] {true, false, false, false}, pr.getTokensGiven()));
 	}
 
 

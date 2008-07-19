@@ -36,7 +36,7 @@ public class NaturalCLIDemo {
               
     public static synchronized void main(String args[])
     {
-    	// example1(new String[] { "execute file " });
+        bug1939488(new String[] { "help" });
     }
     
 
@@ -307,4 +307,31 @@ public class NaturalCLIDemo {
 		}
     }    
     
+    public static void bug1939488(String args[])
+    {
+        try { 
+         // Create the set for the commands 
+         Set<Command> cs = new HashSet<Command>(); 
+          
+         // Create the commands 
+         cs.add(new HelpCommand(cs)); 
+         cs.add(new Command("hello world", 
+         "Says hello.", 
+         new ICommandExecutor () 
+         { public void execute(ParseResult pr ) 
+         { System.out.println("Hello world!"); } 
+         } 
+         )); 
+          
+         // Execute 
+         new NaturalCLI(cs).execute(args); 
+          
+         } catch (ExecutionException e) { 
+         // TODO Auto-generated catch block 
+         e.printStackTrace(); 
+         } catch (InvalidSyntaxException e) { 
+         // TODO Auto-generated catch block 
+         e.printStackTrace(); 
+         }         
+    }
 }
