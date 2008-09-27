@@ -8,20 +8,56 @@
 
 <body>
 
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-3026892-1";
+urchinTracker();
+</script>
+
+<p style="font-size:small">
+<a href="index.html" onClick="javascript: pageTracker._trackPageview('/links/index/examples');">Natural CLI home</a> | 
+<a href="http://sourceforge.net/project/showfiles.php?group_id=208949" onClick="javascript: pageTracker._trackPageview('/links/download/examples');">Downloads</a> | 
+Examples | 
+<a href="changelog.html" onClick="javascript: pageTracker._trackPageview('/links/changelog/examples');">Changelog</a> | 
+<a href="doc" onClick="javascript: pageTracker._trackPageview('/links/javadocs/examples');">Javadocs</a> | 
+<a href="http://sourceforge.net/forum/?group_id=208949" onClick="javascript: pageTracker._trackPageview('/links/comments/examples');">Comments</a> |
+<a href="http://sourceforge.net/tracker/?group_id=208949&atid=1007750" onClick="javascript: pageTracker._trackPageview('/links/bugs/examples');">Bugs</a> |
+<a href="http://sourceforge.net/tracker/?group_id=208949&atid=1007753" onClick="javascript: pageTracker._trackPageview('/links/featurerequests/examples');">Feature requests</a>
+<p>
+
 <h1>Natural CLI - Examples</h1>
 
+<a name="EXAMPLE_LIST">List of examples:</a>
 <p>
-If you are looking for the main page of <b>Natural CLI</b>, please go <a href="index.html">here</a>.
-<br><br>To understand better the code, please check the <a href="doc">Javadoc</a>.
-<br><br>Any <a href="http://sourceforge.net/forum/?group_id=208949">comments</a>, <a href="http://sourceforge.net/tracker/?group_id=208949&atid=1007750">bugs</a>, <a href="http://sourceforge.net/tracker/?group_id=208949&atid=1007753">feature requests</a> are welcome ;-)
+
+<ul>
+<li><b>-<a href="#EXAMPLE1">Example 1</a></b>: The first two commands: <i>A Hello world!</i> command and show date command.</li>
+<li><b>-<a href="#EXAMPLE2">Example 2</a></b>: A command with a parameter.</li>
+<li><b>-<a href="#EXAMPLE3">Example 3</a></b>: A command with an optional parameter.</li>
+<li><b>-<a href="#EXAMPLE4">Example 4</a></b>: An user defined type.</li>
+<li><b>-<a href="#EXAMPLE5">Example 5</a></b>: Variable parameter values number.</li>
+<li><b>-Example 6</b>: ... Ups, not yet! If you want any  other example, please request it <a href="http://sourceforge.net/forum/?group_id=208949" onClick="javascript: pageTracker._trackPageview('/links/examplerequests/examples');">here</a>!</li>
+</ul>
+<p>
+
+<br>
+<br>
+<br>
+<br>
 
 
 
-<br><br>If you are looking for the binaries go <a href="http://sourceforge.net/project/showfiles.php?group_id=208949">here</a>.<p>
-<b>Example 1.</b> The first two commands.<br>
+
+<hr>
+
+<a name="EXAMPLE1">
+<b>Example 1.</b> The first two commands: <i>A Hello world!</i> command and show date command.</li>.<br>
+</a>
 <i>
 This example creates two simple commands with a very easy syntax.
 </i>
+
 <pre>
 
   <i>// Create the commands
@@ -56,8 +92,14 @@ This example creates two simple commands with a very easy syntax.
        
 </pre>
 
+<br>
+Return to example <a href="#EXAMPLE_LIST">index</a>!
+<hr>
+
 <p>
+<a name="EXAMPLE2">
 <b>Example 2</b>. A command with a parameter.<br>
+</a>
 <i>
 The parameters are typed and you can define your own type also. 
 A parameter can have a type name or a type name with a parameter name to be
@@ -87,8 +129,15 @@ shown when showing the help.
        
 </pre>
 
+<br>
+Return to example <a href="#EXAMPLE_LIST">index</a>!
+<hr>
+
+
 <p>
+<a name="EXAMPLE3">
 <b>Example 3</b>. A command with optional parameter.<br>
+</a>
 <i>
 Defining optional parameters the command lines are more powerful.
 </i>
@@ -114,8 +163,15 @@ Defining optional parameters the command lines are more powerful.
 
 </pre>
 
+<br>
+Return to example <a href="#EXAMPLE_LIST">index</a>!
+<hr>
+
+
 <p>
+<a name="EXAMPLE4">
 <b>Example 4</b>. An user defined type.<br>
+</a>
 <i>
 It's possible to define your own types to extend the parameter type and value checking.
 </i>
@@ -168,8 +224,15 @@ It's possible to define your own types to extend the parameter type and value ch
 
 </pre>
 
+<br>
+Return to example <a href="#EXAMPLE_LIST">index</a>!
+<hr>
+
+
 <p>
-<b>Example 5</b>. The default commands.<br>
+<a name="EXAMPLE5">
+<b>Example 5</b>. Using the default commands.<br>
+</a>
 <i>
 There are default commands that you can use. Help commands o be able
 to output the command possibilities, execute a file with a list of
@@ -195,8 +258,15 @@ commands, ...
     
 </pre>
 
+<br>
+Return to example <a href="#EXAMPLE_LIST">index</a>!
+<hr>
+
+
 <p>
+<a name="EXAMPLE6">
 <b>Example 6</b>. Variable parameter values number.<br>
+</a>
 <i>
 For the last parameter (and token) it's possible to define it tp get variable values number.  
 
@@ -228,8 +298,9 @@ For the last parameter (and token) it's possible to define it tp get variable va
     
 </i></pre>
 
-<p>
-<b>Example of...</b>. If you want any  other example, please request it <a href="http://sourceforge.net/forum/?group_id=208949">here</a>!
+<br>
+Return to example <a href="#EXAMPLE_LIST">index</a>!
+<hr>
 
 
 <!-- Bottom -->
@@ -239,15 +310,8 @@ For the last parameter (and token) it's possible to define it tp get variable va
 <div align="center">
 
 <small>(C) Copyright 2007-2008. Ferran Busquets</small>
-<p valign="center">ferranb@users.<a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=208949&amp;type=2" alt="SourceForge.net Logo" height="37" border="0" width="125" ></a></p>
+<p valign="center">ferranb@users.<a href="http://sourceforge.net" onClick="javascript: pageTracker._trackPageview('/links/sflogo/examples');"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=208949&amp;type=2" alt="SourceForge.net Logo" height="37" border="0" width="125" ></a></p>
 </div>
-
-<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
-</script>
-<script type="text/javascript">
-_uacct = "UA-3026892-1";
-urchinTracker();
-</script>
 
 </body>
 </html>
