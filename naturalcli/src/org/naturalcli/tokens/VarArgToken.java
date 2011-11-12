@@ -51,21 +51,21 @@ public class VarArgToken extends Token {
      * @see org.naturalcli.tokens.Token#validateTokenAfter(org.naturalcli.tokens.Token)
      */
     @Override
-    public String validateFollowing(Token t) {
+    protected void validateFollowing(Token t) throws InvalidTokenException {
         if (t != null)
-            return "Variable arguments token only allowed at the end.";
-        return super.validateFollowing(t);
+            throw new InvalidTokenException("Variable arguments token only allowed at the end.");
+        super.validateFollowing(t);
     }
 
     /* (non-Javadoc)
      * @see org.naturalcli.tokens.Token#validateTokenBefore(org.naturalcli.tokens.Token)
      */
     @Override
-    public String validatePreceding(Token t) {   
+    protected void validatePreceding(Token t) throws InvalidTokenException {   
         ParameterToken pt = (ParameterToken) t; 
         if (pt == null || !t.isMandatory())
-            return "Variable arguments have to follow a mandatory parameter.";        
-        return super.validatePreceding(t);
+            throw new InvalidTokenException("Variable arguments have to follow a mandatory parameter.");        
+        super.validatePreceding(t);
     }
 
     /* (non-Javadoc)

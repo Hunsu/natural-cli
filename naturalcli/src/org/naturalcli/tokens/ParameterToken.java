@@ -31,7 +31,7 @@ public class ParameterToken extends Token {
 
     private String parameter_name;
     private String parameter_type;
-    private ParameterValidator parameter_validator;
+    private ParameterValidator validator;
 
     public ParameterToken(String text) throws InvalidTokenException {
         super(text);
@@ -39,9 +39,23 @@ public class ParameterToken extends Token {
 
     public ParameterToken(String text, ParameterValidator pv) throws InvalidTokenException {
         super(text);
-        parameter_validator = pv;
+        validator = pv;
     }
     
+    /**
+     * @return the validator
+     */
+    public ParameterValidator getValidator() {
+        return validator;
+    }
+
+    /**
+     * @param validator the validator to set
+     */
+    public void setValidator(ParameterValidator validator) {
+        this.validator = validator;
+    }
+
     /* (non-Javadoc)
      * @see org.naturalcli.tokens.Token#setText(java.lang.String)
      */
@@ -68,23 +82,25 @@ public class ParameterToken extends Token {
 
     @Override
     public boolean matches(String text) {
+        return this.matches(text, this.validator);
+    }
+
+    public boolean matches(String text, ParameterValidator validator) {
         try {
-            return parameter_validator.validate(text, parameter_type) == null;
+            return validator.validate(text, parameter_type) == null;
         } catch (UnknownParameterType e) {
             throw new RuntimeException("Cannot match parameter", e);
         }
-    }
-
+    }    
     /* (non-Javadoc)
      * @see org.naturalcli.tokens.Token#validateTokenBefore(org.naturalcli.tokens.Token)
      */
     @Override
-    public String validatePreceding(Token t) {
+    protected void validatePreceding(Token t) throws InvalidTokenException {
         ParameterToken pt = (ParameterToken) t; 
         if (pt.isOptional() && pt.parameter_type.equalsIgnoreCase(this.getParameterType()))
-          return "An optional parameter cannot be followed by a parameter of the same type.";
-        // TODO Auto-generated method stub
-        return super.validatePreceding(t);
+          throw new InvalidTokenException("An optional parameter cannot be followed by a parameter of the same type.");
+        super.validatePreceding(t);
     }
 
     /**

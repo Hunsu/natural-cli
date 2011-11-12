@@ -21,7 +21,6 @@ package org.naturalcli;
 
 import java.util.LinkedList;
 import java.util.List;
-import org.naturalcli.tokens.*;
 
 
 /**
@@ -84,33 +83,39 @@ public class Syntax {
 	{
 		grammar = new LinkedList<Token>();
 		String[] tokens = definition.split(" "); 
-		Token prec_t = null;
+		Token last_t = null;
    		for (int i = 0; i < tokens.length ; i++)
    		{
    			String s = tokens[i];
    			// Create the token
    			Token t;
 			try {
-				t = TokenFactory.getToken(s);
-				t.setPreceding(prec_t);
+				t = new Token(s);
 			} catch (InvalidTokenException e) {
 				throw new InvalidSyntaxException("Bad token.", e);
 			}
+			// Validating the variable argument token
+			if (t.isVarArgs())
+			{
+				if (last_t == null || i != tokens.length-1)
+					throw new InvalidSyntaxException("Variable arguments token only allowed at the end.");
+				if (!last_t.isMandatoryParameter())
+					throw new InvalidSyntaxException("Variable arguments have to follow a mandatory parameter.");
+			}
+			// Validating optional parameters
+   			if (t.isParameter() && last_t != null && last_t.isOptional() && 
+   			    t.getParameterTypeName().equals(last_t.getParameterTypeName()))
+   			{
+   				throw new InvalidSyntaxException("An optional parameter cannot be followed by a parameter of the same type.");
+   			}
    			// Add the token
    			grammar.add(t);
    			// 
-   			if (t instanceof ParameterToken)
+   			if (t.isParameter())
    				paramCount++;
    			//    			
-   			prec_t = t;
+   			last_t = t;
    		}
-   		// Validate that the last can be a last token
-   		if (prec_t != null)
-   		    try {
-   		        prec_t.validateFollowing(null);
-   		    } catch (InvalidTokenException e) {
-                throw new InvalidSyntaxException("Bad token.", e);
-   		    }
 	} 
 	
 	/**

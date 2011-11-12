@@ -88,11 +88,9 @@ abstract public class Token {
      * 
      * @param t the preceding token
      */
-    public void setPreceding(Token t)
+    public void setPreceding(Token t) throws InvalidTokenException
     {
         this.preceding = t;
-        if (this.preceding != null)
-            this.preceding.validateFollowing(this);
         this.validatePreceding(this.preceding);
     }
 
@@ -101,12 +99,10 @@ abstract public class Token {
      * 
      * @param t the following token
      */
-    public void setFollowing(Token t)
+    public void setFollowing(Token t) throws InvalidTokenException
     {
         this.following = t;
         this.validateFollowing(this.following);
-        if (this.following != null)
-            this.following.validatePreceding(this);
     }
         
     /**
@@ -154,9 +150,9 @@ abstract public class Token {
      * @return <code>null</code> if its compatible or the error messag
      *         about the incompatibility
      */
-    protected String validatePreceding(Token t) 
+    @SuppressWarnings("unused")
+    protected void validatePreceding(Token t) throws InvalidTokenException
     {
-        return null;   
     }
 
     /**
@@ -166,9 +162,9 @@ abstract public class Token {
      * @return <code>null</code> if its compatible or the error messag
      *         about the incompatibility
      */
-    protected String validateFollowing(Token t) 
+    @SuppressWarnings("unused")
+    protected void validateFollowing(Token t) throws InvalidTokenException 
     {
-        return null;   
     }
 
     /**
