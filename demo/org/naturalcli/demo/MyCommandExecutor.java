@@ -1,4 +1,4 @@
-/* 
+/*
  * MyCommandExecutor.java
  *
  * Copyright (C) 2007 Ferran Busquets
@@ -23,11 +23,11 @@ import org.naturalcli.ICommandExecutor;
 
 abstract public class MyCommandExecutor implements ICommandExecutor {
 
-	protected int myvalue;
+    protected int myvalue;
 
-	public MyCommandExecutor(int value)
-	{
-		this.myvalue = value;
-	}
-	
+    public MyCommandExecutor(int value)
+    {
+        this.myvalue = value;
+    }
+    
 }

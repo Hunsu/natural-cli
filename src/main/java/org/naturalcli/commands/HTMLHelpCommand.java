@@ -1,4 +1,4 @@
-/* 
+/*
  * HelpCommand.java
  *
  * Copyright (C) 2007 Ferran Busquets
@@ -6,9 +6,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,29 +25,29 @@ import org.naturalcli.InvalidSyntaxException;
 
 
 /**
- * Implements a command that outputs help information 
+ * Implements a command that outputs help information
  * to the console in HTML format.
- * 
+ *
  * @see HTMLHelpCommandExecutor
  * @author Ferran Busquets
  */
 public class HTMLHelpCommand extends Command {
 
-	/**
-	 * Constructor.
-	 * @param commands the set of commands for the help
-	 */	
-	public HTMLHelpCommand(Set<Command> commands) 
-	{
-		try {
-			prepare("htmlhelp", "Shows the commands help on HTML format.",
-					new HTMLHelpCommandExecutor(commands)
-			);
-		} catch (InvalidSyntaxException e) {
-			throw new RuntimeException(e);
-		}
-	}
-	
-	
+    /**
+     * Constructor.
+     * @param commands the set of commands for the help
+     */
+    public HTMLHelpCommand(Set<Command> commands)
+    {
+        try {
+            prepare("htmlhelp", "Shows the commands help on HTML format.",
+                    new HTMLHelpCommandExecutor(commands)
+            );
+        } catch (InvalidSyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    
 
 }

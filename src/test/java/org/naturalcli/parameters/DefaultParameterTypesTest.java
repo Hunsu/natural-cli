@@ -1,4 +1,4 @@
-/* 
+/*
  * DefaultParameterTypesTest.java
  *
  * Copyright (C) 2007 Ferran Busquets
@@ -33,13 +33,13 @@ import org.naturalcli.IParameterType;
  */
 public class DefaultParameterTypesTest extends TestCase {
 
-	/**
-	 * Test method for {@link org.naturalcli.parameters.DefaultParameterTypes#createSet()}.
-	 */
-	@Test
-	public void testCreateSet()
-	{
-		Set<IParameterType> s = DefaultParameterTypes.createSet();
-		Assert.assertTrue("Bad size for default set", s.size() >0);
-	}
+    /**
+     * Test method for {@link org.naturalcli.parameters.DefaultParameterTypes#createSet()}.
+     */
+    @Test
+    public void testCreateSet()
+    {
+        Set<IParameterType> s = DefaultParameterTypes.createSet();
+        Assert.assertTrue("Bad size for default set", s.size() >0);
+    }
 }

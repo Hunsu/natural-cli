@@ -1,4 +1,4 @@
-/* 
+/*
  * ParameterValidatorTest.java
  *
  * Copyright (C) 2007 Ferran Busquets
@@ -29,31 +29,31 @@ import org.naturalcli.ParameterValidator;
  */
 public class ParameterValidatorTest {
 
-	/**
-	 * Test method for {@link org.naturalcli.ParameterValidator#validate(java.lang.String, java.lang.String)}.
-	 */
-	@Test
-	public final void testValidate() {
-		ParameterValidator pv = new ParameterValidator();
-		try {
-			// Right 
-			Assert.assertNull(pv.validate("test@test.afdf", "email"));
-			Assert.assertNull(pv.validate("hello", "identifier"));
-			Assert.assertNull(pv.validate("1234", "integer"));
-			Assert.assertNull(pv.validate("asdadsa", "string"));
-			// Bad 
-			Assert.assertNotNull(pv.validate("", "email"));
-			Assert.assertNotNull(pv.validate("hello", "email"));
-			Assert.assertNotNull(pv.validate("1234", "email"));
-			Assert.assertNotNull(pv.validate("", "identifier"));
-			Assert.assertNotNull(pv.validate("test@test.afdf", "identifier"));
-			Assert.assertNotNull(pv.validate("1234", "identifier"));
-			Assert.assertNotNull(pv.validate("", "integer"));
-			Assert.assertNotNull(pv.validate("hello", "integer"));
-			Assert.assertNotNull(pv.validate("test@test.afdf", "integer"));
-		} catch (Exception e) {
-			Assert.fail();
-		}
-	}
+    /**
+     * Test method for {@link org.naturalcli.ParameterValidator#validate(java.lang.String, java.lang.String)}.
+     */
+    @Test
+    public final void testValidate() {
+        ParameterValidator pv = new ParameterValidator();
+        try {
+            // Right
+            Assert.assertNull(pv.validate("test@test.afdf", "email"));
+            Assert.assertNull(pv.validate("hello", "identifier"));
+            Assert.assertNull(pv.validate("1234", "integer"));
+            Assert.assertNull(pv.validate("asdadsa", "string"));
+            // Bad
+            Assert.assertNotNull(pv.validate("", "email"));
+            Assert.assertNotNull(pv.validate("hello", "email"));
+            Assert.assertNotNull(pv.validate("1234", "email"));
+            Assert.assertNotNull(pv.validate("", "identifier"));
+            Assert.assertNotNull(pv.validate("test@test.afdf", "identifier"));
+            Assert.assertNotNull(pv.validate("1234", "identifier"));
+            Assert.assertNotNull(pv.validate("", "integer"));
+            Assert.assertNotNull(pv.validate("hello", "integer"));
+            Assert.assertNotNull(pv.validate("test@test.afdf", "integer"));
+        } catch (Exception e) {
+            Assert.fail();
+        }
+    }
 
 }

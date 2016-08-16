@@ -1,4 +1,4 @@
-/* 
+/*
  * ExecutionException.java
  *
  * Copyright (C) 2007 Ferran Busquets
@@ -6,9 +6,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,37 +21,37 @@ package org.naturalcli;
 
 /**
  * Thrown when something unexpected happens executing a command.
- * 
+ *
  * @author Ferran Busquets
  */
 @SuppressWarnings("serial")
 public class ExecutionException extends Exception {
 
-	/* (non-Javadoc)
-	 * @see java.lang.Exception#Exception()
-	 */
-	public ExecutionException() {
-	}
+    /* (non-Javadoc)
+     * @see java.lang.Exception#Exception()
+     */
+    public ExecutionException() {
+    }
 
-	/* (non-Javadoc)
-	 * @see java.lang.Exception#Exception(String)
-	 */
-	public ExecutionException(String message) {
-		super(message);
-	}
+    /* (non-Javadoc)
+     * @see java.lang.Exception#Exception(String)
+     */
+    public ExecutionException(String message) {
+        super(message);
+    }
 
-	/* (non-Javadoc)
-	 * @see java.lang.Exception#Exception(Throwable)
-	 */
-	public ExecutionException(Throwable cause) {
-		super(cause);
-	}
+    /* (non-Javadoc)
+     * @see java.lang.Exception#Exception(Throwable)
+     */
+    public ExecutionException(Throwable cause) {
+        super(cause);
+    }
 
-	/* (non-Javadoc)
-	 * @see java.lang.Exception#Exception(String, Throwable)
-	 */
-	public ExecutionException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    /* (non-Javadoc)
+     * @see java.lang.Exception#Exception(String, Throwable)
+     */
+    public ExecutionException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
 }

@@ -15,21 +15,21 @@ import org.naturalcli.commands.NullCommandExecutor;
  */
 public class CommandTest {
 
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-	}
+    /**
+     * @throws java.lang.Exception
+     */
+    @Before
+    public void setUp() throws Exception {
+    }
 
-	/**
-	 * Test method for {@link org.naturalcli.Command#isHidden()}.
-	 * @throws InvalidSyntaxException 
-	 */
-	@Test
-	public final void testIsHidden() throws InvalidSyntaxException {
-		assertTrue(new Command("marian is the best", ". Hello world", new NullCommandExecutor()).isHidden());
-		assertFalse(new Command("marian is the best", "Hello world", new NullCommandExecutor()).isHidden());
-	}
+    /**
+     * Test method for {@link org.naturalcli.Command#isHidden()}.
+     * @throws InvalidSyntaxException
+     */
+    @Test
+    public final void testIsHidden() throws InvalidSyntaxException {
+        assertTrue(new Command("marian is the best", ". Hello world", new NullCommandExecutor()).isHidden());
+        assertFalse(new Command("marian is the best", "Hello world", new NullCommandExecutor()).isHidden());
+    }
 
 }

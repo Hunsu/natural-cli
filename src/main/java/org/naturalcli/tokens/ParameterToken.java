@@ -1,4 +1,4 @@
-/* 
+/*
  * ParameterToken.java
  *
  * Copyright (C) 2007 Ferran Busquets
@@ -6,9 +6,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -60,7 +60,7 @@ public class ParameterToken extends Token {
      */
     @Override
     public void setText(String text) throws InvalidTokenException {
-        super.setText(text);        
+        super.setText(text);
         int i = text.indexOf(":");
         if (i == -1)
         {
@@ -90,13 +90,13 @@ public class ParameterToken extends Token {
         } catch (UnknownParameterType e) {
             throw new RuntimeException("Cannot match parameter", e);
         }
-    }    
+    }
     /* (non-Javadoc)
      * @see org.naturalcli.tokens.Token#validateTokenBefore(org.naturalcli.tokens.Token)
      */
     @Override
     protected void validatePreceding(Token t) throws InvalidTokenException {
-        ParameterToken pt = (ParameterToken) t; 
+        ParameterToken pt = (ParameterToken) t;
         if (pt.isOptional() && pt.parameter_type.equalsIgnoreCase(this.getParameterType()))
           throw new InvalidTokenException("An optional parameter cannot be followed by a parameter of the same type.");
         super.validatePreceding(t);
