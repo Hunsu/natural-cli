@@ -2,11 +2,11 @@
     Initial release!
 
 1.1
-    BUG FIX: Renamed InvalidSyntaxDefinionException to InvalidSyntaxException. 
-    NEW FEATURE: Variable parameter values number for the last one. For examples, go to the examples page. 
+    BUG FIX: Renamed InvalidSyntaxDefinionException to InvalidSyntaxException.
+    NEW FEATURE: Variable parameter values number for the last one. For examples, go to the examples page.
 
 1.2
-    NEW FEATURE: Added more predefined parameter types: working_url, url, byte, short, long, double, float, hexadecimal, octal and binary. 
+    NEW FEATURE: Added more predefined parameter types: working_url, url, byte, short, long, double, float, hexadecimal, octal and binary.
 
 1.2.1
     BUG FIX: Missing toString in Syntax class
@@ -25,4 +25,3 @@
 
 
 
-       
