@@ -25,7 +25,7 @@ import org.naturalcli.InvalidTokenException;
  *
  */
 public class TokenFactory {
-    
+
    public static Token getToken(String text) throws InvalidTokenException
    {
        Token t;

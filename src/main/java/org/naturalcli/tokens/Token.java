@@ -29,15 +29,15 @@ import org.naturalcli.InvalidTokenException;
 abstract public class Token {
 
     private Token preceding = null;
-    
+
     private Token following = null;
-    
+
     /** Texts giving sense to the token */
     private String text;
 
     /** Texts giving sense to the token */
     private String text_without_optional;
-    
+
     /** If the token is optional */
     private boolean optional;
 
@@ -50,7 +50,7 @@ abstract public class Token {
     public Token(String text) throws InvalidTokenException {
         this.setText(text);
     }
-        
+
     /**
      * Get the token text
      *
@@ -60,7 +60,7 @@ abstract public class Token {
     public String getText() {
         return text;
     }
-    
+
     /**
      * Set the token text and validate it
      * @param text the token text to set
@@ -80,8 +80,8 @@ abstract public class Token {
         else
             text_without_optional = text;
     }
-    
-    
+
+
     /**
      * Sets the preceding token and runs validations.
      *
@@ -103,7 +103,7 @@ abstract public class Token {
         this.following = t;
         this.validateFollowing(this.following);
     }
-        
+
     /**
      * @return the text_without_optional
      */
@@ -127,7 +127,7 @@ abstract public class Token {
     public boolean isMandatory() {
         return !isOptional();
     }
-    
+
     /**
      * Determines if the string matches the token
      *
@@ -135,7 +135,7 @@ abstract public class Token {
      * @return <code>true</code> if its optional, <code>false</code> otherwise
      */
     abstract public boolean matches(String text);
-    
+
     /**
      *
      * @return
@@ -175,5 +175,5 @@ abstract public class Token {
     {
         return false;
     }
-    
+
 }

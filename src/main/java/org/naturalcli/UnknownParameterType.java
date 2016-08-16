@@ -26,8 +26,8 @@ package org.naturalcli;
 
 @SuppressWarnings("serial")
 public class UnknownParameterType extends Exception {
-    
-    
+
+
     /**
      * Creates a new instance of ParameterTypeException
      * @param m Exception message

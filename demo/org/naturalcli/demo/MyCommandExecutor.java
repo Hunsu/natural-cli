@@ -29,5 +29,5 @@ abstract public class MyCommandExecutor implements ICommandExecutor {
     {
         this.myvalue = value;
     }
-    
+
 }

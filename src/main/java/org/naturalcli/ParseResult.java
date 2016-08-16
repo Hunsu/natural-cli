@@ -25,10 +25,10 @@ package org.naturalcli;
  * @author Ferran Busquets
  */
 public class ParseResult {
-    
+
     /** Parameters values **/
     private Object[] parameterValues;
-    
+
     /** Tokens given **/
     private boolean[] tokensGiven;
 
@@ -72,7 +72,7 @@ public class ParseResult {
     {
         return this.parameterValues.clone();
     }
-    
+
     /**
      * Get the number of all possible parameters
      *
@@ -82,7 +82,7 @@ public class ParseResult {
     {
         return this.parameterValues.length;
     }
-        
+
     /**
      * Get if the token is given or not.
      *
@@ -95,7 +95,7 @@ public class ParseResult {
     {
         return this.tokensGiven[tokenIndex];
     }
-    
+
     /**
      * Get a copy of the tokens given.
      *
@@ -105,5 +105,5 @@ public class ParseResult {
     {
         return this.tokensGiven.clone();
     }
-    
+
 }

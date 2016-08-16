@@ -32,12 +32,12 @@ public class Command {
 
     /** Command executor */
     private ICommandExecutor executor;
-    
+
     /** Syntax definition  */
     private Syntax syntax;
 
     private final char CHAR_HIDDEN_COMMAND = '.';
-    
+
     /**
      * Constructs a new command.
      *
@@ -55,7 +55,7 @@ public class Command {
      */
     protected Command() {
     }
-    
+
     /**
      * Initialize the command.
      *
@@ -74,7 +74,7 @@ public class Command {
         this.syntax = new Syntax(syntax);
         this.executor = ce;
     }
-    
+
     /**
      * Determine if this is a hidden command.
      *

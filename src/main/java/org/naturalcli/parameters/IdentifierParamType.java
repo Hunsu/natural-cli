@@ -60,5 +60,5 @@ public class IdentifierParamType implements IParameterType {
     public Object convertParameterValue(String strRepresentation) {
         return strRepresentation;
     }
-        
+
 }

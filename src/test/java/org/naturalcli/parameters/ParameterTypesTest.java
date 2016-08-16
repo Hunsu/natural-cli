@@ -13,7 +13,7 @@ public class ParameterTypesTest {
         Assert.assertFalse(new BinaryParamType().validateParameter("1234"));
         Assert.assertFalse(new BinaryParamType().validateParameter("marian"));
     }
-    
+
     @Test
     public final void testByteParamType()  {
         // Right
@@ -23,8 +23,8 @@ public class ParameterTypesTest {
         Assert.assertFalse(new ByteParamType().validateParameter("1.2"));
         Assert.assertFalse(new ByteParamType().validateParameter("marian"));
     }
-    
-    
+
+
     @Test
     public final void testDoubleParamType()  {
         // Right
@@ -34,7 +34,7 @@ public class ParameterTypesTest {
         // Bad
         Assert.assertFalse(new DoubleParamType().validateParameter("sasd123.2"));
     }
-    
+
     @Test
     public final void testEmailParamType()  {
         // Right
@@ -49,9 +49,9 @@ public class ParameterTypesTest {
         Assert.assertFalse(new EmailParamType().validateParameter("asdasd@"));
         Assert.assertFalse(new EmailParamType().validateParameter("asdasd"));
         Assert.assertFalse(new EmailParamType().validateParameter("asdasd@sadasd"));
-        
+
     }
-    
+
     @Test
     public final void testFileParamType()  {
         Assert.assertFalse(new FileParamType().validateParameter("marian.pau.margaret"));
@@ -60,7 +60,7 @@ public class ParameterTypesTest {
         else // unix
             Assert.assertTrue(new FileParamType().validateParameter("//tmp"));*/
     }
-    
+
     @Test
     public final void testFloatParamType()  {
         // Right
@@ -71,7 +71,7 @@ public class ParameterTypesTest {
         Assert.assertFalse(new FloatParamType().validateParameter("sasd123.2"));
         Assert.assertFalse(new FloatParamType().validateParameter(new Double(Double.MAX_VALUE).toString()));
     }
-    
+
     @Test
     public final void testHexadecimalParamType()  {
         // Right
@@ -81,7 +81,7 @@ public class ParameterTypesTest {
         Assert.assertFalse(new HexadecimalParamType().validateParameter("1234567890.1234567890"));
         Assert.assertFalse(new HexadecimalParamType().validateParameter("sasd123.2"));
     }
-    
+
     @Test
     public final void testIdentifierParamType()  {
         // Right
@@ -97,7 +97,7 @@ public class ParameterTypesTest {
         Assert.assertFalse(new IdentifierParamType().validateParameter("asdad.asdasda"));
         Assert.assertFalse(new IdentifierParamType().validateParameter("_asdsada"));
     }
-    
+
     @Test
     public final void testIntegerParamType()  {
         // Right
@@ -107,7 +107,7 @@ public class ParameterTypesTest {
         Assert.assertFalse(new IntegerParamType().validateParameter("sasd123.2"));
         Assert.assertFalse(new IntegerParamType().validateParameter(new Double(Double.MAX_VALUE).toString()));
     }
-    
+
     @Test
     public final void testLongParamType()  {
         // Right
@@ -118,7 +118,7 @@ public class ParameterTypesTest {
         Assert.assertFalse(new LongParamType().validateParameter("sasd123.2"));
         Assert.assertFalse(new LongParamType().validateParameter(new Double(Double.MAX_VALUE).toString()));
     }
-    
+
     @Test
     public final void testOctalParamType()  {
         // Right
@@ -128,7 +128,7 @@ public class ParameterTypesTest {
         Assert.assertFalse(new OctalParamType().validateParameter("sasd123.2"));
         Assert.assertFalse(new OctalParamType().validateParameter("12345678901234567890"));
     }
-    
+
     @Test
     public final void testShortParamType()  {
         // Right
@@ -139,12 +139,12 @@ public class ParameterTypesTest {
         Assert.assertFalse(new ShortParamType().validateParameter("sasd123.2"));
         Assert.assertFalse(new ShortParamType().validateParameter(new Integer(Integer.MAX_VALUE).toString()));
     }
-    
+
     @Test
     public final void testStringParamType()  {
         // Always true ;-)
     }
-    
+
     @Test
     public final void testURLParamType()  {
         // Right
@@ -153,7 +153,7 @@ public class ParameterTypesTest {
         // Bad
         Assert.assertFalse(new URLParamType().validateParameter("uralcli.sourceforge.net/style.css"));
     }
-    
+
     @Test
     public final void testWorkingURLParamType()  {
         // Right

@@ -29,10 +29,10 @@ package org.naturalcli;
  * @author Ferran Busquets
  */
 public class Token {
-    
+
     /** Beginning char for a parameter */
     static private final char CHAR_BEGIN_PARAM = '<';
-    
+
     /** Ending char for a parameter */
     static private final char CHAR_END_PARAM = '>';
 
@@ -41,16 +41,16 @@ public class Token {
 
     /** Ending char for an optional token */
     static private final char CHAR_END_OPT= ']';
-    
+
     /** Char separator for a parameter name and type */
     static private final char CHAR_NAME_TYPE = ':';
 
     /** String for variable arguments token */
     static private final String VAR_ARGS = "...";
-    
+
     /** Texts giving sense to the token */
     private String text;
-    
+
     /**
      * Constructor for the token
      *
@@ -62,8 +62,8 @@ public class Token {
     {
         this.setText(text);
     }
-    
-    
+
+
     /**
      * Get the token text
      *
@@ -85,7 +85,7 @@ public class Token {
         validate(text);
         this.text = text;
     }
-    
+
     private void validate(String text) throws InvalidTokenException
     {
         // Validate null
@@ -129,7 +129,7 @@ public class Token {
         boolean end = text.charAt(text.length()-1) == CHAR_END_OPT;
         return begin && end;
     }
-    
+
     /**
      * Checks if it's a parameter token
      *
@@ -153,7 +153,7 @@ public class Token {
     {
         return isParameter() && isOptional();
     }
-    
+
     /**
      * Checks if it's a mandatory parameter token
      *
@@ -163,7 +163,7 @@ public class Token {
     {
         return isParameter() && !isOptional();
     }
-    
+
     /**
      * Helper method for {@link org.naturalcli.Token#getParameterName()} and
      * {@link org.naturalcli.Token#getParameterName()}
@@ -183,7 +183,7 @@ public class Token {
             return word;
         return (n1t2 == 1) ? word.substring(0, i) : word.substring(i+1);
     }
-        
+
     /**
      * Gets the parameter name for the token
      *
@@ -203,7 +203,7 @@ public class Token {
     {
         return this.getParameterInfo(2);
     }
-    
+
     /**
      * Determines if it's an identifier
      *
@@ -223,7 +223,7 @@ public class Token {
     {
         return this.text.equals(VAR_ARGS);
     }
-    
+
     /**
      * Obtains the word that represents the token, it means
      * the token text without optional or parameter chars
@@ -239,7 +239,7 @@ public class Token {
             return text.substring(1, text.length()-1);
         return word;
     }
-    
+
     /**
      * Checks the text given to see if it's like the token
      *
@@ -257,5 +257,5 @@ public class Token {
             return pv.validate(t, this.getParameterTypeName()) == null;
         return false;
     }
-    
+
 }

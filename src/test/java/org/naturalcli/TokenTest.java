@@ -59,7 +59,7 @@ public class TokenTest {
         try { new Token(""); fail(); } catch (InvalidTokenException e) { }
         try { new Token(null); fail(); } catch (InvalidTokenException e) { }
     }
-    
+
     /**
      * Test method for {@link org.naturalcli.Token#isOptional()}.
      */
@@ -98,7 +98,7 @@ public class TokenTest {
         assertFalse(new Token("[marian]").isOptionalParameter());
         assertFalse(new Token("<marian:integer>").isOptionalParameter());
     }
-    
+
     /**
      * Test method for {@link org.naturalcli.Token#getParameterName()}.
      */

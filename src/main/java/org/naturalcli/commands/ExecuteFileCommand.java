@@ -29,7 +29,7 @@ import org.naturalcli.NaturalCLI;
  * @author Ferran Busquets
  */
 public class ExecuteFileCommand  extends Command {
-    
+
     /**
      * Constructor.
      *

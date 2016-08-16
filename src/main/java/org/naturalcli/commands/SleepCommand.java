@@ -28,7 +28,7 @@ import org.naturalcli.InvalidSyntaxException;
  * @author Ferran Busquets
  */
 public class SleepCommand extends Command {
-    
+
     public SleepCommand()
     {
         try {
@@ -38,5 +38,5 @@ public class SleepCommand extends Command {
         }
     }
 
-    
+
 }

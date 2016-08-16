@@ -32,7 +32,7 @@ public interface IParameterType {
      * @return the name of the parameter type
      */
     public String getParameterTypeName();
-    
+
     /**
      * Checks if a parameter value is of this type
      * of parameter.

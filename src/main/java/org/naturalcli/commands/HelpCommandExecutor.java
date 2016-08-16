@@ -44,7 +44,7 @@ public class HelpCommandExecutor implements ICommandExecutor {
     {
         this.commands = commands;
     }
-        
+
     /* (non-Javadoc)
      * @see org.naturalcli.ICommandExecutor#execute(java.lang.Object[])
      */

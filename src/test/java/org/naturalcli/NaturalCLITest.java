@@ -36,7 +36,7 @@ public class NaturalCLITest {
 
     Set<Command> commands;
     NaturalCLI naturalCLI;
-    
+
     /**
      * @throws java.lang.Exception
      */

@@ -47,7 +47,7 @@ public class HTMLHelpCommand extends Command {
             throw new RuntimeException(e);
         }
     }
-    
-    
+
+
 
 }

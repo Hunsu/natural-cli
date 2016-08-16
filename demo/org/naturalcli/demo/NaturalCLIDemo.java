@@ -33,12 +33,12 @@ import org.naturalcli.commands.*;
  * @author Ferran Busquets
  */
 public class NaturalCLIDemo {
-              
+
     public static synchronized void main(String args[])
     {
         bug1939488(new String[] { "help" });
     }
-    
+
 
     /**
      * Example 1. The firsts commands
@@ -214,8 +214,8 @@ public class NaturalCLIDemo {
             e.printStackTrace();
         }
     }
-        
-    
+
+
     /**
      * Example 6. Command executor extends.
      *
@@ -245,7 +245,7 @@ public class NaturalCLIDemo {
             e.printStackTrace();
         }
     }
-    
+
     /**
      * Example 5. The default commands.
      *
@@ -306,13 +306,13 @@ public class NaturalCLIDemo {
             e.printStackTrace();
         }
     }
-    
+
     public static void bug1939488(String args[])
     {
         try {
          // Create the set for the commands
          Set<Command> cs = new HashSet<Command>();
-          
+
          // Create the commands
          cs.add(new HelpCommand(cs));
          cs.add(new Command("hello world",
@@ -322,10 +322,10 @@ public class NaturalCLIDemo {
          { System.out.println("Hello world!"); }
          }
          ));
-          
+
          // Execute
          new NaturalCLI(cs).execute(args);
-          
+
          } catch (ExecutionException e) {
          // TODO Auto-generated catch block
          e.printStackTrace();

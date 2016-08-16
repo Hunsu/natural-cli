@@ -63,7 +63,7 @@ public class WorkingURLParamType implements IParameterType {
     public String validationMessage(String value) {
         return this.validateParameter(value) ? null : "Not working URL.";
     }
-    
+
     /* (non-Javadoc)
      * @see org.naturalcli.IParameterType#convertParameterValue(java.lang.String)
      */

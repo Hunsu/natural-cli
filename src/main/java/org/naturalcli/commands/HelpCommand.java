@@ -32,7 +32,7 @@ import org.naturalcli.InvalidSyntaxException;
  * @author Ferran Busquets
  */
 public class HelpCommand extends Command {
-    
+
     public HelpCommand(Set<Command> commands)
     {
         try {

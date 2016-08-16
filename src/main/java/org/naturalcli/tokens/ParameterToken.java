@@ -40,7 +40,7 @@ public class ParameterToken extends Token {
         super(text);
         validator = pv;
     }
-    
+
     /**
      * @return the validator
      */
@@ -115,6 +115,6 @@ public class ParameterToken extends Token {
     public String getParameterType() {
         return parameter_type;
     }
-    
-    
+
+
 }

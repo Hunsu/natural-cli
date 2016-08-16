@@ -25,7 +25,7 @@ package org.naturalcli;
  * @author Ferran Busquets
  */
 public interface ICommandExecutor {
-    
+
     /**
      * Execute the command.
      *

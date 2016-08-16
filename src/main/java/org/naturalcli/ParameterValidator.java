@@ -36,7 +36,7 @@ public class ParameterValidator {
 
     /** Parameter types for the validation */
     private Collection<IParameterType> parameterTypes;
-    
+
     /**
      * Creates a new instance of <code>ParameterValidator</code> with default parameter types
      */
@@ -44,7 +44,7 @@ public class ParameterValidator {
     {
         this.parameterTypes = DefaultParameterTypes.createSet();
     }
-    
+
     /**
      * Creates a new instance of <code>ParameterValidator</code>
      *
@@ -73,7 +73,7 @@ public class ParameterValidator {
         // Validate the parameter
         return pt.validationMessage(value);
     }
-        
+
     /**
      * Gets the parameter type for the given type name
      *

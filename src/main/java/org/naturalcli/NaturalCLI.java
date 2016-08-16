@@ -29,11 +29,11 @@ import java.util.Set;
  * @author Ferran Busquets
  */
 public class NaturalCLI {
-    
+
     private Set<Command> commands;
-    
+
     private ParameterValidator pv;
-    
+
     /**
      * Creates a new instance.
      *
@@ -45,7 +45,7 @@ public class NaturalCLI {
         this.commands = commands;
         this.pv = pv;
     }
-    
+
     /**
      * Creates a new instance with the default parameter validator.
      *
@@ -55,7 +55,7 @@ public class NaturalCLI {
     {
         this(commands, new ParameterValidator());
     }
-    
+
    /**
      * Runs a command based on the arguments.
      *
@@ -88,7 +88,7 @@ public class NaturalCLI {
         // Execute the command
         command.getExecutor().execute(parseResult);
     }
-    
+
     /**
      * Runs a command based on the arguments.
      *
@@ -103,7 +103,7 @@ public class NaturalCLI {
             throw new IllegalArgumentException("The parameter argument string cannot be null.");
         execute(args.split(" "), first);
     }
-    
+
     /**
      * Runs a command based on the arguments.
      *
@@ -114,7 +114,7 @@ public class NaturalCLI {
     {
         execute(args, 0);
     }
-    
+
     /**
      * Runs a command based on the arguments in the string.
      *
@@ -125,9 +125,9 @@ public class NaturalCLI {
     {
         execute(args, 0);
     }
-     
-    
 
-     
-    
+
+
+
+
 }

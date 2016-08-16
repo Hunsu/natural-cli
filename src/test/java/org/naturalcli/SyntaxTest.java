@@ -37,7 +37,7 @@ import org.naturalcli.UnknownParameterType;
 public class SyntaxTest {
 
     private ParameterValidator pv;
-    
+
     /**
      * @throws java.lang.Exception
      */
@@ -78,9 +78,9 @@ public class SyntaxTest {
             fail();
         } catch (InvalidSyntaxException e) {
         }
-        
+
     }
-    
+
 
     /**
      * Test method for {@link org.naturalcli.Syntax#parse(java.lang.String[], int, org.naturalcli.ParameterValidator)}.

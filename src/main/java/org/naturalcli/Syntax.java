@@ -32,10 +32,10 @@ public class Syntax {
 
     /** Syntax definition */
     private String definition;
-    
+
     /** List of tokens defining the grammar */
     private List<Token> grammar;
-    
+
     /** Number of parameters */
     private int paramCount;
 
@@ -59,7 +59,7 @@ public class Syntax {
     public String getDefinition() {
         return definition;
     }
-    
+
     /**
      * Sets the definition for the syntax
      *
@@ -72,7 +72,7 @@ public class Syntax {
         this.definition = definition;
         this.compile();
     }
-        
+
     /**
      * Creates the grammar for the command
      * @throws InvalidSyntaxException
@@ -116,7 +116,7 @@ public class Syntax {
                last_t = t;
            }
     }
-    
+
     /**
      * Parse the tokens to see if match with the syntax
      *

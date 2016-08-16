@@ -29,7 +29,7 @@ import org.naturalcli.IParameterType;
  * @author Ferran Busquets
  */
 public class DefaultParameterTypes {
-    
+
     /**
      * Creates a set with a default parameter types.
      *

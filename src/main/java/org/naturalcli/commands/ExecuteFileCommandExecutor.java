@@ -35,14 +35,14 @@ import org.naturalcli.NaturalCLI;
 public class ExecuteFileCommandExecutor implements ICommandExecutor {
 
     static final String COMMENT = "#";
-    
+
     private NaturalCLI naturalCLI;
-    
+
     public ExecuteFileCommandExecutor(NaturalCLI naturalCLI)
     {
         this.naturalCLI = naturalCLI;
     }
-        
+
     /* (non-Javadoc)
      * @see org.naturalcli.ICommandExecutor#execute(java.lang.Object[])
      */

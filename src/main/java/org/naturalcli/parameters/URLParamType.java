@@ -57,7 +57,7 @@ public class URLParamType implements IParameterType {
     public String validationMessage(String value) {
         return this.validateParameter(value) ? null : "Malformed URL.";
     }
-    
+
     /* (non-Javadoc)
      * @see org.naturalcli.IParameterType#convertParameterValue(java.lang.String)
      */
