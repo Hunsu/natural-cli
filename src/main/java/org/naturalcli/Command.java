@@ -19,96 +19,36 @@
 
 package org.naturalcli;
 
+import java.util.List;
 
-/**
- * Represents a command definition
- *
- * @author Ferran Busquets
- */
-public class Command {
+public abstract class Command {
+    private final CommandParser parser;
+    private CommandInput commandInput;
 
-    /** Help message */
-    private String help;
-
-    /** Command executor */
-    private ICommandExecutor executor;
-
-    /** Syntax definition  */
-    private Syntax syntax;
-
-    private final char CHAR_HIDDEN_COMMAND = '.';
-
-    /**
-     * Constructs a new command.
-     *
-     * @param syntax the syntax for the command.
-     * @param helpthe help help of the command.
-     * @param ce command executor.
-     * @throws InvalidSyntaxDefinionException.
-     */
-    public Command(String syntax, String help, ICommandExecutor ce) throws InvalidSyntaxException{
-        this.prepare(syntax, help, ce);
+    public Command() {
+        this.parser = new CommandParser(this);
     }
 
-    /**
-     * Default constructor only for inheritors.
-     */
-    protected Command() {
+    public Command(CommandParser parser) {
+        this.parser = parser;
     }
 
-    /**
-     * Initialize the command.
-     *
-     * @param syntax the syntax for the command.
-     * @param helpthe help help of the command.
-     * @param ce command executor.
-     * @throws InvalidSyntaxDefinionException.
-     */
-    protected void prepare(String syntax, String help, ICommandExecutor ce) throws InvalidSyntaxException
-    {
-        if (help == null || help.length() == 0)
-            throw new IllegalArgumentException("Syntax cannot be empty.");
-        if (ce == null)
-            throw new IllegalArgumentException("Command executor cannot be null.");
-        this.help = help;
-        this.syntax = new Syntax(syntax);
-        this.executor = ce;
+    public abstract String getName();
+
+    public void execute(String... args) {
+        parse(args);
+        doRun();
     }
 
-    /**
-     * Determine if this is a hidden command.
-     *
-     * @return <code>true</code> if it's a hidden command, <code>false</code> if not.
-     */
-    public boolean isHidden() {
-        return getHelp().charAt(0) == CHAR_HIDDEN_COMMAND;
+    protected abstract void doRun();
+
+    protected void parse(String... args) {
+        commandInput = parser.parse(args);
     }
 
-    /**
-     * Returns a string with the syntax for the command.
-     *
-     * @return A string with the syntax for the command.
-     */
-    public Syntax getSyntax() {
-        return syntax;
+    protected CommandInput getCommandInput() {
+        return commandInput;
     }
 
-    /**
-     * Returns the help for the commend.
-     *
-     * @return The help for the command.
-     */
-    public String getHelp() {
-        return help;
-    }
-
-    /**
-     * Get the executor for the command.
-     *
-     * @return the executor.
-     */
-    public ICommandExecutor getExecutor() {
-        return executor;
-    }
-
+    public abstract List<CommandOption> getOptions();
 }

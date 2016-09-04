@@ -19,72 +19,51 @@
  */
 package org.naturalcli;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.naturalcli.commands.*;
 
-/**
- * @author Ferran Busquets
- *
- */
 public class NaturalCLITest {
 
     Set<Command> commands;
     NaturalCLI naturalCLI;
+    Command command;
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-    }
-
-    /**
-     * @throws java.lang.Exception
-     */
     @Before
     public void setUp() throws Exception {
         commands = new HashSet<Command>();
+        command = mock(Command.class);
+        commands.add(command);
         naturalCLI = new NaturalCLI(commands);
-        commands.add(new HelpCommand(commands));
-        commands.add(new HTMLHelpCommand(commands));
-        commands.add(new SleepCommand());
-        commands.add(new ExecuteFileCommand(naturalCLI));
-        commands.add(
-            new Command(
-            "marian is the number <integer> really [<string>] of course <string>",
-            "Just a test",
-            new ICommandExecutor() {
-               public void execute(ParseResult parseResult)
-               {
-                   System.out.println("Number:"+parseResult.getParameterValue(0));
-                   System.out.println("String1:"+parseResult.getParameterValue(1));
-                   System.out.println("String2:"+parseResult.getParameterValue(2));
-               }
-            }
-            )
-        );
     }
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @After
-    public void tearDown() throws Exception {
-    }
-
-    /**
-     * Test method for {@link org.naturalcli.NaturalCLI#execute(java.lang.String, int)}.
-     */
     @Test
-    public final void testExecute() throws ExecutionException {
-        naturalCLI.execute("marian is the number 1 really pau of course margaret");
-//        naturalCLI.execute("marian is the number 1 really of course margaret");
+    public final void testExecuteWhenValidCommandIsInvoked() throws ExecutionException {
+        when(command.getName()).thenReturn("marian");
+
+        naturalCLI.execute("marian", "is", "the", "number", "1", "really pau of course margaret");
+
+        verify(command).execute("is", "the", "number", "1", "really pau of course margaret");
     }
 
+    @Test
+    public final void testExecuteWhenInvalidCommandIsInvoked() throws ExecutionException {
+        when(command.getName()).thenReturn("op");
+
+        try {
+        naturalCLI.execute("marian", "is", "the", "number", "1", "really pau of course margaret");
+            fail();
+        } catch (ExecutionException e) {
+            String expected = "The command marian was not found";
+            assertEquals(expected, e.getMessage());
+        }
+    }
 }

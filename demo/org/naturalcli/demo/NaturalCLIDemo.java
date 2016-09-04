@@ -20,318 +20,82 @@
 
 package org.naturalcli.demo;
 
-import java.util.Arrays;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-import org.naturalcli.*;
-import org.naturalcli.commands.*;
+import org.naturalcli.Command;
+import org.naturalcli.CommandOption;
+import org.naturalcli.ExecutionException;
+import org.naturalcli.NaturalCLI;
+import org.naturalcli.OptionType;
+import org.naturalcli.demo.date.DateType;
 
-
-/**
- *
- * @author Ferran Busquets
- */
 public class NaturalCLIDemo {
 
-    public static synchronized void main(String args[])
-    {
-        bug1939488(new String[] { "help" });
-    }
-
-
-    /**
-     * Example 1. The firsts commands
-     *
-     * This example creates two simple commands with a very easy syntax.
-     *
-     * @param args
+    /*
+     * Example: myprogram convert --from unix --to gregorian 1473002975 Result:
+     * 1473002975 (unix) is 2016-09-04 in gregorian calendar
      */
-    public static void example1(String args[])
-    {
+    public static void main(String[] args) {
+        Set<Command> commands = new HashSet<>();
+        commands.add(new DateUtils());
+        NaturalCLI cli = new NaturalCLI(commands);
         try {
-            // Create the command
-           Command showDateCommand =
-             new Command(
-                "show date",
-                "Shows the current date and time",
-                new ICommandExecutor ()
-                {
-                  public void execute(ParseResult pr)
-                  {  System.out.println(new java.util.Date().toString());  }
-                }
-             );
-           Command helloWorldCommand =
-             new Command(
-                 "hello world",
-                 "Says hello.",
-                 new ICommandExecutor ()
-                 {
-                   public void execute(ParseResult pr )
-                   {  System.out.println("Hello world!");  }
-                 }
-               );
-            // Create the set of commands
-            Set<Command> cs = new HashSet<Command>();
-            cs.add(showDateCommand);
-            cs.add(helloWorldCommand);
-            // Execute
-            new NaturalCLI(cs).execute(args);
-        } catch (Exception e) {
-            e.printStackTrace();
+            cli.execute(args);
+        } catch (ExecutionException e) {
         }
     }
 
-    /**
-     * Example 2. A command with a parameter.
-     *
-     * The parameters are typed and you can define your own type also.
-     * A parameter can have a type name or a type name with a parameter name to be
-     * shown when showing the help.
-     *
-     * @param args
-     */
-    public static void example2(String args[])
-    {
-        try {
-            // Create the command
-            Command helloWorldCommand =
-                new Command(
-                    "hello world <name:string>",
-                    "Says hello to the world and especially to some one.",
-                    new ICommandExecutor ()
-                    {
-                       public void execute(ParseResult pr)
-                       {  System.out.println("Hello world! And hello especially to "+pr.getParameterValue(0));  }
-                    }
-                );
-            // Create the set of commands
-            Set<Command> cs = new HashSet<Command>();
-            cs.add(helloWorldCommand);
-            // Execute
-            new NaturalCLI(cs).execute(args);
-        } catch (Exception e) {
-            e.printStackTrace();
+    private static class DateUtils extends Command {
+
+        @Override
+        protected void doRun() {
+            String from = getCommandInput().getCommandOptions().get(0).getOptionArguments()[0];
+            String to = getCommandInput().getCommandOptions().get(1).getOptionArguments()[0];
+            List<String> args = getCommandInput().getCommandArguments();
+            for (String arg : args) {
+                String converted = convert(Long.valueOf(arg), DateType.from(from),
+                        DateType.from(to));
+                System.out.println(
+                        String.format("%s (%s) is %s in %s calendar", arg, from, converted, to));
+            }
         }
-    }
 
-    /**
-     * Example 3. A command with an optional parameter
-     *
-     * Defining optional parameters the possible interesting command lines are more interesting.
-     *
-     * @param args
-     */
-    public static void example3(String args[])
-    {
-        try {
-            // Create the command
-            Command helloWorldCommand =
-                new Command(
-                    "hello world [<name:string>]",
-                    "Says hello to the world and, may be, especially to some one.",
-                    new ICommandExecutor ()
-                    {
-                       public void execute(ParseResult pr)
-                       {  System.out.print("Hello world!");
-                             String p0 = pr.getParameterValue(0).toString();
-                          if (p0 == null)
-                              System.out.println();
-                          else
-                              System.out.println(" And hello especially to "+p0);
-                        }
-                    }
-                );
-            // Create the set of commands
-            Set<Command> cs = new HashSet<Command>();
-            cs.add(helloWorldCommand);
-            // Execute
-            new NaturalCLI(cs).execute(args);
-        } catch (Exception e) {
-            e.printStackTrace();
+        private String convert(long arg, DateType from, DateType to) {
+            if (DateType.UNIX.equals(from) && DateType.GREGORIAN.equals(to)) {
+                Calendar date = Calendar.getInstance();
+                date.setTimeInMillis(arg * 1000);
+                return new SimpleDateFormat("yyyy-MM-dd").format(date.getTime());
+            }
+            throw new IllegalArgumentException();
         }
-    }
 
-    /**
-     * Example 4. An user defined type.
-     *
-     * It's possible to define your own types to extend the parameter type and value checking.
-     *
-     * @param args
-     */
-    public static void example4(String args[])
-    {
-        try {
-            // Create the type
-            IParameterType type =
-                new IParameterType()
-                {
-                    private final String[] dof = new String[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-
-                      @Override
-                    public Object convertParameterValue(String strRepresentation) {
-                        return strRepresentation;
-                    }
-
-                    @Override
-                    public String getParameterTypeName() {
-                        return "dayofweek";
-                    }
-
-                    @Override
-                    public boolean validateParameter(String value) {
-                        return Arrays.binarySearch(dof, value) != -1;
-                    }
-
-                    @Override
-                    public String validationMessage(String value) {
-                        return this.validateParameter(value) ? null : "Bad day of the week name.";
-                    }
-                };
-            // Create the command
-            Command helloWorldCommand =
-                new Command(
-                    "hello world on <day:dayofweek>",
-                    "Says hello to the world for that day.",
-                    new ICommandExecutor ()
-                    {
-                       public void execute(ParseResult pr)
-                       {
-                          System.out.println("Hello world on "+pr.getParameterValue(0));
-                       }
-                    }
-                );
-            // Create the parameter validator
-            Set<IParameterType> pts = new HashSet<IParameterType>();
-            pts.add(type);
-            ParameterValidator pv = new ParameterValidator(pts);
-            // Create the set of commands
-            Set<Command> cs = new HashSet<Command>();
-            cs.add(helloWorldCommand);
-            // Execute
-            new NaturalCLI(cs, pv).execute(args);
-        } catch (Exception e) {
-            e.printStackTrace();
+        @Override
+        public List<CommandOption> getOptions() {
+            CommandOption from = CommandOption.builder()
+                    .withLongOption("from")
+                    .withShortOption("f")
+                    .withType(OptionType.MONO)
+                    .build();
+            CommandOption to = CommandOption.builder()
+                    .withLongOption("to")
+                    .withShortOption("t")
+                    .withType(OptionType.MONO)
+                    .build();
+            List<CommandOption> options = new ArrayList<>();
+            options.add(from);
+            options.add(to);
+            return options;
         }
-    }
 
-
-    /**
-     * Example 6. Command executor extends.
-     *
-     *
-     *
-     * @param args
-     */
-    public static void example6(String args[])
-    {
-        try {
-            // Create the command
-            @SuppressWarnings("unused")
-            Command helloWorldCommand =
-                new Command(
-                    "hello world on <day:dayofweek>",
-                    "Says hello to the world for that day.",
-                    new MyCommandExecutor(3)
-                    {
-                       public void execute(ParseResult pr)
-                       {
-                          for (int i = 0 ; i < this.myvalue ; i++)
-                            System.out.println("Hello world on "+pr.getParameterValue(0));
-                       }
-                    }
-                );
-        } catch (Exception e) {
-            e.printStackTrace();
+        @Override
+        public String getName() {
+            return "convert";
         }
-    }
 
-    /**
-     * Example 5. The default commands.
-     *
-     * There are default commands that you can use. Help commands o be able
-     * to output the command possibilities, execute a file with a list of
-     * commands, ...
-     *
-     * @param args
-     */
-    public static void example5(String args[])
-    {
-        try {
-            Set<Command> cs = new HashSet<Command>();
-            NaturalCLI nc = new NaturalCLI(cs);
-            cs.add(new HelpCommand(cs));
-            cs.add(new HTMLHelpCommand(cs));
-            cs.add(new SleepCommand());
-            cs.add(new ExecuteFileCommand(nc));
-            nc.execute(args, 0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Example 7. Variable optional parameters
-     *
-     * You can add a parameter and, optionally, can get any number of values.
-     * Variable parameter token can only as the last one.
-     *
-     * @param args
-     */
-    public static void example7(String args[])
-    {
-        try {
-            // Create the command
-            Command helloWorldCommand =
-                new Command(
-                    "hello world <name:string> ...",
-                    "Says hello to the world and especially to some people.",
-                    new ICommandExecutor ()
-                    {
-                       public void execute(ParseResult pr)
-                       {
-                           System.out.print("Hello world! And hello especially to ");
-                           for (int i= 0 ; i < pr.getParameterCount() ; i++)
-                              System.out.print(pr.getParameterValue(i)+" ");
-                           System.out.println();
-                       }
-                    }
-                );
-            // Create the set of commands
-            Set<Command> cs = new HashSet<Command>();
-            cs.add(helloWorldCommand);
-            // Execute
-            new NaturalCLI(cs).execute(args);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void bug1939488(String args[])
-    {
-        try {
-         // Create the set for the commands
-         Set<Command> cs = new HashSet<Command>();
-
-         // Create the commands
-         cs.add(new HelpCommand(cs));
-         cs.add(new Command("hello world",
-         "Says hello.",
-         new ICommandExecutor ()
-         { public void execute(ParseResult pr )
-         { System.out.println("Hello world!"); }
-         }
-         ));
-
-         // Execute
-         new NaturalCLI(cs).execute(args);
-
-         } catch (ExecutionException e) {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-         } catch (InvalidSyntaxException e) {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-         }
     }
 }
